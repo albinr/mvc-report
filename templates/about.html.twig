@@ -1,11 +1,24 @@
 {% extends "base.html.twig" %}
 
-{% block title %}About{% endblock %}
+{% block title %}Om{% endblock %}
 
 {% block body %}
-    <h1>About</h1>
-    <p>An image which can be clicked on.</p>
-    <a href="{{ asset('img/glider.svg') }}">
-        <img src="{{ asset('img/glider.svg') }}" alt="">
-    </a>
+<div class="row">
+    <div class="column">
+        <h1>Om webbplatsen</h1>
+        <p>Denna webbplats fungerar som en rapporteringssida för kursen i MVC (Model-View-Controller).</p>
+        <p>På denna sida kommer jag att skapa och presentera uppgifter samt skriva rapporter relaterade till de olika
+            delarna av
+            kursen.</p>
+            
+    </div>
+    <div class="column">
+        <h2>Länkar</h2>
+        <p><a href="https://github.com/dbwebb-se/mvc/tree/main">Länk till kurs repo.</a></p>
+        <p><a href="https://github.com/albinr/mvc-report">Länk till denna webbplats repo.</a></p>
+        <img src="{{asset('img/mvc.png')}}" alt="mvc">
+        
+    </div>
+</div>
+
 {% endblock %}
