@@ -49,27 +49,27 @@ class ReportController extends AbstractController
         $data = [
             'routes' => $apiRoutes,
         ];
-
+    
         return $this->render('api.html.twig', $data);
     }
 
     #[Route("/api/quote", name: "quote")]
-    public function apiQuote(): Response
+    public function apiQuote(): JsonResponse
     {
         $quotes = [
-            "Life is what happens when you're busy making other plans. — John Lennon",
-            "The greatest glory in living lies not in never falling, but in rising every time we fall. — Nelson Mandela",
-            "The way to get started is to quit talking and begin doing. — Walt Disney",
+            "Life is what happens when you're busy making other plans. - John Lennon",
+            "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela",
+            "The way to get started is to quit talking and begin doing.  - Disney",
+            "Only a life lived for others is a life worthwhile.  - Albert Einstein",
         ];
-
+    
         $quote = $quotes[array_rand($quotes)];
         $data = [
             'quote' => $quote,
             'date' => date('Y-m-d'),
             'timestamp' => date('H:i:s'),
         ];
-
-
-        return $this->render('quote.html.twig', $data);
+    
+        return new JsonResponse($data);
     }
 }
