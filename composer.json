@@ -1,4 +1,6 @@
 {
+    "name": "me/report",
+    "description": "mvc course at BTH",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",

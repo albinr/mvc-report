@@ -27,18 +27,6 @@ class ReportController extends AbstractController
         return $this->render('report.html.twig');
     }
 
-    // #[Route("/report", name: "report")]
-    // public function report(): Response
-    // {
-    //     $number = random_int(0, 100);
-
-    //     $data = [
-    //         'number' => $number
-    //     ];
-
-    //     return $this->render('report.html.twig', $data);
-    // }
-
     #[Route("/lucky", name: "lucky")]
     public function lucky(): Response
     {
@@ -49,5 +37,39 @@ class ReportController extends AbstractController
         ];
 
         return $this->render('lucky.html.twig', $data);
+    }
+
+    #[Route("/api", name: "api")]
+    public function api(): Response
+    {
+        $apiRoutes = [
+            'quote' => 'api/quote',
+        ];
+
+        $data = [
+            'routes' => $apiRoutes,
+        ];
+
+        return $this->render('api.html.twig', $data);
+    }
+
+    #[Route("/api/quote", name: "quote")]
+    public function apiQuote(): Response
+    {
+        $quotes = [
+            "Life is what happens when you're busy making other plans. — John Lennon",
+            "The greatest glory in living lies not in never falling, but in rising every time we fall. — Nelson Mandela",
+            "The way to get started is to quit talking and begin doing. — Walt Disney",
+        ];
+
+        $quote = $quotes[array_rand($quotes)];
+        $data = [
+            'quote' => $quote,
+            'date' => date('Y-m-d'),
+            'timestamp' => date('H:i:s'),
+        ];
+
+
+        return $this->render('quote.html.twig', $data);
     }
 }

@@ -20,19 +20,24 @@
 </head>
 
 <body>
-    <nav>
-        <a href="{{ path('home') }}" class="me-icon"><img src="{{asset('img/small-me-img.jpg') }}"
-                alt="img of Albin Ryberg"></a>
-        <ul>
-            <li><a href="{{ path('home') }}">HEM</a></li>
-            <li><a href="{{ path('about') }}">OM</a></li>
-            <li><a href="{{ path('report') }}">REPORT</a></li>
-            <li><a href="{{ path('lucky') }}">LUCKY</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav>
+            <a href="{{ path('home') }}" class="me-icon"><img src="{{asset('img/small-me-img.jpg') }}"
+                    alt="img of Albin Ryberg"></a>
+            <ul>
+                <li><a href="{{ path('home') }}">HEM</a></li>
+                <li><a href="{{ path('about') }}">OM</a></li>
+                <li><a href="{{ path('report') }}">RAPPORT</a></li>
+                <li><a href="{{ path('lucky') }}">LUCKY</a></li>
+            </ul>
+        </nav>
+    </header>
     <main>
         {% block body %}{% endblock %}
     </main>
+    <footer>
+        <p>Webbplats av Albin Ryberg (alry23)</p>
+    </footer>
 </body>
 
 </html>
