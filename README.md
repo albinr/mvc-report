@@ -2,23 +2,23 @@
 
 # MVC Course Report Page
 
-## Introduction
+## Intro
 
 Welcome to the MVC Course Report Page project! This web application, built using the Symfony framework and managed with Composer, serves as a dynamic platform for displaying and managing course reports. It leverages the Model-View-Controller (MVC) architecture to provide a clean separation of concerns, making it easier for developers to maintain and enhance the application.
 
-## Getting Started
+## Setup
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+### Requirements
 
-Before you begin, ensure you have the following software installed on your computer:
+Before you begin, ensure you have the following installed:
 
 - PHP 8.2 or newer
 - Composer
 - Symfony CLI
 
-### Cloning the Repository
+### Cloning the Repo
 
 To get started with the MVC Course Report Page on your local machine, first, you need to clone the repository. Open a terminal and run the following command:
 
@@ -37,7 +37,7 @@ composer install
 
 ### Running the Application
 
-After installing the dependencies, you can start the Symfony server to run the application locally:
+After installing the dependencies, you can start a PHP server to run the application locally:
 
 ```bash
 php -S localhost:8888 -t public
