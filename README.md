@@ -1,4 +1,4 @@
-![Logo of the MVC Course Report Page project](/public/img/mvc.png)
+![MVC image](/public/img/mvc.png)
 
 # MVC Course Report Page
 
