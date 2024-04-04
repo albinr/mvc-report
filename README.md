@@ -23,8 +23,8 @@ Before you begin, ensure you have the following installed:
 To get started with the MVC Course Report Page on your local machine, first, you need to clone the repository. Open a terminal and run the following command:
 
 ```bash
-git clone https://yourgithubrepo.com/path/to/MVC-Course-Report-Page.git
-cd MVC-Course-Report-Page
+git clone https://github.com/albinr/mvc-report
+cd mvc-report
 ```
 
 ### Installing Dependencies
