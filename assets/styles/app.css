@@ -20,7 +20,7 @@ body {
 
 header {
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    margin: 10px 0;
+    margin: 20px 0;
     background-image: url('../images/landscape.jpg');
     background-size: cover;
     border-radius: 50px;
