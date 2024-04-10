@@ -9,29 +9,118 @@
     <h3>Erfarenhet av objektorientering</h3>
     <p>Erfarenheten jag har av objektorientering kommer från den tidigare OOPython kursen. I kursen fick jag lära mig
         grunderna i att skapa klasser, instansiera objekt och att använda arv för att skapa strukturerad och
-        återanvändbar kod. Syntaxen i Python gjorde det enkelt att förstå och lära sig koncepten inom objektorientering
-        men i PHP är det annorlunda. Syntaxen kommer ta ett tag att vänja sig och det kommer vara frustrerande men jag
-        tror att jag förstår grunden.
+        återanvändbar kod.</p>
+
+    <p>Python vehicle class exempel:</p>
+    <pre>
+    <code>
+    class Vehicle:
+        def __init__(self, make, model):
+            self.make = make
+            self.model = model
+    </code>
+    </pre>
+
+    <p>PHP vehicle class exempel:</p>
+    <pre>
+    <code>
+    class Vehicle {
+        public $make;
+        public $model;
+    
+        public function __construct($make, $model) {
+            $this->make = $make;
+            $this->model = $model;
+        }
+    }        
+    </code>
+    </pre>
+
+    <p>Syntaxen i Python gjorde det enkelt att förstå och lära sig koncepten inom objektorientering men i PHP är det
+        annorlunda. Att det behövs mer rader kod, pilar (->) och dollartecken känns jobbigt. Syntaxen kommer ta ett tag
+        att vänja sig och det kommer vara frustrerande men jag tror att jag förstår grunden.
     </p>
 
     <h3>PHPs modell för klasser och objekt</h3>
-    <p>Grunderna för att förstå PHPs klasser och objekt är definition av klasser, skapande av objekt, användning av
-        public, private och protected för att styra användarens åtkomst av attribut och metoder och konceptet med
-        constructors och de-constructors för att initiera och förstöra objekt. Arv är viktigt att veta för att förstå
-        att en klass kan ärva egenskaper och metoder från en annan klass. Det kan till exempel vara användbart för att
-        återanvända kod och minska upprepning.
+    <p>
+        Grunderna för att programmera objektorienterat i PHP börjar med att förstå klasser och objekt.
     </p>
+
+    <p>En klass kan ses som en mall för att skapa objekt. Objekt kan också kallas en instans av en klass. I klassen
+        definieras objektets attribut och beteende. Ett attribut för en hundklass kan till exempel vara vilket namn
+        hunden har. Ett beteende(metod) för en sådan klass kan till exempel vara att skälla.</p>
+
+    <p>Åtkomsthantering är också en viktig del av objektorientering. Att markera och avgränsa vilka attribut och metoder
+        en användare har tillgång till är viktigt för enkapsulering objektets data. Det leder till säkrare och intakta
+        objekt. Genom att använda “Public”,”Private”, och “Protected” kan vi kontrollera åtkomsten.</p>
+
+    <p><code>- Public är tillgängligt både inom och utanför klassen.</code></p>
+    <p><code>- Private kan endast nås inom klassen där den deklareras.</code></p>
+    <p><code>- Protected är tillgängligt inom klassen och dess underklasser.</code></p>
+
+    <p>Konstruktorer och destruktorer används för att skapa och förstöra instansierade objekt. En konstruktor anropas
+        automatiskt när ett nytt objekt skapas. Den initialiserar också objektets attribut med specifika värden.
+        Destruktorer anropas automatiskt när ett objekt förstörs för att fria minne.
+    </p>
+
+    <p>Arv är viktigt att veta för att förstå att en klass kan ärva egenskaper och metoder från en annan klass. Det kan
+        till exempel vara användbart för att återanvända kod och minska upprepning.</p>
+
+    <p>Här är ett exempel på en klass för en hund:</p>
+
+    <pre><code>
+    class Dog {
+        public $name;
+        private $sound = "Woof";
+    
+        public function __construct($name) {
+            $this->name = $name;
+        }
+    
+        public function bark() {
+            echo $this->name . " says " . $this->sound;
+        }
+    }
+    
+    $myDog = new Dog("Sixten");
+    $myDog->bark();
+        
+    </code></pre>
 
     <h3>Reflektion över kodbas</h3>
     <p>Jag tycker att kodbasen för uppgiften var svår att förstå till en början. Det var många mappar och filer som jag
-        inte riktigt förstod vad de gjorde för att de inte nämns i set up guiden. Jag tror dock att jag förstår de
-        viktiga delarna och flödet för mvc med routes och templates.</p>
+        inte riktigt förstod vad de gjorde för att de inte nämns i set up guiden. Men jag har fått en större förståelse
+        för Symfony som ramverk. Jag har skapat en webbsida som använder sig av en controller för att servera twig
+        template filer och ett litet json api med kända citat.</p>
+
+    <p>Utmaningar jag stött var att lägga till bilder korrekt och att ladda upp sidan på studentservern. När jag
+        försökte ladda bilder så visades de inte lokalt men de visades på student server.</p>
+
+    <p>Jag löste det genom att sätta rätt path till filerna i Symfony och installera de paket som behövdes genom npm
+        install. I mitt första försök på uppgiften så hade jag inget utrymme kvar på studentservern. Det betydde att jag
+        inte kunde ladda upp en kod för att testa den. Nu har jag dock fått mer utrymme.</p>
+
+    <p>Jag har valt att lägga till sass i projektet. Med hjälp av sass så kan jag lätt använda variabler och dela upp
+        min scss kod i små moduler för till exempel header, navigation och footer.</p>
+
+    <p>Ett problem jag fortfarande stöter på är felmeddelanden i webbläsarens konsol. Hur jag än försöker så fortsätter
+        de poppa upp. Det är något jag måste fixa i framtiden.</p>
+
+    <p>Jag tror att jag förstår de viktiga delarna och flödet för mvc med routes och templates.</p>
 
     <h3>PHP The Right Way</h3>
-    <p>Delarna av PHP The Right Way artikeln jag läst och använt är Getting Started, Coding Practices och Errors and
-        Exceptions. Artikeln känns som ett bra komplement för en mindre erfaren php utvecklare som mig själv. Jag kommer
-        läsa igenom artikeln mer men nu läste jag delarna som jag tyckte var relevanta för kursmomentet.
-    </p>
+    <p>Delarna av PHP The Right Way artikeln jag läst och använt är Getting Started, Coding Practices, Errors and
+        Exceptions och Code Style Guide. Getting Started handlade mer om hur jag installerar php och utvecklingsmiljön,
+        men det har jag redan gjort.</p>
+
+    <p>Det var intressant att läsa igenom Coding practices. Det gav mig en bättre förståelse för hur man skriver vissa
+        delar av php. Tillsammans med kodstil guiden så har jag fått se riktlinjer för de grundläggande
+        kodningsstandarder och kodstil regler som finns. Hittills har jag följt de kodexempel vi fått från övningarna.
+        Jag kommer nog få mer användning av Code Style Guiden senare när jag skriver mer komplicerade kod bitar.</p>
+
+    <p>Jag läste också om hur jag kan använda phps pakethanterare Composer för att underlätta utvecklingen.</p>
+
+    <p>Artikeln känns som ett bra komplement för en mindre erfaren php utvecklare som mig själv.</p>
 
     <h3>Today I Learned</h3>
     <p>Min til för detta kursmoment är hur jag kan börja programmera objektorienterat i php och de första grunderna i

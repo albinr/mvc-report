@@ -13,12 +13,10 @@ h1 {
 h2 {
     font-size: 2rem;
     margin-bottom: 2.8rem;
-    border-bottom: 1px solid lighten($blue, 20%);
 }
 
 h3 {
-    border-bottom: 1px solid $light-grey;
-    margin-bottom: 2.8rem;
+    margin-bottom: 1.5rem;
 }
 
 h4 {
@@ -33,4 +31,34 @@ body {
 p {
     margin-bottom: 1.4rem;
     font-size: 1rem;
+    font-weight: 100;
+}
+
+code {
+    margin: 0 0.1em;
+    padding: 0.1em 0.2em;
+    border: 1px solid $light-grey;
+    border-radius: 0.3em;
+    background: $white;
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.9824;
+}
+
+pre {
+    padding: 0 1em;
+    margin: 1em;
+    border: 1px solid $light-grey;
+    border-radius: 0.3em;
+    background: $white;
+}
+
+pre code {
+    display: block;
+    margin: 0;
+    padding: 1.1111em 0;
+    border: 0 none;
+    background: transparent;
+    overflow-x: auto;
+    line-height: 1.4;
 }
