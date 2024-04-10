@@ -3,9 +3,8 @@
 {% block title %}Api{% endblock %}
 
 {% block body %}
-<h1>Api</h1>
-<h2>Json Routes</h2>
+<h1>Api Json Routes</h1>
 {% for key, route in routes %}
-        <a>{{key}}: {{ route }}</a>
+        <a href="{{ path('quote') }}">{{key}}: {{ route }}</a>
 {% endfor %}
 {% endblock %}
