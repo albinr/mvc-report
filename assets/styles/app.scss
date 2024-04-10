@@ -42,5 +42,7 @@ main {
     margin: 0 auto;
     max-width: 800px;
     min-height: 80vh;
+    display: flex;
+    flex-direction: column;
 }
 
