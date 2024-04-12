@@ -49,7 +49,7 @@ class ReportController extends AbstractController
         $data = [
             'routes' => $apiRoutes,
         ];
-    
+
         return $this->render('api.html.twig', $data);
     }
 
@@ -62,14 +62,14 @@ class ReportController extends AbstractController
             "The way to get started is to quit talking and begin doing.  - Disney",
             "Only a life lived for others is a life worthwhile.  - Albert Einstein",
         ];
-    
+
         $quote = $quotes[array_rand($quotes)];
         $data = [
             'quote' => $quote,
             'date' => date('Y-m-d'),
             'timestamp' => date('H:i:s'),
         ];
-    
+
         return new JsonResponse($data);
     }
 }
