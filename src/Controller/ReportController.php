@@ -12,19 +12,19 @@ class ReportController extends AbstractController
     #[Route("/", name: "home")]
     public function home(): Response
     {
-        return $this->render('home.html.twig');
+        return $this->render('report/home.html.twig');
     }
 
     #[Route("/about", name: "about")]
     public function about(): Response
     {
-        return $this->render('about.html.twig');
+        return $this->render('report/about.html.twig');
     }
 
     #[Route("/report", name: "report")]
     public function report(): Response
     {
-        return $this->render('report.html.twig');
+        return $this->render('report/report.html.twig');
     }
 
     #[Route("/lucky", name: "lucky")]
@@ -36,7 +36,7 @@ class ReportController extends AbstractController
             'number' => $number
         ];
 
-        return $this->render('lucky.html.twig', $data);
+        return $this->render('report/lucky.html.twig', $data);
     }
 
     #[Route("/api", name: "api")]
@@ -50,7 +50,7 @@ class ReportController extends AbstractController
             'routes' => $apiRoutes,
         ];
 
-        return $this->render('api.html.twig', $data);
+        return $this->render('report/api.html.twig', $data);
     }
 
     #[Route("/api/quote", name: "quote")]
