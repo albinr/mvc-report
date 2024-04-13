@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Session Data</h1>
+{% if sessionData is not empty %}
+    <ul>
+    {% for key, value in sessionData %}
+        <li><strong>{{ key }}:</strong> {{ value }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No session data available.</p>
+{% endif %}
+{% endblock %}

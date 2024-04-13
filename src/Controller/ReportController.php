@@ -72,4 +72,6 @@ class ReportController extends AbstractController
 
         return new JsonResponse($data);
     }
+
+
 }
