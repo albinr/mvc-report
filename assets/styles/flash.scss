@@ -1,18 +1,18 @@
 .flash-notice {
     padding: 0.5em;
-    color: #004085;
-    background-color: #cce5ff;
-    border-color: #b8daff;
+    margin: 0.5em 0;
+    border-radius: 8px;
+    color: $white;
+    background-color: lighten($blue, 20%);
 }
 .flash-notice:before {
     content: "ⓘ";
 }
-
 .flash-warning {
     padding: 0.5em;
-    color: #856404;
-    background-color: #fff3cd;
-    border-color: #ffeeba;
+    margin: 0.5em 0;
+    color: $white;
+    background-color: lighten($red, 20%);
 }
 .flash-warning:before {
     content: "⚠";

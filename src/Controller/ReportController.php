@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -73,5 +74,32 @@ class ReportController extends AbstractController
         return new JsonResponse($data);
     }
 
+    #[Route("/session", name: "session")]
+    public function session(SessionInterface $session): Response
+    {
+        if (!$session->isStarted()) {
+            $session->start();
+        }
 
+        $sessionData = $session->all();
+
+        return $this->render('session.html.twig', ['sessionData' => $sessionData]);
+    }
+
+    #[Route("/session/delete", name: "session_delete")]
+    public function sessionDelete(SessionInterface $session): Response
+    {
+        if (!$session->isStarted()) {
+            $session->start();
+        }
+
+        $session->clear();
+
+        $this->addFlash(
+            'notice',
+            'The session has been cleared'
+        );
+
+        return $this->redirectToRoute('session');
+    }
 }
