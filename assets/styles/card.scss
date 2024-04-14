@@ -1,0 +1,31 @@
+.card {
+    border: 1px solid $light-grey;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 5px;
+    display: inline-block;
+    color: black;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 125px;
+    height: 225px;
+}
+
+.red-card{
+    color: $red;
+}
+
+.black-card{
+    color: $black;
+}
+
+.deck-display{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
