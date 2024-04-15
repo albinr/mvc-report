@@ -5,16 +5,10 @@
 
 {{ include('flash.html.twig') }}
 
-{% if sessionData is not empty %}
-    <ul>
-    {% for key, value in sessionData %}
-        <li><strong>{{ key }}:</strong> {{ value }}</li>
-    {% endfor %}
-    </ul>
-    <form action="{{ path('session_delete') }}" method="post">
-        <button type="submit" class="button red-button">Clear Session</button>
-    </form>
-{% else %}
-    <p>Session is empty.</p>
-{% endif %}
+{# Dump all session data #}
+{{ dump(sessionData) }}
+
+<form action="{{ path('session_delete') }}" method="post">
+    <button type="submit" class="button red-button">Clear Session</button>
+</form>
 {% endblock %}

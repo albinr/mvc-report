@@ -32,7 +32,7 @@ class CardGraphic extends Card
         return "
     <div class='card {$color}'>
         <div class='card-top'><span>{$this->getValue()}</span> <span>{$symbol}</span></div>
-        <div>{$this->getValue()} {$symbol}</div>
+        <div>{$symbol} {$this->getValue()}</div>
         <div class='card-bottom'><span>{$this->getValue()}</span> <span>{$symbol}</span></div>
     </div>";
     }
