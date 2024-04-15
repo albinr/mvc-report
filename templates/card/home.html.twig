@@ -4,7 +4,8 @@
 
 {% block body %}
 <h1>Card</h1>
-{% for key, route in routes %}
-<a href="{{ path(route) }}" class="button"> {{ key }}</a>
+{% for route in routes %}
+<a href="{{ path(route.name, route.params) }}" class="button">{{ route.path }}</a>
+
 {% endfor %}
 {% endblock %}

@@ -19,9 +19,26 @@ class CardController extends AbstractController
     public function card(): Response
     {
         $routes = [
-            'Deck' => "deck",
-            'Shuffle' => "shuffle",
-            'Draw' => "draw",
+            [
+                'name' => 'deck',
+                'path' => 'card/deck/',
+                'params' => [],
+            ],
+            [
+                'name' => 'shuffle',
+                'path' => 'card/deck/shuffle',
+                'params' => [],
+            ],
+            [
+                'name' => 'draw',
+                'path' => 'card/deck/draw',
+                'params' => [],
+            ],
+            [
+                'name' => 'multi_draw',
+                'path' => 'card/deck/draw/5',
+                'params' => ['num' => 5],
+            ],
         ];
 
         $data = [
@@ -34,13 +51,11 @@ class CardController extends AbstractController
     #[Route('/card/deck', name: 'deck')]
     public function deck(SessionInterface $session): Response
     {
-        $deck = $session->get('deck');
-        if (!$deck) {
-            $deck = new DeckOfCards();
-            $session->set('deck', $deck);
-        }
+        $cardArray = $session->get('deck');
+        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         $deck->sort();
+        $session->set('deck', $deck);
 
         $renderCards = array_map(function ($card) {
             $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
@@ -57,11 +72,10 @@ class CardController extends AbstractController
     #[Route("/card/deck/shuffle", name: "shuffle")]
     public function shuffle(SessionInterface $session): Response
     {
-
         $deck = new DeckOfCards();
-        $session->set('deck', $deck);
-
         $deck->shuffle();
+
+        $session->set('deck', $deck);
 
         $renderCards = array_map(function ($card) {
             $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
@@ -78,11 +92,14 @@ class CardController extends AbstractController
     #[Route("/card/deck/draw", name: "draw")]
     public function draw(SessionInterface $session): Response
     {
-        $deck = $session->get('deck');
-        if (!$deck) {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-        }
+        // $deck = $session->get('deck');
+        // if (!$deck) {
+        //     $deck = new DeckOfCards();
+        //     $deck->shuffle();
+        // }
+
+        $cardArray = $session->get('deck');
+        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         $card = $deck->dealCard();
         $session->set('deck', $deck);
@@ -110,11 +127,14 @@ class CardController extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $deck = $session->get('deck');
-        if (!$deck) {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-        }
+        // $deck = $session->get('deck');
+        // if (!$deck) {
+        //     $deck = new DeckOfCards();
+        //     $deck->shuffle();
+        // }
+
+        $cardArray = $session->get('deck');
+        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         if ($num > count($deck->getCards())) {
             throw new \Exception("Can not roll more than 99 dices!");

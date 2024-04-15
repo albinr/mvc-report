@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class ReportController extends AbstractController
 {
     #[Route("/", name: "home")]
@@ -75,7 +74,7 @@ class ReportController extends AbstractController
             [
                 'name' => 'api_deck_multi_draw',
                 'path' => 'api/deck/draw/5',
-                'params' => ['num'=> 5],
+                'params' => ['num' => 5],
                 'method' => 'POST',
             ],
         ];
@@ -110,11 +109,10 @@ class ReportController extends AbstractController
     #[Route("/api/deck", name: "api_deck", methods: ['GET'])]
     public function apiDeck(SessionInterface $session): JsonResponse
     {
-        // $deck = new DeckOfCards();
-        $deck = $session->get('deck', new DeckOfCards());
-        $deck->sort();
-        $cards = $deck->getCards();
+        $deck = new DeckOfCards();
+        $session->set('deck', $deck->toArray());
 
+        $cards = $deck->getCards();
         $deckArray = array_map(function ($card) {
             return [
                 'card' => $card->getAsString()
@@ -131,9 +129,11 @@ class ReportController extends AbstractController
     #[Route("/api/deck/shuffle", name: "api_deck_shuffle", methods: ['POST'])]
     public function apiDeckShuffle(SessionInterface $session): JsonResponse
     {
-        $deck = $session->get('deck', new DeckOfCards());
+        $cardArray = $session->get('deck');
+        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
+
         $deck->shuffle();
-        $session->set('deck', $deck);
+        $session->set('deck', $deck->toArray());
 
         $cards = $deck->getCards();
         $deckArray = array_map(function ($card) {
@@ -149,48 +149,22 @@ class ReportController extends AbstractController
         return new JsonResponse($data);
     }
 
-    // #[Route("/api/deck/draw/{num<\d+>}", name: "api_deck_draw", methods: ['POST'])]
-    // public function draw(int $num = 1, SessionInterface $session): JsonResponse
-    // {
-    //     $deck = $session->get('deck', new DeckOfCards());
-    //     $cards = [];
-    //     for ($i = 0; $i < $number; $i++) {
-    //         $card = $deck->dealCard();
-    //         if (!$card) {
-    //             break; // Stop if there are no more cards to draw
-    //         }
-    //         $cards[] = [
-    //             'suit' => $card->getSuit(),
-    //             'value' => $card->getValue()
-    //         ]; // Or use $card->getAsString() if that's defined to format it as a string
-    //     }
-
-    //     $session->set('deck', $deck); // Save the state back to the session
-    //     $remaining = count($deck->getCards());
-
-    //     $data = [
-    //         'card' => $cards,
-    //         'remaining' => $remaining
-    //     ];
-
-    //     return new JsonResponse($data);
-    // }
-
-
-    #[Route("/card/deck/draw", name: "api_deck_draw", methods: ['POST'])]
+    #[Route("/api/deck/draw", name: "api_deck_draw", methods: ['POST'])]
     public function draw(SessionInterface $session): Response
     {
-        $deck = $session->get('deck');
-        if (!$deck) {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-        }
+        // $deck = $session->get('deck');
+        // if (!$deck) {
+        //     $deck = new DeckOfCards();
+        //     $deck->shuffle();
+        // }
+
+        $cardArray = $session->get('deck');
+        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         $card = $deck->dealCard();
-        $session->set('deck', $deck);
+        $session->set('deck', $deck->toArray());
 
-        if ($card) {
-        } else {
+        if (!$card) {
             $card = 'No more cards in the deck.';
         }
 
@@ -204,31 +178,37 @@ class ReportController extends AbstractController
         return new JsonResponse($data);
     }
 
-    #[Route("/card/deck/draw/{num<\d+>}", name: "api_deck_multi_draw")]
+    #[Route("/api/deck/draw/{num<\d+>}", name: "api_deck_multi_draw")]
     public function multiDraw(
         int $num,
         SessionInterface $session
     ): Response {
 
-        $deck = $session->get('deck');
-        if (!$deck) {
-            $deck = new DeckOfCards();
-            $deck->shuffle();
-        }
+        // $deck = $session->get('deck');
+        // if (!$deck) {
+        //     $deck = new DeckOfCards();
+        //     $deck->shuffle();
+        // }
+
+        $cardArray = $session->get('deck');
+        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         $cards = [];
         for ($i = 0; $i < $num; $i++) {
             if (count($deck->getCards()) > 0) {
                 $card = $deck->dealCard();
+                $cards[] = $card->getAsString();
             } else {
                 break;
             }
         }
 
+        $session->set('deck', $deck->toArray());
+
         $remaining = count($deck->getCards());
 
         $data = [
-            'cards' => $cards,
+            'cards' => [$cards],
             'remaining' => $remaining
         ];
 
