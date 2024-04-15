@@ -55,7 +55,7 @@ class CardController extends AbstractController
         $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         $deck->sort();
-        $session->set('deck', $deck);
+        $session->set('deck', $deck->toArray());
 
         $renderCards = array_map(function ($card) {
             $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
@@ -75,7 +75,7 @@ class CardController extends AbstractController
         $deck = new DeckOfCards();
         $deck->shuffle();
 
-        $session->set('deck', $deck);
+        $session->set('deck', $deck->toArray());
 
         $renderCards = array_map(function ($card) {
             $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
@@ -102,7 +102,7 @@ class CardController extends AbstractController
         $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         $card = $deck->dealCard();
-        $session->set('deck', $deck);
+        $session->set('deck', $deck->toArray());
 
         if ($card) {
             $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
@@ -150,6 +150,8 @@ class CardController extends AbstractController
                 break;
             }
         }
+
+        $session->set('deck', $deck->toArray());
 
         $remaining = count($deck->getCards());
 
