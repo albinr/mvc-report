@@ -21,7 +21,7 @@ class CardController extends AbstractController
         $routes = [
             [
                 'name' => 'deck',
-                'path' => 'card/deck/',
+                'path' => 'card/deck',
                 'params' => [],
             ],
             [
