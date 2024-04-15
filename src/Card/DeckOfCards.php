@@ -13,9 +13,9 @@ class DeckOfCards
 
     protected function initialize()
     {
-        $suits = ['Diamonds', 'Clubs', 'Hearts', 'Spades'];
-        $values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
-        $count = 0;
+        $suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
+        $values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        $count = 1;
         foreach ($suits as $suit) {
             foreach ($values as $value) {
                 $this->cards[] = new Card($value, $suit, $count);
@@ -33,7 +33,7 @@ class DeckOfCards
     public function sort()
     {
         usort($this->cards, function ($a, $b) {
-            return strcmp($a->getId(), $b->getId());
+            return $a->getId() <=> $b->getId();
         });
     }
 
@@ -57,7 +57,7 @@ class DeckWithJokers extends DeckOfCards
     protected function initialize()
     {
         parent::initialize();
-        $this->cards[] = new Card('Joker', 'Black', 52);
-        $this->cards[] = new Card('Joker', 'Red', 53);
+        $this->cards[] = new Card('Joker', 'Black', 53);
+        $this->cards[] = new Card('Joker', 'Red', 54);
     }
 }

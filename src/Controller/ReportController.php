@@ -51,24 +51,33 @@ class ReportController extends AbstractController
             [
                 'name' => 'quote',
                 'path' => 'api/quote',
+                'params' => [],
+                'method' => 'GET',
             ],
             [
                 'name' => 'api_deck',
                 'path' => 'api/deck',
+                'params' => [],
+                'method' => 'GET',
             ],
             [
                 'name' => 'api_deck_shuffle',
                 'path' => 'api/deck/shuffle',
+                'params' => [],
+                'method' => 'POST',
             ],
             [
                 'name' => 'api_deck_draw',
                 'path' => 'api/deck/draw',
+                'params' => [],
+                'method' => 'POST',
             ],
-            // [
-            //     'name' => 'api_deck_Multi_draw',
-            //     'path' => 'api/deck/draw/:number',
-            // ],
-
+            [
+                'name' => 'api_deck_multi_draw',
+                'path' => 'api/deck/draw/5',
+                'params' => ['num'=> 5],
+                'method' => 'POST',
+            ],
         ];
 
         $data = [
@@ -99,9 +108,11 @@ class ReportController extends AbstractController
     }
 
     #[Route("/api/deck", name: "api_deck", methods: ['GET'])]
-    public function apiDeck(): JsonResponse
+    public function apiDeck(SessionInterface $session): JsonResponse
     {
-        $deck = new DeckOfCards();
+        // $deck = new DeckOfCards();
+        $deck = $session->get('deck', new DeckOfCards());
+        $deck->sort();
         $cards = $deck->getCards();
 
         $deckArray = array_map(function ($card) {
@@ -120,11 +131,11 @@ class ReportController extends AbstractController
     #[Route("/api/deck/shuffle", name: "api_deck_shuffle", methods: ['POST'])]
     public function apiDeckShuffle(SessionInterface $session): JsonResponse
     {
-        $deck = new DeckOfCards();
+        $deck = $session->get('deck', new DeckOfCards());
         $deck->shuffle();
         $session->set('deck', $deck);
-        $cards = $deck->getCards();
 
+        $cards = $deck->getCards();
         $deckArray = array_map(function ($card) {
             return [
                 'card' => $card->getAsString()
@@ -138,7 +149,35 @@ class ReportController extends AbstractController
         return new JsonResponse($data);
     }
 
-    #[Route("/card/deck/draw", name: "api_deck_draw")]
+    // #[Route("/api/deck/draw/{num<\d+>}", name: "api_deck_draw", methods: ['POST'])]
+    // public function draw(int $num = 1, SessionInterface $session): JsonResponse
+    // {
+    //     $deck = $session->get('deck', new DeckOfCards());
+    //     $cards = [];
+    //     for ($i = 0; $i < $number; $i++) {
+    //         $card = $deck->dealCard();
+    //         if (!$card) {
+    //             break; // Stop if there are no more cards to draw
+    //         }
+    //         $cards[] = [
+    //             'suit' => $card->getSuit(),
+    //             'value' => $card->getValue()
+    //         ]; // Or use $card->getAsString() if that's defined to format it as a string
+    //     }
+
+    //     $session->set('deck', $deck); // Save the state back to the session
+    //     $remaining = count($deck->getCards());
+
+    //     $data = [
+    //         'card' => $cards,
+    //         'remaining' => $remaining
+    //     ];
+
+    //     return new JsonResponse($data);
+    // }
+
+
+    #[Route("/card/deck/draw", name: "api_deck_draw", methods: ['POST'])]
     public function draw(SessionInterface $session): Response
     {
         $deck = $session->get('deck');
@@ -152,13 +191,13 @@ class ReportController extends AbstractController
 
         if ($card) {
         } else {
-            $renderedCard = 'No more cards in the deck.';
+            $card = 'No more cards in the deck.';
         }
 
         $remaining = count($deck->getCards());
 
         $data = [
-            'card' => [$renderedCard],
+            'card' => [$card->getAsString()],
             'remaining' => $remaining
         ];
 

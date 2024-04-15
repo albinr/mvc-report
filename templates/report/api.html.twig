@@ -5,6 +5,14 @@
 {% block body %}
 <h1>Api Json Routes</h1>
 {% for route in routes %}
-        <a href="{{ path(route.name) }}" class="button">{{ route.path }}</a>
+{% if route.method == 'GET' %}
+<a href="{{ path(route.name, route.params) }}" class="button">{{ route.path }}</a>
+{% else %}
+{# <a href="{{ path(route.name, route.params) }}" class="button">{{ route.path }}</a> #}
+<form action="{{ path(route.name, route.params) }}" method="post">
+        <button type="submit" class="button full-width-button">{{ route.path }}</button>
+</form>
+
+{% endif %}
 {% endfor %}
 {% endblock %}
