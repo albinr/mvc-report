@@ -20,7 +20,7 @@ class CardGraphic extends Card
 
     public function __construct($suit, $value)
     {
-        parent::__construct($suit, $value);
+        parent::__construct($suit, $value, $card_id = null);
     }
 
     public function render()

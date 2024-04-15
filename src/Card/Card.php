@@ -6,11 +6,13 @@ class Card
 {
     protected $value;
     protected $suit;
+    protected $card_id;
 
-    public function __construct($value, $suit)
+    public function __construct($value, $suit, $card_id)
     {
         $this->value = $value;
         $this->suit = $suit;
+        $this->card_id = $card_id;
     }
 
     public function getValue()
@@ -23,8 +25,13 @@ class Card
         return $this->suit;
     }
 
+    public function getId()
+    {
+        return $this->card_id;
+    }
+
     public function getAsString(): string
     {
-        return "[{$this->suit} {$this->value}]";
+        return "{$this->value} of {$this->suit}";
     }
 }

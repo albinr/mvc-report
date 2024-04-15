@@ -13,8 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-
 class CardController extends AbstractController
 {
     #[Route("/card", name: "card")]
@@ -42,6 +40,8 @@ class CardController extends AbstractController
             $session->set('deck', $deck);
         }
 
+        $deck->sort();
+
         $renderCards = array_map(function ($card) {
             $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
             return $cardGraphic->render();
@@ -57,11 +57,9 @@ class CardController extends AbstractController
     #[Route("/card/deck/shuffle", name: "shuffle")]
     public function shuffle(SessionInterface $session): Response
     {
-        $deck = $session->get('deck');
-        if (!$deck) {
-            $deck = new DeckOfCards();
-            $session->set('deck', $deck);
-        }
+
+        $deck = new DeckOfCards();
+        $session->set('deck', $deck);
 
         $deck->shuffle();
 

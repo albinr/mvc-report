@@ -2,14 +2,17 @@
 
 namespace App\Card;
 
-class CardHand {
+class CardHand
+{
     private $cards = [];
 
-    public function addCard(Card $card) {
+    public function addCard(Card $card)
+    {
         $this->cards[] = $card;
     }
 
-    public function showHand() {
+    public function showHand()
+    {
         $hand = [];
         foreach ($this->cards as $card) {
             $hand[] = "{$card->getValue()} of {$card->getSuit()}";

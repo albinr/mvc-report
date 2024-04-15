@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1>Api Json Routes</h1>
-{% for key, route in routes %}
-        <a href="{{ path(key) }}">{{key}}: {{ route }}</a>
+{% for route in routes %}
+        <a href="{{ path(route.name) }}" class="button">{{ route.path }}</a>
 {% endfor %}
 {% endblock %}

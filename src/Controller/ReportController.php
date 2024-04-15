@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Card\DeckOfCards;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class ReportController extends AbstractController
 {
@@ -44,7 +48,27 @@ class ReportController extends AbstractController
     public function api(): Response
     {
         $apiRoutes = [
-            'quote' => 'api/quote',
+            [
+                'name' => 'quote',
+                'path' => 'api/quote',
+            ],
+            [
+                'name' => 'api_deck',
+                'path' => 'api/deck',
+            ],
+            [
+                'name' => 'api_deck_shuffle',
+                'path' => 'api/deck/shuffle',
+            ],
+            [
+                'name' => 'api_deck_draw',
+                'path' => 'api/deck/draw',
+            ],
+            // [
+            //     'name' => 'api_deck_Multi_draw',
+            //     'path' => 'api/deck/draw/:number',
+            // ],
+
         ];
 
         $data = [
@@ -69,6 +93,104 @@ class ReportController extends AbstractController
             'quote' => $quote,
             'date' => date('Y-m-d'),
             'timestamp' => date('H:i:s'),
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route("/api/deck", name: "api_deck", methods: ['GET'])]
+    public function apiDeck(): JsonResponse
+    {
+        $deck = new DeckOfCards();
+        $cards = $deck->getCards();
+
+        $deckArray = array_map(function ($card) {
+            return [
+                'card' => $card->getAsString()
+            ];
+        }, $cards);
+
+        $data = [
+            'deck' => $deckArray
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route("/api/deck/shuffle", name: "api_deck_shuffle", methods: ['POST'])]
+    public function apiDeckShuffle(SessionInterface $session): JsonResponse
+    {
+        $deck = new DeckOfCards();
+        $deck->shuffle();
+        $session->set('deck', $deck);
+        $cards = $deck->getCards();
+
+        $deckArray = array_map(function ($card) {
+            return [
+                'card' => $card->getAsString()
+            ];
+        }, $cards);
+
+        $data = [
+            'deck' => $deckArray
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route("/card/deck/draw", name: "api_deck_draw")]
+    public function draw(SessionInterface $session): Response
+    {
+        $deck = $session->get('deck');
+        if (!$deck) {
+            $deck = new DeckOfCards();
+            $deck->shuffle();
+        }
+
+        $card = $deck->dealCard();
+        $session->set('deck', $deck);
+
+        if ($card) {
+        } else {
+            $renderedCard = 'No more cards in the deck.';
+        }
+
+        $remaining = count($deck->getCards());
+
+        $data = [
+            'card' => [$renderedCard],
+            'remaining' => $remaining
+        ];
+
+        return new JsonResponse($data);
+    }
+
+    #[Route("/card/deck/draw/{num<\d+>}", name: "api_deck_multi_draw")]
+    public function multiDraw(
+        int $num,
+        SessionInterface $session
+    ): Response {
+
+        $deck = $session->get('deck');
+        if (!$deck) {
+            $deck = new DeckOfCards();
+            $deck->shuffle();
+        }
+
+        $cards = [];
+        for ($i = 0; $i < $num; $i++) {
+            if (count($deck->getCards()) > 0) {
+                $card = $deck->dealCard();
+            } else {
+                break;
+            }
+        }
+
+        $remaining = count($deck->getCards());
+
+        $data = [
+            'cards' => $cards,
+            'remaining' => $remaining
         ];
 
         return new JsonResponse($data);
