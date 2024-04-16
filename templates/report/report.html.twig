@@ -128,6 +128,73 @@
 </section>
 <section>
     <h2 id="kmom02">Kmom02</h2>
+    <h3>Objektorienterade konstruktioner</h3>
+    <h4>Arv</h4>
+    <p>Arv används av klasser för att ärva egenskaper och metoder från andra klasser. För att ärva från en annan klass
+        används ordet ‘extends’ (förlänga/utöka). Med den nuvarande klassen kan du nu utöka funktionalitet eller
+        förändra den.</p>
+
+    <h4>Komposition</h4>
+    <p>Komposition betyder att en klass innehåller en eller flera instanser av en annan klass. Ett exempel kan vara en
+        kortlek har flera kort eller en bil som har en motor. Det är alltså “har-en” eller “har många” förhållande.</p>
+
+    <h4>Interface</h4>
+    <p>Interface kan användas för att specificera metoder som måste finnas i klassen. Interface används för att se till
+        att olika klasser följer samma strukturella regler i koden även om de obligatoriska funktionerna kan skrivas
+        olika.</p>
+
+    <h4>Trait</h4>
+    <p>Trait används för att återanvända kod i klasser. En trait används för att gruppera funktionalitet på ett mer
+        flexibelt sätt. En klass kan använda flera traits och flera klasser kan använda en trait.</p>
+
+    <h3>Implementation av uppgiften</h3>
+    <p>För att lösa uppgiften skapade jag klasserna Card(Ett spelkort),CardGrapic(För en grafisk representation av ett
+        spelkort), DeckOfCards(En kortlek) och CardHand(En hand men kort).</p>
+
+    <p>DeckOfCards och CardHand har ett kompositions förhållande med Card-klassen. Det finns också ett arv av Card
+        klassen i CardGrapic.</p>
+
+    <p>För att visa korten med den specifika stilen i kraven så använder jag html och css. Jag tycker korten ser helt
+        okej ut just nu, men jag vill lägga till symboler för knekt, drottning och kung. Just nu är det bara bokstäver.
+    </p>
+
+    <p>Jag har haft en stor utmaning under uppgiften och det var att få koden att fungera på studentservern. Problemet
+        var dock inte med min kod, det var min Firefox webbläsare. Av någon anledning så minskade inte kortleken när jag
+        laddade om sidorna för att dra kort. Först trodde jag det berodde på att jag satte hela DeckOfCards objektet i
+        session.</p>
+
+    <p>För att lösa problemet så försökte jag först att bara ladda upp arrayen med kort objekt istället. När det inte
+        heller fungerade så lade jag till metoder för att skapa en kortlek från en array och en metod för att skapa en
+        array med värden som strängar av en kortlek. Det fungerade inte heller.</p>
+
+    <p>När jag tillslut bad en kompis testa min lösning så fungerade det på hans dator. Då bestämde jag mig för att
+        testa med Crome som webbläsare och då fungerade det. Av mina lösningar så tror jag att ladda upp en array med
+        strängar är smidigare än att ladda upp en array med objekt i session.</p>
+
+    <p>Förbättringar som kan göras är till exempel att slå samman de två draw card rutterna. Efter som de nästan gör
+        samma sak (drar ett eller flera kort), men jag lyckades inte med det i detta kursmoment.</p>
+
+    <p>Jag skapade också CardHand klassen utan att använda den. Jag kanske får användning av den i ett senare
+        kursmoment.
+    </p>
+
+    <h3>Symfony och MVC</h3>
+    <p>Att jobba med mvc och Symfony har känts ganska smidigt. Ett problem jag stötte på dock var att skapa routes med
+        metoderna GET och POST. Jag fick lösa det genom att rendera en a tag för GET routes och en form submit för
+        Routes med POST. Tror det inte är helt korrekt att göra så men det fungerar.
+    </p>
+
+    <p>När jag jobbade med arrayer i session så slutade min sida för att visa allt i session att fungera. Den första
+        lösningen var att lägga till en __toString metod på DeckOfCards klassen. Men när jag bytte sätt att ladda upp
+        till session så kändes den lösningen inte så bra. Jag googlade lite och hittade en komponent i Symfony som heter
+        VarDumper. Med den kan jag lätt dumpa all information från session, även arrayer.
+    </p>
+
+    <h3>Today I Learned</h3>
+    <p>Min til för detta kursmoment är hur jag kan skapa klasser i PHP. Efter mycket krångel så tycker jag att jag
+        förstår klasser bättre. Jag tycker det har varit svåra moment hittills och jag hoppas det blir något lättare
+        framåt.</p>
+
 </section>
 <section>
     <h2 id="kmom03">Kmom03</h2>
