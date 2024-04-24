@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Card\DeckOfCards;
 use App\Card\CardGraphic;
-use App\Card\CardHand;
+// use App\Card\CardHand;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+// use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
+// use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CardController extends AbstractController
@@ -52,13 +52,18 @@ class CardController extends AbstractController
     public function deck(SessionInterface $session): Response
     {
         $cardArray = $session->get('deck');
-        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
-        $deck->sort();
+        if ($cardArray) {
+            $deck = new DeckOfCards($cardArray);
+            $deck->sort();
+        } else {
+            $deck = new DeckOfCards();
+        }
+
         $session->set('deck', $deck->toArray());
 
         $renderCards = array_map(function ($card) {
-            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
+            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
             return $cardGraphic->render();
         }, $deck->getCards());
 
@@ -72,13 +77,14 @@ class CardController extends AbstractController
     #[Route("/card/deck/shuffle", name: "shuffle")]
     public function shuffle(SessionInterface $session): Response
     {
+        $session->remove('deck');
         $deck = new DeckOfCards();
         $deck->shuffle();
 
         $session->set('deck', $deck->toArray());
 
         $renderCards = array_map(function ($card) {
-            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
+            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
             return $cardGraphic->render();
         }, $deck->getCards());
 
@@ -92,11 +98,6 @@ class CardController extends AbstractController
     #[Route("/card/deck/draw", name: "draw")]
     public function draw(SessionInterface $session): Response
     {
-        // $deck = $session->get('deck');
-        // if (!$deck) {
-        //     $deck = new DeckOfCards();
-        //     $deck->shuffle();
-        // }
 
         $cardArray = $session->get('deck');
         $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
@@ -104,11 +105,11 @@ class CardController extends AbstractController
         $card = $deck->dealCard();
         $session->set('deck', $deck->toArray());
 
+        $renderedCard = 'No more cards in the deck.';
+
         if ($card) {
-            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
+            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
             $renderedCard = $cardGraphic->render();
-        } else {
-            $renderedCard = 'No more cards in the deck.';
         }
 
         $remaining = count($deck->getCards());
@@ -127,12 +128,6 @@ class CardController extends AbstractController
         SessionInterface $session
     ): Response {
 
-        // $deck = $session->get('deck');
-        // if (!$deck) {
-        //     $deck = new DeckOfCards();
-        //     $deck->shuffle();
-        // }
-
         $cardArray = $session->get('deck');
         $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
@@ -144,7 +139,7 @@ class CardController extends AbstractController
         for ($i = 0; $i < $num; $i++) {
             if (count($deck->getCards()) > 0) {
                 $card = $deck->dealCard();
-                $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit());
+                $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
                 $cards[] = $cardGraphic->render();
             } else {
                 break;

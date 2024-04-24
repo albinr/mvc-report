@@ -1,0 +1,105 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Game Doc{% endblock %}
+
+{% block body %}
+<h1>Dokumentation för spelet 21</h1>
+
+<div class="row">
+    <div class="column">
+        <h2>Pseudokod</h2>
+        <h4>Starta spelet:</h4>
+        <ul>
+            <li>Skapa och blanda en kortlek</li>
+            <li>Skapa en tom hand för spelaren</li>
+            <li>Skapa en tom hand för banken</li>
+        </ul>
+
+        <h4>Spelarens tur:</h4>
+        <ul>
+            <li>WHILE spelaren inte har stannat och inte överskridit 21 poäng:
+                <ul>
+                    <li>Fråga spelaren om de vill ta ett kort eller stanna</li>
+                    <li>Om spelaren väljer att ta ett kort:
+                        <ul>
+                            <li>Dra ett kort från kortleken och lägg till i spelarens hand</li>
+                            <li>Visa spelarens nya kort</li>
+                            <li>Om spelarens totala poäng överskrider 21:
+                                <ul>
+                                    <li>Meddela spelaren att de överskridit 21</li>
+                                    <li>Avsluta spelarens tur</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Annars om spelaren väljer att stanna:
+                        <ul>
+                            <li>Avsluta spelarens tur och påbörja bankens tur</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Bankens tur:</h4>
+        <ul>
+            <li>WHILE bankens totala poäng är mindre än 17:
+                <ul>
+                    <li>Dra ett kort från kortleken och lägg till i bankens hand</li>
+                    <li>Visa bankens nya kort</li>
+                    <li>Om bankens totala poäng överskrider 21:
+                        <ul>
+                            <li>Meddela att banken överskridit 21</li>
+                            <li>Avsluta bankens tur</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4> Avgör vem som vann:</h4>
+        <ul>
+            <li>Om både spelaren och banken är under eller lika med 21:
+                <ul>
+                    <li>Om spelarens poäng är högre än bankens poäng:
+                        <ul>
+                            <li>Spelaren vinner</li>
+                        </ul>
+                    </li>
+                    <li>Annars om bankens poäng är lika med eller högre än spelarens poäng:
+                        <ul>
+                            <li>Banken vinner</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Annars:
+                <ul>
+                    <li>Om bara banken överskrider 21:
+                        <ul>
+                            <li>Spelaren vinner</li>
+                        </ul>
+                    </li>
+                    <li>Om bara spelaren överskrider 21:
+                        <ul>
+                            <li>Banken vinner</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Klasser som behövs:</h4>
+        <p>Card - Representerar ett kort med ett värde och en svit.</p>
+        <p>Deck - Hanterar en kortlek. Ansvarig för att blanda och dra kort.</p>
+        <p>Hand - Hanterar en samling kort för en spelare.</p>
+        <p>Game - Kontrollerar spelets flöde, inkluderar att starta spelet, spelarens och dealerns drag, och att avgöra
+            spelets slut.</p>
+    </div>
+
+    <div class="column">
+        <h2>Flödesschema</h2>
+        <img src="{{ asset('img/game-flowchart.png') }}" alt="Flödesschema för spelet 21">
+    </div>
+</div>
+{% endblock %}

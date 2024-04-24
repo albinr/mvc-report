@@ -6,13 +6,13 @@ class Card
 {
     protected $value;
     protected $suit;
-    protected $card_id;
+    protected $cardId;
 
-    public function __construct($value, $suit, $card_id)
+    public function __construct($value, $suit, $cardId)
     {
         $this->value = $value;
         $this->suit = $suit;
-        $this->card_id = $card_id;
+        $this->cardId = $cardId;
     }
 
     public function getValue()
@@ -27,7 +27,7 @@ class Card
 
     public function getId()
     {
-        return $this->card_id;
+        return $this->cardId;
     }
 
     public function getAsString(): string

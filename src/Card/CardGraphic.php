@@ -18,9 +18,9 @@ class CardGraphic extends Card
         'Spades' => 'black-card'
     ];
 
-    public function __construct($suit, $value)
+    public function __construct($suit, $value, $cardId)
     {
-        parent::__construct($suit, $value, $card_id = null);
+        parent::__construct($suit, $value, $cardId);
     }
 
     public function render()

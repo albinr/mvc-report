@@ -25,7 +25,6 @@ class DeckOfCards
         foreach ($suits as $suit) {
             foreach ($values as $value) {
                 $this->cards[] = new Card($value, $suit, $count);
-                // $this->cards[] = new CardGraphic($value, $suit);
                 $count++;
             }
         }
@@ -38,8 +37,8 @@ class DeckOfCards
 
     public function sort()
     {
-        usort($this->cards, function ($a, $b) {
-            return $a->getId() <=> $b->getId();
+        usort($this->cards, function ($card1, $card2) {
+            return $card1->getId() <=> $card2->getId();
         });
     }
 

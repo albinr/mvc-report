@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}21{% endblock %}
+
+{% block body %}
+<h1>Kortspel: 21</h1>
+
+<p><a href="{{ path('game_doc') }}" >Documentation</a></p>
+
+<h3>Förklaring:</h3>
+
+<p>Målet med spelet är att samla kort som har det totala värdet så nära 21 som möjligt, utan att överskrida 21.</p>
+
+<h3>Kortens värde:</h3>
+<ul>
+    <li>De numrerade korten har sitt tryckta värde. (2-10)</li>
+    <li>Knekt, Dam och Kung är värda 10.</li>
+    <li>Ess kan vara värt antingen 1 eller 14, spelaren får välja vad som gymmar dem mest.</li>
+</ul>
+
+<h3>En spel runda ser ut så här:</h3>
+<ol>
+    <li>Spelaren tar ett kort. Kortet visas.</li>
+    <li>Spelaren kan bestämma att stanna(stand) eller ta ytterligare ett kort(hit).</li>
+    <li>Om spelaren får över 21 vinner banken.</li>
+    <li>När spelaren stannar så är det bankens tur.</li>
+    <li>Banken plockar kort tills den stannar eller har över 21.</li>
+    <li>Banken vinner vid lika eller om banken har mer än spelaren.</li>
+    <li>Spelaren vinner om banken får över 21.</li>
+</ol>
+
+<a href="" class="button green-button">Starta spel</a>
+
+{% endblock %}
