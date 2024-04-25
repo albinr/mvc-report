@@ -4,6 +4,9 @@ namespace App\Card;
 
 class CardGraphic extends Card
 {
+    /**
+     * @var array<string, string>
+     */
     private $suitSymbols = [
         'Hearts' => '♥',
         'Diamonds' => '♦',
@@ -11,6 +14,9 @@ class CardGraphic extends Card
         'Spades' => '♠'
     ];
 
+    /**
+     * @var array<string, string>
+     */
     private $suitColors = [
         'Hearts' => 'red-card',
         'Diamonds' => 'red-card',
@@ -18,12 +24,12 @@ class CardGraphic extends Card
         'Spades' => 'black-card'
     ];
 
-    public function __construct($suit, $value, $cardId)
+    public function __construct(string $suit, string $value, int $cardId)
     {
         parent::__construct($suit, $value, $cardId);
     }
 
-    public function render()
+    public function render(): string
     {
 
         $symbol = $this->suitSymbols[$this->getSuit()] ?? '';

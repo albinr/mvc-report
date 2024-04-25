@@ -4,7 +4,10 @@ namespace App\Card;
 
 class CardHand
 {
-    private $cards = [];
+    /**
+     * @var Card[] Array of Card objects
+     */
+    private array $cards = [];
 
     public function __construct(array $cards = null)
     {
@@ -15,17 +18,17 @@ class CardHand
         }
     }
 
-    public function addCard(Card $card)
+    public function addCard(Card $card): void
     {
         $this->cards[] = $card;
     }
 
-    public function getCards()
+    public function getCards(): array
     {
         return $this->cards;
     }
 
-    public function showHand()
+    public function showHand(): array
     {
         $hand = [];
         foreach ($this->cards as $card) {
@@ -34,12 +37,12 @@ class CardHand
         return $hand;
     }
 
-    public function clearHand()
+    public function clearHand(): void
     {
         $this->cards = [];
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return array_map(function (Card $card) {
             return [
@@ -50,7 +53,7 @@ class CardHand
         }, $this->cards);
     }
 
-    public function getRenderedHand()
+    public function getRenderedHand(): array
     {
         return array_map(function (Card $card) {
             $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), $card->getId());

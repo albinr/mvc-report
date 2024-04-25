@@ -4,13 +4,11 @@ namespace App\Controller;
 
 use App\Card\DeckOfCards;
 use App\Card\CardGraphic;
-// use App\Card\CardHand;
+use Exception;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-// use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CardController extends AbstractController
@@ -52,18 +50,13 @@ class CardController extends AbstractController
     public function deck(SessionInterface $session): Response
     {
         $cardArray = $session->get('deck');
+        $deck = new DeckOfCards($cardArray ? $cardArray : null);
 
-        if ($cardArray) {
-            $deck = new DeckOfCards($cardArray);
-            $deck->sort();
-        } else {
-            $deck = new DeckOfCards();
-        }
-
+        $deck->sort();
         $session->set('deck', $deck->toArray());
 
         $renderCards = array_map(function ($card) {
-            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
+            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), $card->getId());
             return $cardGraphic->render();
         }, $deck->getCards());
 
@@ -73,6 +66,7 @@ class CardController extends AbstractController
 
         return $this->render('card/deck.html.twig', $data);
     }
+
 
     #[Route("/card/deck/shuffle", name: "shuffle")]
     public function shuffle(SessionInterface $session): Response
@@ -123,27 +117,24 @@ class CardController extends AbstractController
     }
 
     #[Route("/card/deck/draw/{num<\d+>}", name: "multi_draw")]
-    public function multiDraw(
-        int $num,
-        SessionInterface $session
-    ): Response {
+    public function multiDraw(int $num, SessionInterface $session): Response
+    {
 
         $cardArray = $session->get('deck');
         $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
         if ($num > count($deck->getCards())) {
-            throw new \Exception("Can not roll more than 99 dices!");
+            throw new Exception("Can't draw more cards!");
         }
 
         $cards = [];
         for ($i = 0; $i < $num; $i++) {
-            if (count($deck->getCards()) > 0) {
-                $card = $deck->dealCard();
-                $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
-                $cards[] = $cardGraphic->render();
-            } else {
+            if (count($deck->getCards()) === 0) {
                 break;
             }
+            $card = $deck->dealCard();
+            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
+            $cards[] = $cardGraphic->render();
         }
 
         $session->set('deck', $deck->toArray());

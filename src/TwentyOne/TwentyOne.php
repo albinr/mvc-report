@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Game;
+namespace App\TwentyOne;
 
 use App\Card\DeckOfCards;
 use App\Card\CardHand;
 
 class TwentyOne
 {
-    private $deck;
-    private $playerHand;
-    private $bankHand;
-    private $status;
+    private DeckOfCards $deck;
+    private CardHand $playerHand;
+    private CardHand $bankHand;
+    private string $status;
 
     public function __construct()
     {
@@ -21,28 +21,31 @@ class TwentyOne
         $this->status = 'playing';
     }
 
-    public function hit()
+    public function hit(): void
     {
-        $this->playerHand->addCard($this->deck->dealCard());
-        if ($this->calcScore($this->playerHand->getCards()) > 21) {
-            $this->status = 'Player loss';
+        $card = $this->deck->dealCard();
+        if ($card !== null) {
+            $this->playerHand->addCard($card);
+            if ($this->calcScore($this->playerHand->getCards()) > 21) {
+                $this->status = 'Player loss';
+            }
         }
     }
 
-    public function stand()
+    public function stand(): void
     {
         $this->bankPlay();
     }
 
-    private function bankPlay()
+    private function bankPlay(): void
     {
-        while ($this->calcScore($this->bankHand->getCards()) < 17) {
+        while ($this->calcScore($this->bankHand->getCards()) < 18) {
             $this->bankHand->addCard($this->deck->dealCard());
         }
         $this->gameOver();
     }
 
-    private function calcScore($hand): int
+    private function calcScore(array $hand): int
     {
         $score = 0;
         $aces = 0;
@@ -58,53 +61,49 @@ class TwentyOne
         }
 
         for ($i = 0; $i < $aces; $i++) {
-            if ($score + 14 <= 21) {
-                $score += 14;
-            } else {
-                $score += 1;
-            }
+            $score += ($score + 14 <= 21) ? 14 : 1;
         }
 
         return $score;
     }
 
-    private function gameOver()
+    private function gameOver(): void
     {
         $playerScore = $this->calcScore($this->playerHand->getCards());
         $bankScore = $this->calcScore($this->bankHand->getCards());
 
         if ($playerScore > 21) {
             $this->status = 'Player loss';
-        } elseif ($bankScore > 21) {
-            $this->status = 'Bank loss';
-        } elseif ($playerScore > $bankScore) {
-            $this->status = 'Player wins';
-        } else {
-            $this->status = 'Bank wins';
+            return;
         }
+        if ($bankScore > 21) {
+            $this->status = 'Bank loss';
+            return;
+        }
+        $this->status = ($playerScore > $bankScore) ? 'Player wins' : 'Bank wins';
     }
 
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    public function getPlayerHand()
+    public function getPlayerHand(): CardHand
     {
         return $this->playerHand;
     }
 
-    public function getBankHand()
+    public function getBankHand(): CardHand
     {
         return $this->bankHand;
     }
 
-    public function getPlayerScore()
+    public function getPlayerScore(): int
     {
         return $this->calcScore($this->playerHand->getCards());
     }
 
-    public function getBankScore()
+    public function getBankScore(): int
     {
         return $this->calcScore($this->bankHand->getCards());
     }

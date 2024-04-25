@@ -9,16 +9,24 @@
     margin: 20px;
     background-color: lighten($blue, 40%);
     border-radius: 8px;
-    padding: 20px;
-    border:1px solid lighten($blue, 10%)
+    padding: 10px;
+    border: 1px solid lighten($blue, 10%);
+}
+
+.player-cards h2 {
+    margin-bottom: 18px;
 }
 
 .bank-cards {
     margin: 20px;
     background-color: lighten($red, 30%);
     border-radius: 8px;
-    padding: 20px;
-    border:1px solid lighten($red, 10%)
+    padding: 10px;
+    border: 1px solid lighten($red, 10%);
+}
+
+.bank-cards h2 {
+    margin-bottom: 18px;
 }
 
 .game-actions {

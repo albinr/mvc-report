@@ -4,7 +4,7 @@ namespace App\Card;
 
 class DeckOfCards
 {
-    protected $cards = [];
+    protected array $cards = [];
 
     public function __construct(array $cards = null)
     {
@@ -12,12 +12,14 @@ class DeckOfCards
             $this->cards = array_map(function ($cardData) {
                 return new Card($cardData['value'], $cardData['suit'], $cardData['id']);
             }, $cards);
-        } else {
-            $this->initialize();
+            return;
         }
+
+        $this->initialize();
     }
 
-    protected function initialize()
+
+    protected function initialize(): void
     {
         $suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
         $values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -30,29 +32,29 @@ class DeckOfCards
         }
     }
 
-    public function shuffle()
+    public function shuffle(): void
     {
         shuffle($this->cards);
     }
 
-    public function sort()
+    public function sort(): void
     {
         usort($this->cards, function ($card1, $card2) {
             return $card1->getId() <=> $card2->getId();
         });
     }
 
-    public function dealCard()
+    public function dealCard(): ?Card
     {
-        return array_shift($this->cards);
+        return array_shift($this->cards) ?: null;
     }
 
-    public function getCards()
+    public function getCards(): array
     {
         return $this->cards;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return array_map(function (Card $card) {
             return [
@@ -63,17 +65,8 @@ class DeckOfCards
         }, $this->cards);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return 'Deck of Cards: ' . count($this->cards) . ' cards remaining';
-    }
-}
-class DeckWithJokers extends DeckOfCards
-{
-    protected function initialize()
-    {
-        parent::initialize();
-        $this->cards[] = new Card('Joker', 'Black', 53);
-        $this->cards[] = new Card('Joker', 'Red', 54);
     }
 }

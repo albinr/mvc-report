@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Game\TwentyOne;
+use App\TwentyOne\TwentyOne;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
