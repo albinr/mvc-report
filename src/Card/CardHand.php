@@ -49,4 +49,12 @@ class CardHand
             ];
         }, $this->cards);
     }
+
+    public function getRenderedHand()
+    {
+        return array_map(function (Card $card) {
+            $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), $card->getId());
+            return $cardGraphic->render();
+        }, $this->cards);
+    }
 }

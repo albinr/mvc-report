@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Game{% endblock %}
+
+{% block body %}
+<h1>Game of Twenty-One</h1>
+
+<div class="bank-cards">
+    <h2>Bank's Cards:</h2>
+    <div class="hand">
+        {% for card in game.getBankHand().getRenderedHand() %}
+        {{ card|raw }}
+        {% endfor %}
+    </div>
+    <div class="game-points">Card score: {{ game.getBankScore() }}</div>
+</div>
+<div class="game-status">{{ game.getStatus() }}</div>
+<div class="player-cards">
+    <h2>Your Cards:</h2>
+    <div class="hand">
+        {% for card in game.getPlayerHand().getRenderedHand() %}
+        {{ card|raw }}
+        {% endfor %}
+    </div>
+    <div class="game-points">Card score: {{ game.getPlayerScore() }}</div>
+</div>
+
+<div class="game-actions">
+    {% if game.getStatus() == 'playing' %}
+        <a href="{{ path('game_hit') }}" class="button blue-button">Hit</a>
+        <a href="{{ path('game_stand') }}" class="button">Stand</a>
+    {% else %}
+        <a href="{{ path('game_start') }}" class="button blue-button">Play Again</a>
+        <a href="{{ path('game') }}" class="button">Back to Home</a>
+    {% endif %}
+</div>
+
+
+{% endblock %}
