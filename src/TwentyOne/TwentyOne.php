@@ -4,7 +4,6 @@ namespace App\Game;
 
 use App\Card\DeckOfCards;
 use App\Card\CardHand;
-use App\Card\CardGraphic;
 
 class TwentyOne
 {
@@ -26,51 +25,62 @@ class TwentyOne
     {
         $this->playerHand->addCard($this->deck->dealCard());
         if ($this->calcScore($this->playerHand->getCards()) > 21) {
-            $this->status = 'bust';
+            $this->status = 'Player loss';
         }
     }
 
     public function stand()
     {
-        $this->dealerPlay();
+        $this->bankPlay();
     }
 
-    private function dealerPlay()
+    private function bankPlay()
     {
         while ($this->calcScore($this->bankHand->getCards()) < 17) {
             $this->bankHand->addCard($this->deck->dealCard());
         }
-        $this->finalizeGame();
+        $this->gameOver();
     }
 
-    private function calcScore(array $hand): int
+    private function calcScore($hand): int
     {
         $score = 0;
+        $aces = 0;
+
         foreach ($hand as $card) {
             if ($card->getValue() === 'A') {
-                $score += ($score + 14 <= 21) ? 14 : 1;
-            } else if (in_array($card->getValue(), ['J', 'Q', 'K', '10'])) {
+                $aces++;
+            } elseif (in_array($card->getValue(), ['J', 'Q', 'K'])) {
                 $score += 10;
             } else {
-                $score += (int) $card->getValue();
+                $score += intval($card->getValue());
             }
         }
+
+        for ($i = 0; $i < $aces; $i++) {
+            if ($score + 14 <= 21) {
+                $score += 14;
+            } else {
+                $score += 1;
+            }
+        }
+
         return $score;
     }
 
-    private function finalizeGame()
+    private function gameOver()
     {
         $playerScore = $this->calcScore($this->playerHand->getCards());
-        $dealerScore = $this->calcScore($this->bankHand->getCards());
+        $bankScore = $this->calcScore($this->bankHand->getCards());
 
         if ($playerScore > 21) {
             $this->status = 'Player loss';
-        } else if ($dealerScore > 21) {
-            $this->status = 'Dealer loss';
-        } else if ($playerScore >= $dealerScore) {
+        } elseif ($bankScore > 21) {
+            $this->status = 'Bank loss';
+        } elseif ($playerScore > $bankScore) {
             $this->status = 'Player wins';
         } else {
-            $this->status = 'Dealer wins';
+            $this->status = 'Bank wins';
         }
     }
 

@@ -3,10 +3,10 @@
 {% block title %}Game{% endblock %}
 
 {% block body %}
-<h1>Game of Twenty-One</h1>
+<h1>Game of Twenty One</h1>
 
 <div class="bank-cards">
-    <h2>Bank's Cards:</h2>
+    <h2>Banks Cards:</h2>
     <div class="hand">
         {% for card in game.getBankHand().getRenderedHand() %}
         {{ card|raw }}

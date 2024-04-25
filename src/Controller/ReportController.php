@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Card\DeckOfCards;
-
+use App\Game\TwentyOne;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -152,11 +152,6 @@ class ReportController extends AbstractController
     #[Route("/api/deck/draw", name: "api_deck_draw", methods: ['POST'])]
     public function draw(SessionInterface $session): Response
     {
-        // $deck = $session->get('deck');
-        // if (!$deck) {
-        //     $deck = new DeckOfCards();
-        //     $deck->shuffle();
-        // }
 
         $cardArray = $session->get('deck');
         $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
@@ -184,12 +179,6 @@ class ReportController extends AbstractController
         SessionInterface $session
     ): Response {
 
-        // $deck = $session->get('deck');
-        // if (!$deck) {
-        //     $deck = new DeckOfCards();
-        //     $deck->shuffle();
-        // }
-
         $cardArray = $session->get('deck');
         $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
 
@@ -214,6 +203,30 @@ class ReportController extends AbstractController
 
         return new JsonResponse($data);
     }
+
+    #[Route("/api/game", name: "api_game_status")]
+    public function apiGameStatus(SessionInterface $session): Response
+    {
+        if ($session->has('game')) {
+            $game = unserialize($session->get('game'));
+
+            $data = [
+                'game-status' => $game->getStatus(),
+                'player-score' => $game->getPlayerScore(),
+                'bank-score' => $game->getBankScore(),
+                'player-cards' => $game->getPlayerHand()->showHand(),
+                'bank-cards' => $game->getBankHand()->showHand()
+            ];
+        } else {
+            $data = [
+                'game-status' => 'No game in progress.'
+            ];
+        }
+
+        return new JsonResponse($data);
+    }
+
+
 
     #[Route("/session", name: "session")]
     public function session(SessionInterface $session): Response

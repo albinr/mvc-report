@@ -2,15 +2,10 @@
 
 namespace App\Controller;
 
-use App\Card\DeckOfCards;
-use App\Card\CardGraphic;
-use App\Card\CardHand;
 use App\Game\TwentyOne;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TwentyOneController extends AbstractController
