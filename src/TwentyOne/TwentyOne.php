@@ -39,7 +39,7 @@ class TwentyOne
 
     private function bankPlay(): void
     {
-        while ($this->calcScore($this->bankHand->getCards()) < 18) {
+        while ($this->calcScore($this->bankHand->getCards()) < 16) {
             $this->bankHand->addCard($this->deck->dealCard());
         }
         $this->gameOver();

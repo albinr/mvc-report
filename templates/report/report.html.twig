@@ -198,6 +198,68 @@
 </section>
 <section>
     <h2 id="kmom03">Kmom03</h2>
+    <p>I kmom03 har jag skapat kortspelet 21 i min rapport sida. För att skapa kortspelet har jag använt mig av
+        flödesdiagram och pseudokod för att hjälpa att planera och strukturera koden jag skrivit.
+    </p>
+    <h3>Modellering av kortspel</h3>
+    <p>När jag började med uppgiften så kändes det svårt att börja lösa den. Jag visste inte riktigt hur jag skulle
+        göra. Men när jag började med att försöka skapa ett flödesdiagram så började jag också få bättre förståelse för
+        hur koden skulle kunna se ut.</p>
+
+    <p>Jag tycker det var svårt att skapa ett flödesdiagram. Det blev antingen för komplicerat eller för simpelt
+        diagram. Det jag landat på är den version jag tyckte om mest men jag är inte helt nöjd. I diagrammet så ska ju
+        banken också gå igenom en loop när de drar kort.
+    </p>
+
+    <p>Det som hjälpte allra mest var pseudokoden tycker jag. Jag listade snabbt ut vilka klasser och funktioner som jag
+        skulle behöva. När jag tänker på större uppgifter jag gjort tidigare så har jag alltid tänkt på ett liknande
+        sätt. Den enda skillnaden var att jag inte skrev ner pseudokoden/tankarna i vissa fall. Likt när man inte
+        skriver kommentarer i koden så glömde jag bort vad planen för koden var.</p>
+
+    <h3>Implementation av uppgiften</h3>
+
+    <p>För att göra uppgiften så skapade jag klassen TwentyOne. Klassen använder sig av DeckOfCards, CardHand, Card och
+        CardGraphic klasserna för att skapa ett 21 kortspel. Klassen initieras med att skapa en blandad kortlek, en hand
+        med kort för spelaren och en hand med kort till banken och en status för att kontrollera spelets gång. Sedan
+        skapade jag funktionen hit() för att ge ett kort till spelaren. Varje gång hit() kallas så räknas värdet av
+        spelarens hand ut. Om värdet är högre än 21 så blir det en förlust för spelaren. Om spelaren väljer att stanna
+        med funktionen stand() så startar bankens tur. Banken drar kort tills kortens totala värde är mindre än 16. Jag
+        har testat olika värden för hur mycket risk banken tar och jag har slutat på 16. Det gör spelet lite svårare
+        tycker jag. När banken har dragit sina kort så kallar jag på game over funktionen. Game over räknar ut värdet på
+        banken och spelarens kort för att se vem som vann. Jag har också skapat olika get funktionenr för att hämta
+        spelaren och bankens hand, deras värde och status på spelet.</p>
+
+    <p>Det svåraste med uppgiften var att räkna ut värdet på en hand med kort. Funktionen calcScore har gått igenom
+        många förändringar. Eftersom ett ess kan ha värdet 1 eller 14 så blev det väldigt klurigt. I min första lösning
+        så skapade jag en array som samlade alla värden i en hand, kort för kort. Om ett ess hittades så blev det en
+        array med värdet 1 och 14 i sig. En array kunde se ut så här [ 2, [ 1, 14 ], 5 ]. Den lösningen kändes inte så
+        smidig och kod liters klagade på den mycket.</p>
+
+    <p>Min nuvarande lösning är bättre tycker jag. I den lösningen så har jag en variabel för totala värdet av handen
+        och en variabel för att räkna antalet ess. Om jag stöter på ett ess lä ökar ess räknaren. Efter att hela handen
+        med kort gåtts igenom så gör jag en till loop som kör ett turnary if statement så många gånger som ett ess
+        hittades i handen. Jag kollar om vilket värde på ess undviker att överskrida 21. På det sättet hittar jag det
+        bästa värdet.
+    </p>
+
+    <h3>Att koda i symfony</h3>
+
+    <p>Jag tycker det har gått bra att koda med Symfony. För detta kursmoment har det känts enkelt att skapa spelet med
+        template-filer. Jag har också lyckats få mina routes att ha lite kod genom att skicka in hela game objektet till
+        template-filerna. Jag hittade också funktionen serialise() och unserialize() för att enkelt lägga upp ett objekt
+        i session och hämta det.
+    </p>
+
+    <p>Jag har fått många klagomål från linters på att jag haft över 10 routes i en kontroller. Jag har brutit ut alla
+        api routes till en separat controller.</p>
+
+    <h3>Today i Learned</h3>
+
+    <p>I detta kursmoment har jag lärt mig hur jag kan förbereda mig innan jag börjar skriva kod, med hjälp av
+        flödesdiagram och pseudokod. Jag har också lärt mig lite mer om hur jag bättre programmerar i php med hjälp av
+        linters. Det har varit roligt och lärorikt projekt. Det har till exempel varit roligt att styla spelplanen.
+    </p>
+
 </section>
 <section>
     <h2 id="kmom04">Kmom04</h2>
