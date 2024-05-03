@@ -2,9 +2,6 @@
 
 namespace App\Card;
 
-// use App\Card\DeckOfCards;
-// use App\Card\CardHand;
-
 /**
  * Class TwentyOne handles the game logic for the game 21.
  */
@@ -14,7 +11,6 @@ class TwentyOne
     private CardHand $playerHand;
     private CardHand $bankHand;
     private string $status;
-
 
     /**
      * Constructor initializes the game with a shuffled deck, game status and empty hands for player and bank.

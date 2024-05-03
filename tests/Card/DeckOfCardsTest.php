@@ -12,9 +12,8 @@ class DeckOfCardsTest extends TestCase
     public function testInitialization()
     {
         $deck = new DeckOfCards();
-        $this->assertCount(52, $deck->getCards(), "Deck should initialize with 52 cards");
+        $this->assertCount(52, $deck->getCards());
 
-        // Optionally check the first and last card to ensure order
         $cards = $deck->getCards();
         $this->assertEquals('2', $cards[0]->getValue());
         $this->assertEquals('Spades', $cards[51]->getSuit());
@@ -29,7 +28,7 @@ class DeckOfCardsTest extends TestCase
             ['value' => 'J', 'suit' => 'Spades', 'id' => 4],
         ];
         $deck = new DeckOfCards($cards);
-        $this->assertCount(4, $deck->getCards(), "Custom deck should contain exactly 4 cards");
+        $this->assertCount(4, $deck->getCards());
         $extractedCards = $deck->toArray();
         foreach ($cards as $index => $cardData) {
             $this->assertEquals($cardData['value'], $extractedCards[$index]['value']);
@@ -46,17 +45,17 @@ class DeckOfCardsTest extends TestCase
         $deck->shuffle();
         $afterShuffle = $deck->toArray();
 
-        $this->assertNotEquals($beforeShuffle, $afterShuffle, "Shuffling should change the order of cards");
+        $this->assertNotEquals($beforeShuffle, $afterShuffle);
     }
 
     public function testSort()
     {
         $deck = new DeckOfCards();
-        $deck->shuffle(); // Shuffle to change initial order
+        $deck->shuffle();
         $deck->sort();
         $cards = $deck->getCards();
-        $this->assertEquals(1, $cards[0]->getId(), "Sorting should reorder cards starting with ID 1");
-        $this->assertEquals(52, $cards[51]->getId(), "Last card should have ID 52 after sorting");
+        $this->assertEquals(1, $cards[0]->getId());
+        $this->assertEquals(52, $cards[51]->getId());
     }
 
     public function testDealCard()
@@ -66,7 +65,7 @@ class DeckOfCardsTest extends TestCase
         $card = $deck->dealCard();
 
         $this->assertInstanceOf(Card::class, $card);
-        $this->assertCount($initialCount - 1, $deck->getCards(), "Dealing should reduce deck size by 1");
+        $this->assertCount($initialCount - 1, $deck->getCards());
     }
 
     public function testToArray()
