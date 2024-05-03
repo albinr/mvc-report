@@ -176,6 +176,96 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-DeckWithJokers.html#method_initialize"
         },                {
+            "fqsen": "\\App\\Card\\TwentyOne",
+            "name": "TwentyOne",
+            "summary": "Class\u0020TwentyOne\u0020handles\u0020the\u0020game\u0020logic\u0020for\u0020the\u0020game\u002021.",
+            "url": "classes/App-Card-TwentyOne.html"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor\u0020initializes\u0020the\u0020game\u0020with\u0020a\u0020shuffled\u0020deck,\u0020game\u0020status\u0020and\u0020empty\u0020hands\u0020for\u0020player\u0020and\u0020bank.",
+            "url": "classes/App-Card-TwentyOne.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AaddCardToHand\u0028\u0029",
+            "name": "addCardToHand",
+            "summary": "Adds\u0020a\u0020card\u0020to\u0020the\u0020specified\u0020hand\u0020from\u0020the\u0020deck.",
+            "url": "classes/App-Card-TwentyOne.html#method_addCardToHand"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003Ahit\u0028\u0029",
+            "name": "hit",
+            "summary": "Allows\u0020the\u0020player\u0020to\u0020take\u0020a\u0020hit\u0020\u0028draw\u0020a\u0020card\u0029\u0020during\u0020their\u0020turn.",
+            "url": "classes/App-Card-TwentyOne.html#method_hit"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003Astand\u0028\u0029",
+            "name": "stand",
+            "summary": "Handles\u0020the\u0020players\u0020decision\u0020to\u0020stand,\u0020ends\u0020their\u0020turn\u0020and\u0020initiates\u0020the\u0020banks\u0020play.",
+            "url": "classes/App-Card-TwentyOne.html#method_stand"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AbankPlay\u0028\u0029",
+            "name": "bankPlay",
+            "summary": "Manages\u0020the\u0020banks\u0020turn,\u0020where\u0020the\u0020bank\u0020continues\u0020to\u0020draw\u0020cards\u0020until\u0020its\u0020score\u0020is\u002016\u0020or\u0020more.",
+            "url": "classes/App-Card-TwentyOne.html#method_bankPlay"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AcalcScore\u0028\u0029",
+            "name": "calcScore",
+            "summary": "Calculates\u0020the\u0020score\u0020of\u0020a\u0020hand.",
+            "url": "classes/App-Card-TwentyOne.html#method_calcScore"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AgameOver\u0028\u0029",
+            "name": "gameOver",
+            "summary": "Determines\u0020the\u0020outcome\u0020of\u0020the\u0020game\u0020after\u0020the\u0020bank\u0020finishes\u0020its\u0020turn.",
+            "url": "classes/App-Card-TwentyOne.html#method_gameOver"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AgetStatus\u0028\u0029",
+            "name": "getStatus",
+            "summary": "Gets\u0020the\u0020current\u0020status\u0020of\u0020the\u0020game.",
+            "url": "classes/App-Card-TwentyOne.html#method_getStatus"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AgetPlayerHand\u0028\u0029",
+            "name": "getPlayerHand",
+            "summary": "Gets\u0020the\u0020players\u0020hand.",
+            "url": "classes/App-Card-TwentyOne.html#method_getPlayerHand"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AgetBankHand\u0028\u0029",
+            "name": "getBankHand",
+            "summary": "Gets\u0020the\u0020banks\u0020hand.",
+            "url": "classes/App-Card-TwentyOne.html#method_getBankHand"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AgetPlayerScore\u0028\u0029",
+            "name": "getPlayerScore",
+            "summary": "Calculates\u0020and\u0020returns\u0020the\u0020players\u0020score.",
+            "url": "classes/App-Card-TwentyOne.html#method_getPlayerScore"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AgetBankScore\u0028\u0029",
+            "name": "getBankScore",
+            "summary": "Calculates\u0020and\u0020returns\u0020the\u0020banks\u0020score.",
+            "url": "classes/App-Card-TwentyOne.html#method_getBankScore"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003AgetAsString\u0028\u0029",
+            "name": "getAsString",
+            "summary": "Generates\u0020a\u0020string\u0020representation\u0020of\u0020the\u0020current\u0020state\u0020of\u0020the\u0020game,\u0020including\u0020status\u0020and\u0020hands\u0020scores.",
+            "url": "classes/App-Card-TwentyOne.html#method_getAsString"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003A\u0024deck",
+            "name": "deck",
+            "summary": "",
+            "url": "classes/App-Card-TwentyOne.html#property_deck"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003A\u0024playerHand",
+            "name": "playerHand",
+            "summary": "",
+            "url": "classes/App-Card-TwentyOne.html#property_playerHand"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003A\u0024bankHand",
+            "name": "bankHand",
+            "summary": "",
+            "url": "classes/App-Card-TwentyOne.html#property_bankHand"
+        },                {
+            "fqsen": "\\App\\Card\\TwentyOne\u003A\u003A\u0024status",
+            "name": "status",
+            "summary": "",
+            "url": "classes/App-Card-TwentyOne.html#property_status"
+        },                {
             "fqsen": "\\App\\Controller\\ApiController",
             "name": "ApiController",
             "summary": "",
@@ -376,11 +466,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Dice-Dice.html#method_roll"
         },                {
-            "fqsen": "\\App\\Dice\\Dice\u003A\u003AgetValue\u0028\u0029",
-            "name": "getValue",
-            "summary": "",
-            "url": "classes/App-Dice-Dice.html#method_getValue"
-        },                {
             "fqsen": "\\App\\Dice\\Dice\u003A\u003AgetAsString\u0028\u0029",
             "name": "getAsString",
             "summary": "",
@@ -451,86 +536,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Kernel.html"
         },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne",
-            "name": "TwentyOne",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method___construct"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003Ahit\u0028\u0029",
-            "name": "hit",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_hit"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003Astand\u0028\u0029",
-            "name": "stand",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_stand"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AbankPlay\u0028\u0029",
-            "name": "bankPlay",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_bankPlay"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AcalcScore\u0028\u0029",
-            "name": "calcScore",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_calcScore"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AgameOver\u0028\u0029",
-            "name": "gameOver",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_gameOver"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AgetStatus\u0028\u0029",
-            "name": "getStatus",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_getStatus"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AgetPlayerHand\u0028\u0029",
-            "name": "getPlayerHand",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_getPlayerHand"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AgetBankHand\u0028\u0029",
-            "name": "getBankHand",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_getBankHand"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AgetPlayerScore\u0028\u0029",
-            "name": "getPlayerScore",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_getPlayerScore"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003AgetBankScore\u0028\u0029",
-            "name": "getBankScore",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#method_getBankScore"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003A\u0024deck",
-            "name": "deck",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#property_deck"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003A\u0024playerHand",
-            "name": "playerHand",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#property_playerHand"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003A\u0024bankHand",
-            "name": "bankHand",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#property_bankHand"
-        },                {
-            "fqsen": "\\App\\TwentyOne\\TwentyOne\u003A\u003A\u0024status",
-            "name": "status",
-            "summary": "",
-            "url": "classes/App-TwentyOne-TwentyOne.html#property_status"
-        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -555,10 +560,5 @@ Search.appendIndex(
             "name": "App",
             "summary": "",
             "url": "namespaces/app.html"
-        },                {
-            "fqsen": "\\App\\TwentyOne",
-            "name": "TwentyOne",
-            "summary": "",
-            "url": "namespaces/app-twentyone.html"
         }            ]
 );
