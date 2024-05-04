@@ -263,6 +263,49 @@
 </section>
 <section>
     <h2 id="kmom04">Kmom04</h2>
+    <p>I detta kursmoment har jag skapat enhetstester för 2 av mina klasser och lagt till dokumentation för min kod.</p>
+
+    <h3>Kod tester med PHPUnit</h3>
+    <p>Att skriva tester med PHPUnit har gått bra och varit ganska roligt. Jag känner igen mig lite från OOPython kursen
+        så jag tyckte det var enkelt och smidigt att skapa testerna. En sak som gjorde det hela lite roligare och mer
+        motiverande var att se progress bars för varje klass man gjorde tester för. Med dokumentationen så kunde jag
+        lätt hitta olika typer av asserts för att testa olika saker i min kod. Något som ofta hände när jag kodade
+        tester i python var att jag bara använde assertEqual. Nu använder jag många fler och jag tror det beror på att
+        jag läste mer av dokumentationen för PHPUnit.
+    </p>
+
+    <h3>Kodtäckning</h3>
+    <p>Jag har lyckats få 96% kodtäckning för Lines, 94% för Functions and Methods och 83% för Classes and Traits för
+        mina klasser i Card namespacet. Så jag tror att jag lyckats ganska bra. Om jag hade mer tid så skulle jag lägga
+        till kodtäckning för Controller också.</p>
+
+    <h3>Kodens testbarhet</h3>
+    <p>Min kod var inte jätte testbar när jag började skriva testerna. Det fanns delar som var mindre testbara och jag
+        behövde ändra som till exempel min game over function och stand funktionen. Jag har också gjort några funktioner
+        public istället för private för att kunna kalla dem i testerna. Det kanske inte är ett bra tillvägagångssätt men
+        det var min lösning.</p>
+
+    <p>Jag har behövt skriva om delar av min kod för att göra den mer testbar. Jag har flyttat in TwentyOne under Card
+        namespacet så att jag får lättare tillgång till klasserna. Det har också gjorts förändringar i koden. Ett
+        exempel är att jag skapat en addCardToHand function som tar emot en kort hand och lägger till ett kort i den.
+        Jag har allmänt försökt att dela upp funktionerna mer och dem mindre och lättare att testa och förstå.</p>
+
+    <h3>Snygg och ren kod</h3>
+    <p>Jag tror att tester oftast kan identifiera snygg och ren kod. De funktioner i min kod som var svåra att testa var
+        alltid lite mer komplexa och gjorde mer än en sak oftast. Jag tror att kod som är lätt att testa är modulär med
+        tydliga avgränsningar mellan olika delar. Modulär kod underlättar underhåll, uppdatering och felsökning.</p>
+
+    <p>Jag tror dock att det går att skapa kod som är extremt komplicerad och svår att läsa men som också är lätt att
+        testa.
+    </p>
+
+    <h3>Today i learned</h3>
+
+    <p>Min til för detta kursmoment är hur jag kan skapa tester i php med PHPUnit. Jag har också fått lära mig skriva
+        lite snyggare kod tycker jag. Jag hade inställningen att detta kursmoment skulle vara ett av de tråkigare. Det
+        var dock lite roligare än förväntat att skapa testerna. Jag skulle vilja se ett exempel på hur ett projekt med
+        större kodbas hanterar tester.
+    </p>
 </section>
 <section>
     <h2 id="kmom05">Kmom05</h2>
