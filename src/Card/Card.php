@@ -15,7 +15,7 @@ class Card
      * Constructor for the Card class.
      *
      * @param string $value The value of the card.
-     * @param string $suit The suit of the card.
+     * @param string $suit The suit of the card
      * @param int $cardId The card's unique identifier.
      */
     public function __construct(string $value, string $suit, int $cardId)
