@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update book{% endblock %}
+
+{% block body %}
+<h1>Update book with id {{ book.id }}</h1>
+
+<form action="{{ path('update_book', {'id': book.id}) }}" method="POST" class="form">
+    <input type="hidden" name="_method" value="PUT"> <!-- For Symfony to recognize it as a PUT request -->
+    <label for="title" class="input-label">Title</label>
+    <input type="text" class="input" value="{{ book.title }}" name="title" id="title" placeholder="Enter title"
+        required>
+    <label for="author" class="input-label">Author</label>
+    <input type="text" class="input" value="{{ book.author }}" name="author" id="author" placeholder="Enter author"
+        required>
+    <label for="isbn" class="input-label">ISBN</label>
+    <input type="text" class="input" value="{{ book.isbn }}" name="isbn" id="isbn" placeholder="Enter ISBN" required>
+    <label for="image" class="input-label">Image</label>
+    <input type="text" class="input" value="{{ book.image }}" name="image" id="image" placeholder="Enter image path">
+    <input type="submit" class="button green-button" value="Update Book">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('update-book') }}">
+</form>
+{% endblock %}

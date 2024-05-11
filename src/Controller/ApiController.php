@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Card\DeckOfCards;
 use Exception;
+use App\Entity\Book;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -51,6 +53,18 @@ class ApiController extends AbstractController
                 'path' => 'api/game',
                 'params' => [],
                 'method' => 'GET',
+            ],
+            [
+                'name' => 'api_library',
+                'path' => 'api/library',
+                'params' => [],
+                'method' => 'GET',
+            ],
+            [
+                'name' => 'api_library_isbn',
+                'path' => 'api/library/book/9780340960196',
+                'params' => ['isbn' => "9780340960196"],
+                'method' => 'POST',
             ],
         ];
 
@@ -193,4 +207,47 @@ class ApiController extends AbstractController
 
         return new JsonResponse($data);
     }
+
+    #[Route("/api/library/books", name: "api_library")]
+    public function apiLibrary(ManagerRegistry $doctrine): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+        $bookRepository = $entityManager->getRepository(Book::class);
+        $books = $bookRepository->findAll();
+
+        $bookData = array_map(function ($book) {
+            return [
+                'id' => $book->getId(),
+                'title' => $book->getTitle(),
+                'author' => $book->getAuthor(),
+                'isbn' => $book->getIsbn(),
+                'image' => $book->getImage(),
+            ];
+        }, $books);
+
+        return new JsonResponse(['books' => $bookData]);
+    }
+
+    #[Route("/api/library/book/{isbn}", name: "api_library_isbn")]
+    public function apiBookIsbn(string $isbn, ManagerRegistry $doctrine): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+        $bookRepository = $entityManager->getRepository(Book::class);
+        $book = $bookRepository->findOneBy(['isbn' => $isbn]);
+
+        if (!$book) {
+            return new JsonResponse(['error' => 'Book not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $bookData = [
+            'id' => $book->getBookId(),
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'isbn' => $book->getIsbn(),
+            'image' => $book->getImage(),
+        ];
+
+        return new JsonResponse($bookData);
+    }
+
 }

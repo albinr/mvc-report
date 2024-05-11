@@ -1,0 +1,43 @@
+.library {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.book-container {
+    display: flex;
+    flex-direction: row;
+    margin: 4px;
+    border-radius: 8px;
+    background-color: $white;
+}
+
+.book-info {
+    width: 200px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+
+.book-cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    background-color: $white;
+    overflow: hidden;
+    width: 200px;
+    min-height: 300px;
+    border-radius: 8px;
+    margin-left: 4px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.book-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+}

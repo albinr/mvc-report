@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block body %}
+
+<h1>Welcome to the library!</h1>
+
+<ul>
+    <li><a href="{{ path('read_many') }}" class="button">Books</a></li>
+    <li><a href="{{ path('create') }}" class="button">Add book</a></li>
+
+</ul>
+{% endblock %}

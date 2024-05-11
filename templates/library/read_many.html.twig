@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library Catalog{% endblock %}
+
+{% block body %}
+<h1>Library</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>
+                <a href="{{ path('read_one', {'id': book.id}) }}">Details</a>
+                <a href="{{ path('edit_book', {'id': book.id}) }}">Edit</a>
+                <form action="{{ path('delete_book', {'id': book.id}) }}" method="post"
+                    onsubmit="return confirm('Are you sure?');" style="display: inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="5"><a href="{{ path('create') }}">+ Add book</a></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="library">
+    {% for book in books %}
+    <div class="book-container">
+        <div class="book-info">
+            <span>{{ book.id }}</span>
+            <div>
+                <h3>{{ book.title }}</h3>
+                <p>{{ book.author }}</p>
+                <p>Isbn: {{ book.isbn }}</p>
+            </div>
+            <p><a href="{{ path('read_one', {'id': book.id}) }}" class="button">Details</a></p>
+        </div>
+        <div class="book-cover">
+            {% if book.image %}
+            <img src="{{ asset( book.image ) }}" alt="Cover image of {{ book.title }}" class="book-img">
+            {% else %}
+            No image
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    <a href="{{ path('create') }}" class="book-cover">+ Add book</a>
+</div>
+{% endblock %}
