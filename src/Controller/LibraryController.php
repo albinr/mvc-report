@@ -55,16 +55,16 @@ class LibraryController extends AbstractController
         return $this->redirectToRoute('read_many');
     }
 
-    #[Route('/library/book/{bookId}', name: 'read_one')]
+    #[Route('/library/book/{bookid}', name: 'read_one')]
     public function readOne(
         ManagerRegistry $doctrine,
-        int $bookId
+        int $bookid
     ): Response {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($bookId);
+        $book = $entityManager->getRepository(Book::class)->find($bookid);
 
         if (!$book) {
-            throw $this->createNotFoundException('No book found for id ' . $bookId);
+            throw $this->createNotFoundException('No book found for id ' . $bookid);
         }
 
         return $this->render('library/read_one.html.twig', [
@@ -85,14 +85,14 @@ class LibraryController extends AbstractController
     }
 
 
-    #[Route('/library/book/edit/{bookId}', name: 'edit_book')]
-    public function updateFormBook(ManagerRegistry $doctrine, int $bookId): Response
+    #[Route('/library/book/edit/{bookid}', name: 'edit_book')]
+    public function updateFormBook(ManagerRegistry $doctrine, int $bookid): Response
     {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($bookId);
+        $book = $entityManager->getRepository(Book::class)->find($bookid);
 
         if (!$book) {
-            throw $this->createNotFoundException('No book found for id ' . $bookId);
+            throw $this->createNotFoundException('No book found for id ' . $bookid);
         }
 
         return $this->render('library/update.html.twig', [
@@ -100,17 +100,17 @@ class LibraryController extends AbstractController
         ]);
     }
 
-    #[Route('/library/book/update/{bookId}', name: 'update_book', methods: ['POST'])]
+    #[Route('/library/book/update/{bookid}', name: 'update_book', methods: ['POST'])]
     public function updateBook(
         Request $request,
         ManagerRegistry $doctrine,
-        int $bookId
+        int $bookid
     ): Response {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($bookId);
+        $book = $entityManager->getRepository(Book::class)->find($bookid);
 
         if (!$book) {
-            throw $this->createNotFoundException('No book found for id ' . $bookId);
+            throw $this->createNotFoundException('No book found for id ' . $bookid);
         }
 
         $book->setTitle($request->request->get('title'));
@@ -125,16 +125,16 @@ class LibraryController extends AbstractController
         return $this->redirectToRoute('read_one', ['id' => $book->getBookId()]);
     }
 
-    #[Route('/library/book/delete/{bookId}', name: 'delete_book', methods: ['POST'])]
+    #[Route('/library/book/delete/{bookid}', name: 'delete_book', methods: ['POST'])]
     public function deleteBook(
         ManagerRegistry $doctrine,
-        int $bookId
+        int $bookid
     ): Response {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($bookId);
+        $book = $entityManager->getRepository(Book::class)->find($bookid);
 
         if (!$book) {
-            throw $this->createNotFoundException('No book found for id ' . $bookId);
+            throw $this->createNotFoundException('No book found for id ' . $bookid);
         }
 
         $entityManager->remove($book);

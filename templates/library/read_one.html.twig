@@ -7,15 +7,15 @@
 <div class="one-book">
     <div class="book-container">
         <div class="book-info">
-            <p>{{ book.id }}</p>
+            <p>{{ book.bookid }}</p>
             <p>Title: {{ book.title }}</p>
             <p>Author: {{ book.author }}</p>
             <p>Isbn: {{ book.isbn }}</p>
-            <form action="{{ path('edit_book', {'id': book.id}) }}" method="POST">
+            <form action="{{ path('edit_book', {'bookid': book.bookid}) }}" method="POST">
                 <button type="submit" class="button green-button">Update Book</button>
             </form>
 
-            <form action="{{ path('delete_book', {'id': book.id}) }}" method="POST">
+            <form action="{{ path('delete_book', {'bookid': book.bookid}) }}" method="POST">
                 <button type="submit" class="button red-button">Delete Book</button>
             </form>
         </div>

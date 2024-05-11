@@ -3,9 +3,9 @@
 {% block title %}Update book{% endblock %}
 
 {% block body %}
-<h1>Update book with id {{ book.id }}</h1>
+<h1>Update book with id {{ book.bookid }}</h1>
 
-<form action="{{ path('update_book', {'id': book.id}) }}" method="POST" class="form">
+<form action="{{ path('update_book', {'bookid': book.bookid}) }}" method="POST" class="form">
     <input type="hidden" name="_method" value="PUT"> <!-- For Symfony to recognize it as a PUT request -->
     <label for="title" class="input-label">Title</label>
     <input type="text" class="input" value="{{ book.title }}" name="title" id="title" placeholder="Enter title"

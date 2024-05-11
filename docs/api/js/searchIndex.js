@@ -588,77 +588,77 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Book",
             "name": "Book",
-            "summary": "",
+            "summary": "Represents\u0020a\u0020book\u0020in\u0020the\u0020library.",
             "url": "classes/App-Entity-Book.html"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AgetBookId\u0028\u0029",
             "name": "getBookId",
-            "summary": "",
+            "summary": "Get\u0020the\u0020books\u0020unique\u0020id.",
             "url": "classes/App-Entity-Book.html#method_getBookId"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AgetTitle\u0028\u0029",
             "name": "getTitle",
-            "summary": "",
+            "summary": "Get\u0020the\u0020title\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#method_getTitle"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AsetTitle\u0028\u0029",
             "name": "setTitle",
-            "summary": "",
+            "summary": "Set\u0020the\u0020title\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#method_setTitle"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AgetIsbn\u0028\u0029",
             "name": "getIsbn",
-            "summary": "",
+            "summary": "Get\u0020the\u0020isbn\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#method_getIsbn"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AsetIsbn\u0028\u0029",
             "name": "setIsbn",
-            "summary": "",
+            "summary": "Set\u0020the\u0020isbn\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#method_setIsbn"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AgetAuthor\u0028\u0029",
             "name": "getAuthor",
-            "summary": "",
+            "summary": "Get\u0020the\u0020author\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#method_getAuthor"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AsetAuthor\u0028\u0029",
             "name": "setAuthor",
-            "summary": "",
+            "summary": "Set\u0020the\u0020author\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#method_setAuthor"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AgetImage\u0028\u0029",
             "name": "getImage",
-            "summary": "",
+            "summary": "Get\u0020the\u0020image\u0020path\u0020for\u0020the\u0020book\u0020cover.",
             "url": "classes/App-Entity-Book.html#method_getImage"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003AsetImage\u0028\u0029",
             "name": "setImage",
-            "summary": "",
+            "summary": "Set\u0020the\u0020image\u0020path\u0020for\u0020the\u0020book\u0020cover.",
             "url": "classes/App-Entity-Book.html#method_setImage"
         },                {
-            "fqsen": "\\App\\Entity\\Book\u003A\u003A\u0024bookId",
-            "name": "bookId",
-            "summary": "",
-            "url": "classes/App-Entity-Book.html#property_bookId"
+            "fqsen": "\\App\\Entity\\Book\u003A\u003A\u0024bookid",
+            "name": "bookid",
+            "summary": "The\u0020unique\u0020id\u0020for\u0020the\u0020book.",
+            "url": "classes/App-Entity-Book.html#property_bookid"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003A\u0024title",
             "name": "title",
-            "summary": "",
+            "summary": "The\u0020title\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#property_title"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003A\u0024isbn",
             "name": "isbn",
-            "summary": "",
+            "summary": "The\u0020isbn\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#property_isbn"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003A\u0024author",
             "name": "author",
-            "summary": "",
+            "summary": "The\u0020author\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#property_author"
         },                {
             "fqsen": "\\App\\Entity\\Book\u003A\u003A\u0024image",
             "name": "image",
-            "summary": "",
+            "summary": "The\u0020image\u0020of\u0020the\u0020book.",
             "url": "classes/App-Entity-Book.html#property_image"
         },                {
             "fqsen": "\\App\\Entity\\Library",

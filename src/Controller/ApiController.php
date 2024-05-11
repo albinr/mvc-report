@@ -217,7 +217,7 @@ class ApiController extends AbstractController
 
         $bookData = array_map(function ($book) {
             return [
-                'id' => $book->getId(),
+                'id' => $book->getBookId(),
                 'title' => $book->getTitle(),
                 'author' => $book->getAuthor(),
                 'isbn' => $book->getIsbn(),
