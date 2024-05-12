@@ -122,7 +122,7 @@ class LibraryController extends AbstractController
 
         $this->addFlash('success', 'Book updated successfully');
 
-        return $this->redirectToRoute('read_one', ['id' => $book->getBookId()]);
+        return $this->redirectToRoute('read_one', ['bookid' => $book->getBookId()]);
     }
 
     #[Route('/library/book/delete/{bookid}', name: 'delete_book', methods: ['POST'])]

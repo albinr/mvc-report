@@ -309,6 +309,41 @@
 </section>
 <section>
     <h2 id="kmom05">Kmom05</h2>
+    <p>I detta kursmoment har jag lagt till ORM för att koppla min rapport sida till en sqlite databas.</p>
+
+    <h3>Symfony och doctrine övningen</h3>
+    <p>Övningen med Symfony och Doctrine gick bra och var bra tycker jag. Det var en tydlig genomgång av hur man kan
+        skapa entiteter och controllers genom terminalen. Det enda som var lite jobbigt var om man ändrade något i
+        entiteterna och glömde migrera dem med migration kommandot. Detta gav mig lite problem senare när jag gjorde
+        uppgiften och behövde uppdatera mina variabla namn enligt phpstan.</p>
+
+    <h3>Tankar om applikationen</h3>
+    <p>I början så tänkte jag mycket på stylingen av applikationen men när jag började få lite tidspress så växlade jag
+        till att möta kraven mer exakt. Min tanke var att skapa något som ser ut som en webbshop där man kan se bilder
+        på böckerna och en knapp för att visa mer detaljer.</p>
+
+    <p>Alla delar av applikationen loopar tillbaka till vyn med många böcker. Om man raderar en bok så går man tillbaka
+        till read_many vyn. Detsamma händer efter man har lagt till och uppdaterat en bok.</p>
+
+    <h3>ORM i CRUD</h3>
+    <p>Jag tycker det varit lätt att jobba med ORM. När jag jämför med sättet vi jobbat mot en databas i Webtec och
+        Databas kurserna så tycker jag att detta varit väldigt smidigt. Kanske kan eftersom jag fått erfarenhet av dessa
+        kurser så har det känts lite enklare. Jag tycker det känns som att jobba mot ett objekt och att man lagrar
+        objekt i databasen om det är förståeligt. Att skapa, radera och uppdatera med ORM har varit enkelt eftersom det
+        känns som att jag bara uppdaterar värden på ett objekt.</p>
+
+    <h3>Tankar om ORM</h3>
+    <p>Jämfört med det tidigare sätt vi jobbat mot databaser med råa sql förfrågningar och procedurer så ser jag
+        fördelar med detta sätt att jobba mot en databas. ORM gör koden enklare att skriva och läsa. Det gör också koden
+        säkrare mot sql injektioner. En nackdel med ORM jag läst om är att det kan bli dålig prestanda om man gör
+        komplexa databasförfrågningar.</p>
+
+    <h3>Today i learned</h3>
+    <p>Min til för detta kursmoment är hur ORM kan användas för att förenkla och effektivisera interaktionen med
+        databaser. Detta har gett mig ett nytt sätt att tänka kring databasdesign och applikationsutveckling. Jag ser
+        fördelar med att kunna hantera data som objekt istället för som separata datarader. Jag tror att denna kunskap
+        kommer att vara värdefull i framtida projekt där databashantering är viktigt.
+    </p>
 </section>
 <section>
     <h2 id="kmom06">Kmom06</h2>
