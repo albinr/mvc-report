@@ -42,6 +42,12 @@ class ReportController extends AbstractController
         return $this->render('report/lucky.html.twig', $data);
     }
 
+    #[Route("/metrics", name: "metrics")]
+    public function metrics(): Response
+    {
+        return $this->render('report/metrics.html.twig');
+    }
+
     #[Route("/session", name: "session")]
     public function session(SessionInterface $session): Response
     {

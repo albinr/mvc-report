@@ -1,5 +1,3 @@
-#Scrutinizer
-
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/albinr/mvc-report/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/albinr/mvc-report/?branch=main)
 [![Code Coverage](https://scrutinizer-ci.com/g/albinr/mvc-report/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/albinr/mvc-report/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/albinr/mvc-report/badges/build.png?b=main)](https://scrutinizer-ci.com/g/albinr/mvc-report/build-status/main)
