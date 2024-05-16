@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Card\TwentyOne;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -53,10 +54,28 @@ class TwentyOneController extends AbstractController
         ]);
     }
 
-
     #[Route("/game/doc", name: "game_doc")]
     public function doc(): Response
     {
         return $this->render('twentyone/doc.html.twig');
+    }
+
+    #[Route("/api/game", name: "api_game_status")]
+    public function apiGameStatus(SessionInterface $session): Response
+    {
+        $data = ['game-status' => 'No game in progress.'];
+        if ($session->has('game')) {
+            $game = unserialize($session->get('game'));
+
+            $data = [
+                'game-status' => $game->getStatus(),
+                'player-score' => $game->getPlayerScore(),
+                'bank-score' => $game->getBankScore(),
+                'player-cards' => $game->getPlayerHand()->showHand(),
+                'bank-cards' => $game->getBankHand()->showHand()
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 }

@@ -51,17 +51,17 @@
     man gör. Ju högre CRAP värde man har desto svårare är det att göra ändringar i den på grund av den höga
     komplexiteten och dålig kodtäckning.
 </p>
-<p>Just nu har min kod 23% i coverage så jag kommer behöva skriva mer tester för att göra min kod mindre CRAP.</p>
+<p>Just nu har min kod 28% i coverage så jag kommer behöva skriva mer tester för att göra min kod mindre CRAP.</p>
 
 <h2>Phpmetrics</h2>
 <p>Här kommer statistik från phpmetrics.</p>
 
 <ul>
-    <li>Violations: 7 (0 critical, 1 errors)</li>
-    <li>Lines of code: 1,093</li>
-    <li>Classes: 20</li>
-    <li>Average cyclomatic complexity by class: 3.70</li>
-    <li>Assertions in tests: 72</li>
+    <li>Violations: 5 (0 critical, 1 errors)</li>
+    <li>Lines of code: 930</li>
+    <li>Classes: 16</li>
+    <li>Average cyclomatic complexity by class: 3.69</li>
+    <li>Assertions in tests: 70</li>
     <li>Average bugs by class: 0.14</li>
 </ul>
 
@@ -71,6 +71,39 @@
 </div>
 
 <h3>Flaskhalsar och Svagheter:</h3>
+
+<h4>Blob / God Object in App\Controller\ApiController</h4>
+<p>Problem: Klassen har många publika metoder och hög sammanhangslöshet (LCOM=9) som betyder att
+    den hanterar flera funktioner som kan vara mer effektivt separerade.
+</p>
+
+<p>Potentiell lösning: Bryt ned klassen i flera mindre och mer fokuserade klasser som var och en ansvarar för en
+    specifik
+    del funktionalitet.
+</p>
+
+<h4>Potentiella Buggar i App\Controller\CardController</h4>
+<p>Problem: Klassen har teoretiska buggar baserade på Halstead-komplexitetsmått och ingen testtäckning.
+</p>
+
+<p>Potentiell lösning: Implementera enhetstester för att öka kodtäckningen och identifiera och åtgärda potentiella
+    fel.
+</p>
+
+<h3>Hög Koppling (Coupling)</h3>
+
+<p>Problem: Vissa klasser, såsom ovan nämnda, använder många externa klasser som ökar deras beroenden och
+    komplexitet.
+</p>
+
+<p>Potentiell lösning: Minska beroendet genom att använda designmönster som Dependency Injection för att underlätta
+    framtida underhåll och tester.
+</p>
+
+<h3>Sammanfattning</h3>
+<p>Genom att använda Phpmetrics har jag sett svagheter i min kodstruktur, till exempel överkomplexitet och
+    otillräcklig testtäckning. Genom att fixa dessa problem kan jag förbättra min kodkvalitet och minska
+    risken för buggar i framtiden.</p>
 
 <h2>Scrutinizer</h2>
 <div class="badges">
@@ -86,6 +119,56 @@
         <img src="https://scrutinizer-ci.com/g/albinr/mvc-report/badges/build.png?b=main" style="padding: 10px;" alt="">
     </a>
 </div>
+
+<p>Scrutinizer visar att det är problem i src/kernel.php och tools/php-cs-fixer/.php-cs-fixer.dist.php. Dock är det
+    filer som är autogenererade så det är inte kod jag skrivit.</p>
+
+<div>
+    <img src="{{ asset('img/scrutinizer.png') }}" alt="bild på maintainabilyt" style="max-width: 600px;">
+    <p>Bild på scrutinizer fil betyg</p>
+</div>
+
+<p>Ett problem jag ser dock är att jag har väldigt låg kodtäckning (coverage) som är på 28%.</p>
+
+<p>För att öka kod-täckningen så kommer jag skriva mer tester.</p>
+
+<h2>Findings</h2>
+<h3>Codestyle</h3>
+<p>Från phpmetrics kan jag se att i min Api controller så finns det många publika metoder och lågt sammanhängande av
+    metoder. Så en förbättring på codestyle hadde varit att dela upp api controller i flera mindre klasser. Jag kan
+    tänka mig att lägga api ruterna i mer sammanhängande controllers. Som till exempel card/draw kan läggas i
+    CardContoller istället för att liknande metoder används i den controllern.</p>
+
+<h3>Coverage</h3>
+<p>Både phpmetrics och scrutinizer pekar på låg coverage. Scrutinizer visa coverage på 28%. Jag behöver skriva flera
+    tester för att täcka min kod mer. Med högre kodteckning minskar mängden potentiella buggar i koden i framtiden.
+</p>
+
+<h3>Cohesion och coupling</h3>
+<p>Min kod har också höga värden av LCOM (LCOM=9) som pekar på låg sammanhållning och användningen av många externa
+    klasser som visar hög koppling. Tillsammans kan det leda till en kodbas som är svår att underhålla och utveckla.
+    För att få bättre code style så vill jag minska beroenden(låg coupling) och maximera sammanhållningen(hög
+    cohesion).
+</p>
+
+<h3>Complexity</h3>
+<p>I min ApiContoller så rapporteras det hög sannolikhet för buggar(0.71 buggar). Hög komplexitet ofta leder till
+    kod som är svår att förstå, underhålla och testa. Jag behöver göra koden mindre komplex. Detta kan jag göra
+    genom att till exempel förbättra strukturen, reflektera och granska koden mer noggrant.
+</p>
+
+<h3>CRAP</h3>
+<p>För att göra min kod mindre CRAP så behöver jag definitivt skriva mer tester. Jag skulle också kunna göra koden
+    mindre komplex om jag stöter på det.
+</p>
+
+<h2>Förbättringar</h2>
+
+<h2>Diskussion</h2>
+
+
+
+
 
 
 {% endblock %}
