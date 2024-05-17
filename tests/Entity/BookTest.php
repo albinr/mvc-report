@@ -15,7 +15,7 @@ class BookTest extends TestCase
         $this->assertEquals($title, $book->getTitle());
     }
 
-    public function testGetSetISBN()
+    public function testGetISBN()
     {
         $book = new Book();
         $isbn = "9780340960196";
@@ -23,7 +23,7 @@ class BookTest extends TestCase
         $this->assertEquals($isbn, $book->getIsbn());
     }
 
-    public function testGetSetAuthor()
+    public function testGetAuthor()
     {
         $book = new Book();
         $author = "Frank Herbert";
@@ -31,7 +31,7 @@ class BookTest extends TestCase
         $this->assertEquals($author, $book->getAuthor());
     }
 
-    public function testGetSetImage()
+    public function testGetImage()
     {
         $book = new Book();
         $image = "img/dune.jpeg";
