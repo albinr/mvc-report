@@ -62,11 +62,6 @@ class CardController extends AbstractController
         $deck->sortDeck();
         $session->set('deck', $deck->toArray());
 
-        // $renderCards = array_map(function ($card) {
-        //     $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), $card->getId());
-        //     return $cardGraphic->render();
-        // }, $deck->getCards());
-
         $renderCards = array_map([$this, 'renderCard'], $deck->getCards());
 
         $data = [
@@ -85,11 +80,6 @@ class CardController extends AbstractController
         $deck->shuffleDeck();
 
         $session->set('deck', $deck->toArray());
-
-        // $renderCards = array_map(function ($card) {
-        //     $cardGraphic = new CardGraphic($card->getValue(), $card->getSuit(), 1);
-        //     return $cardGraphic->render();
-        // }, $deck->getCards());
 
         $renderCards = array_map([$this, 'renderCard'], $deck->getCards());
 
