@@ -133,7 +133,11 @@ class CardController extends AbstractController
         $cards = [];
         for ($i = 0; $i < $num; $i++) {
             $card = $deck->dealCard();
-            $cards[] = $this->renderCard($card);
+            if ($card !== null) {
+                $cards[] = $this->renderCard($card);
+            } else {
+                $cards[] = "No more cards left.";
+            }
         }
 
         $session->set('deck', $deck->toArray());
