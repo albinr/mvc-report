@@ -32,12 +32,12 @@ class DeckOfCards
         }
     }
 
-    public function shuffle(): void
+    public function shuffleDeck(): void
     {
         shuffle($this->cards);
     }
 
-    public function sort(): void
+    public function sortDeck(): void
     {
         usort($this->cards, function ($card1, $card2) {
             return $card1->getId() <=> $card2->getId();

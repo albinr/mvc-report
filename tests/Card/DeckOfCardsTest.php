@@ -42,7 +42,7 @@ class DeckOfCardsTest extends TestCase
     {
         $deck = new DeckOfCards();
         $beforeShuffle = $deck->toArray();
-        $deck->shuffle();
+        $deck->shuffleDeck();
         $afterShuffle = $deck->toArray();
 
         $this->assertNotEquals($beforeShuffle, $afterShuffle);
@@ -51,8 +51,8 @@ class DeckOfCardsTest extends TestCase
     public function testSort()
     {
         $deck = new DeckOfCards();
-        $deck->shuffle();
-        $deck->sort();
+        $deck->shuffleDeck();
+        $deck->sortDeck();
         $cards = $deck->getCards();
         $this->assertEquals(1, $cards[0]->getId());
         $this->assertEquals(52, $cards[51]->getId());

@@ -18,7 +18,7 @@ class TwentyOne
     public function __construct()
     {
         $this->deck = new DeckOfCards();
-        $this->deck->shuffle();
+        $this->deck->shuffleDeck();
         $this->playerHand = new CardHand();
         $this->bankHand = new CardHand();
         $this->status = 'playing';
