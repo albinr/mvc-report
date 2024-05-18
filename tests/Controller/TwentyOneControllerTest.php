@@ -5,7 +5,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class ReportControllerTest extends WebTestCase
+class TwentyOneControllerTest extends WebTestCase
 {
     public function testHome()
     {
