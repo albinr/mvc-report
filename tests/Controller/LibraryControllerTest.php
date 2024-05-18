@@ -3,7 +3,6 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LibraryControllerTest extends WebTestCase
 {
@@ -48,6 +47,4 @@ class LibraryControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
-
-
 }
