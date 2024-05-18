@@ -9,7 +9,7 @@ class ApiCardControllerTest extends WebTestCase
     public function testApiDeck()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/api/deck');
+        $client->request('GET', '/api/deck');
 
         $this->assertResponseIsSuccessful();
         $this->assertJson($client->getResponse()->getContent());

@@ -5,46 +5,49 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class CardControllerTest extends WebTestCase
+class LibraryControllerTest extends WebTestCase
 {
-    public function testCard()
+    public function testLibrary()
     {
         $client = static::createClient();
-        $client->request('GET', '/card');
+        $client->request('GET', '/library');
 
         $this->assertResponseIsSuccessful();
         $this->assertStringContainsString('<!DOCTYPE html>', $client->getResponse()->getContent());
     }
 
-    public function testDeck()
+    public function testCreate()
     {
         $client = static::createClient();
-        $client->request('GET', '/card/deck');
+        $client->request('GET', '/library/create');
 
         $this->assertResponseIsSuccessful();
     }
 
-    public function testShuffle()
+
+    public function testReadOne()
     {
         $client = static::createClient();
-        $client->request('GET', '/card/deck/shuffle');
+        $client->request('GET', '/library/book/1');
 
         $this->assertResponseIsSuccessful();
     }
 
-    public function testDraw()
+    public function testReadMany()
     {
         $client = static::createClient();
-        $client->request('GET', '/card/deck/draw');
+        $client->request('GET', '/library/books');
 
         $this->assertResponseIsSuccessful();
     }
 
-    // public function testMultiDraw()
-    // {
-    //     $client = static::createClient();
-    //     $client->request('GET', '/card/deck/5');
+    public function testUpdateFormBook()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/library/book/edit/1');
 
-    //     $this->assertResponseIsSuccessful();
-    // }
+        $this->assertResponseIsSuccessful();
+    }
+
+
 }

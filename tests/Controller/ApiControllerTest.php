@@ -9,7 +9,7 @@ class ApiControllerTest extends WebTestCase
     public function testApi()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/api');
+        $client->request('GET', '/api');
 
         $this->assertResponseIsSuccessful();
         $this->assertStringContainsString('<!DOCTYPE html>', $client->getResponse()->getContent());
