@@ -12,14 +12,28 @@ build:
             environment:
                 php:
                     version: 8.3.3
-                    # version: 8.1.13
-                    # version: 8.1.17
-                    # version: 8.2.4
+                node:
+                    version: 14  # Ensure the version matches your project's requirements
+            steps:
+                - action: "file.copy"
+                  parameters:
+                    source: "./.env.test"
+                    target: "./.env"
+                - action: "command"
+                  command: "composer install"
+                - action: "command"
+                  command: "npm install"  # or "yarn install" if you use yarn
+                - action: "command"
+                  command: "npm run build"  # or "yarn build" if you use yarn
+                - action: "command"
+                  command: "composer phpunit"  # Ensure this matches your local test script
+
         analysis:
             tests:
                 override:
                     - php-scrutinizer-run
                     #- phpcs-run # Not used, missing config file
+
     tests:
         override:
             -   command: "composer phpunit"
