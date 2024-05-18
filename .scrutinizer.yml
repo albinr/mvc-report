@@ -16,9 +16,13 @@ build:
                     version: 14  # Ensure the version matches your project's requirements
             commands:
                 - command: "composer install"
+                  working_directory: "."
                 - command: "npm install"  # or "yarn install" if you use yarn
+                  working_directory: "."
                 - command: "npm run build"  # or "yarn build" if you use yarn
+                  working_directory: "."
                 - command: "composer phpunit"  # Ensure this matches your local test script
+                  working_directory: "."
 
         analysis:
             tests:
@@ -33,3 +37,4 @@ build:
                 coverage:
                     file: "docs/coverage.clover"
                     format: "php-clover"
+                working_directory: "."
