@@ -14,19 +14,11 @@ build:
                     version: 8.3.3
                 node:
                     version: 14  # Ensure the version matches your project's requirements
-            steps:
-                - action: "file.copy"
-                  parameters:
-                    source: "./.env.test"
-                    target: "./.env"
-                - action: "command"
-                  command: "composer install"
-                - action: "command"
-                  command: "npm install"  # or "yarn install" if you use yarn
-                - action: "command"
-                  command: "npm run build"  # or "yarn build" if you use yarn
-                - action: "command"
-                  command: "composer phpunit"  # Ensure this matches your local test script
+            commands:
+                - command: "composer install"
+                - command: "npm install"  # or "yarn install" if you use yarn
+                - command: "npm run build"  # or "yarn build" if you use yarn
+                - command: "composer phpunit"  # Ensure this matches your local test script
 
         analysis:
             tests:
