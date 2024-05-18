@@ -3,7 +3,6 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReportControllerTest extends WebTestCase
 {
@@ -57,5 +56,25 @@ class ReportControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    public function testSessionDelete()
+    {
+        $client = static::createClient();
 
+        $client->request('GET', '/session');
+        $session = $client->getRequest()->getSession();
+        $session->set('test_key', 'test_value');
+        $session->save();
+
+        $this->assertEquals('test_value', $session->get('test_key'));
+
+        $client->request('GET', '/session/delete');
+
+        $this->assertTrue($client->getResponse()->isRedirect('/session'));
+
+        $client->followRedirect();
+
+        $newSession = $client->getRequest()->getSession();
+
+        $this->assertEmpty($newSession->all());
+    }
 }
