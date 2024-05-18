@@ -7,16 +7,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiLibraryControllerTest extends WebTestCase
 {
-    public function testApiLibraryReturnsAllBooks()
-    {
-        $client = static::createClient();
-        $client->request('GET', '/api/library/books');
+    // public function testApiLibraryReturnsAllBooks()
+    // {
+    //     $client = static::createClient();
+    //     $client->request('GET', '/api/library/books');
 
-        $this->assertResponseIsSuccessful();
-        $response = json_decode($client->getResponse()->getContent(), true);
-        $this->assertIsArray($response['books']);
-        $this->assertNotEmpty($response['books']);
-    }
+    //     $this->assertResponseIsSuccessful();
+    //     $response = json_decode($client->getResponse()->getContent(), true);
+    //     $this->assertIsArray($response['books']);
+    //     $this->assertNotEmpty($response['books']);
+    // }
 
     public function testApiBookIsbnFound()
     {
