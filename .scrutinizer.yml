@@ -12,24 +12,14 @@ build:
             environment:
                 php:
                     version: 8.3.3
-                node:
-                    version: 14  # Ensure the version matches your project's requirements
-            commands:
-                - command: "composer install"
-                  working_directory: "."
-                - command: "npm install"  # or "yarn install" if you use yarn
-                  working_directory: "."
-                - command: "npm run build"  # or "yarn build" if you use yarn
-                  working_directory: "."
-                - command: "composer phpunit"  # Ensure this matches your local test script
-                  working_directory: "."
-
+                    # version: 8.1.13
+                    # version: 8.1.17
+                    # version: 8.2.4
         analysis:
             tests:
                 override:
                     - php-scrutinizer-run
                     #- phpcs-run # Not used, missing config file
-
     tests:
         override:
             -   command: "composer phpunit"
@@ -37,4 +27,3 @@ build:
                 coverage:
                     file: "docs/coverage.clover"
                     format: "php-clover"
-                working_directory: "."
