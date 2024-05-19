@@ -566,16 +566,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Repository-BookRepository.html#method___construct"
         },                {
-            "fqsen": "\\App\\Repository\\LibraryRepository",
-            "name": "LibraryRepository",
-            "summary": "",
-            "url": "classes/App-Repository-LibraryRepository.html"
-        },                {
-            "fqsen": "\\App\\Repository\\LibraryRepository\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-Repository-LibraryRepository.html#method___construct"
-        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

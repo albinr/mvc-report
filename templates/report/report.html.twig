@@ -347,5 +347,55 @@
 </section>
 <section>
     <h2 id="kmom06">Kmom06</h2>
+    <p>I detta kursmomentet har jag lagt till automatiserade tester i min rapport-sida. Med Phpmetrics och Scrutinizer
+        har jag försökt förbättra min kod.</p>
+
+    <h3>Min uppfattning av Phpmetrics</h3>
+    <p>Jag tycker Php Metrics har varit ett värdefullt och bra verktyg att få lära sig jobba med. När jag först började
+        arbeta med verktyget så såg jag fram emot att få bilden med bollar att bli helt grön. Detta var mycket svårare
+        än förväntat och jag lyckades inte se den feedback jag ville ha från bilden. Men jag fick se en liten
+        förbättring i alla fall.
+    </p>
+
+    <p>Varningarna och deras förklaringar som Phpmetrics visar var bra och ganska konkreta tycker jag. Att man fick tips
+        på hur man kunde lösa dem kom till nytta. Jag har löst alla varningar och issues som verktyget pekade ut i koden
+        jag skrivit.
+    </p>
+
+    <h3>Min uppfattning av Scrutinizer</h3>
+    <p>Scrutinizer har varit lätt att installera och integrera i min rapport-sida. Att man kan få badges att visa upp
+        som visar kodkvalitet är en rolig och motiverande del av verktyget. Från första början så hade jag 10 poäng i
+        kodkvalitet och 28% kodtäckning. Mina filer hade alla A i betyg så det var nästan inga problem från scrutinizer
+        som jag behövde fixa. När jag var klar med uppgiften så var min kodtäckning på 89%.</p>
+
+    <p>Det uppkom dock ganska jobbiga och tidskrävande problem jag stötte på med scrutinizer. Problemet började när jag
+        skulle skriva tester för mina controllers. Alla tester passerade phpunit lokalt men i Scrutinizer så
+        misslyckades dem. Jag gick igenom en hel runda med problemlösningar och lyckades tillslut hitta lösningen som
+        var att kommentera ut en rad ur ".gitignore". Problemen uppstod eftersom scrutinizer inte fick tillgång till delar
+        av koden som testerna behövde.
+    </p>
+
+    <p>Ett annat problem jag hade var när jag skulle testa min databas. Det var ett liknande som ovan då scrutinizer
+        inte fick tillgång till sqlite databasen. Databasen låg dock i mappen “var/“ som hade en massa andra filer
+        också. Min lösning var att ta en kopia på databasen och lägga den i rapportmappen så att scrutinizer kunde komma
+        åt den och köra testerna.
+    </p>
+
+    <h3>Kodkvalitet</h3>
+    <p>Jag tycker att kodkvalitet är en otroligt viktig del av att skapa bra program. Kod med hög kvalitet är lättare
+        att läsa, lättare att underhålla och vidareutveckla. Jag tror att badges från tjänster som Scrutinizer kan visa
+        kodens kvalitet till en grad. Dock tycker jag att man borde inspektera koden på scrutinizer snabbt för att se
+        hur mycket kod som Scrutinizer tar del av för att avgöra mer exakt om betygen är riktiga.
+    </p>
+
+    <p>Jag tycker att badges ger en bra motivation för mig som utvecklar att sikta på en högre standard i min kod. Det
+        är dock också viktigt att inte bara stödja sig på betyg från verktyg som dessa men också genom att granska koden
+        själv eller med andra.
+    </p>
+
+    <h3>Today i learned</h3>
+    <p>Min til för detta kursmoment är hur jag kan lägga till och använda verktyg och automatiserade tester för att
+        förbättra min kod. Jag har fått lära mig hur jag kan identifiera problem i min kod med verktygen. Jag kommer
+        definitivt använda mig mer av verktyg som dessa i framtida projekt jag gör.</p>
 </section>
 {% endblock %}

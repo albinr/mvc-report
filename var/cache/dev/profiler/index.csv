@@ -1,1 +1,13 @@
 317f9d,127.0.0.1,GET,http://127.0.0.1:8888/library/books,1716036767,,200,request
+c450e1,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716116547,,200,request
+fa8632,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716121440,,200,request
+591c64,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716123098,,200,request
+a4a863,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716123147,,200,request
+76b3d2,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716123157,,200,request
+e470a2,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716127180,,200,request
+e66394,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716127189,,200,request
+0c4580,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716127644,,200,request
+916da0,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716127684,,200,request
+d31aad,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716127721,,200,request
+fc5572,127.0.0.1,GET,http://127.0.0.1:8888/metrics,1716137954,,200,request
+8bf4d1,127.0.0.1,GET,http://127.0.0.1:8888/report,1716137957,,200,request

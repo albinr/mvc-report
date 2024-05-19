@@ -24,7 +24,8 @@
     leder ofta till mindre buggar i koden eftersom att de upptäckts av testerna i ett tidigare stadium i utvecklingen.
 </p>
 
-<p>Just nu har jag några tester som täcker koden för spelet och klassen twentyone.</p>
+<p>Just nu har jag några tester som täcker koden för spelet och klassen twentyone. Enligt Scrutinizer så har jag 28% kod
+    täckning just nu.</p>
 
 <h3>Complexity</h3>
 <p>Complexity handlar om hur komplicerad koden är. Kod som är komplicerad är svår att förstå och underhålla. Komplex kod
@@ -164,11 +165,101 @@
 
 <h2>Förbättringar</h2>
 
+<h3>Minska Komplexiteten i ApiController</h3>
+
+<p>Jag planerar att dela upp ApiController i mindre, mer fokuserade klasser. Varje ny klass kommer att hantera en
+    specifik del av applikationens funktionalitet, vilket minskar den enskilda klassens storlek och ansvar.</p>
+
+<p>Hög komplexitet i klasser ökar risken för buggar och gör koden svårare att underhålla och testa. Genom att minska
+    komplexiteten ökar vi kodens läsbarhet och underhållbarhet.</p>
+
+<p>Genom att separera ansvar minskar jag den cyklomatiska komplexiteten och förbättrar LCOM-värdena. Det gör att varje
+    klass blir enklare att förstå och testa individuellt.</p>
+
+<h3>Öka Kodtäckningen</h3>
+<p>Jag behöver implementera fler tester för att öka kod täckningen. Speciellt mot kärnfunktioner i koden som har för
+    lite test täckning.</p>
+
+<p>Ökad testtäckning minskar risken för missade fel och buggar i produktionen. Det ger även en mer stabil kod som är
+    lättare att underhålla och uppgradera i framtiden.</p>
+
+<p>Förbättrad kodtäckning borde direkt minska antalet buggar och förbättra hållbarheten av koden. Detta hjälper också
+    till att säkra koden så att framtida ändringar inte skapar nya problem/buggar.</p>
+
+<h3>Fixa Identifierade Issues</h3>
+<p>Issues som identifierats av Phpmetrics och Scrutinizer ska fixas så bra det går. Jag har hittat några variabler som
+    inte används och de har tagits bort.</p>
+
+<p>Att åtgärda fel är bra för att förbättra kod kvaliteten och systemets stabilitet. Det hjälper till att
+    säkerställa att applikationen kör smidigt och reducerar risken för fel när den är i drift.</p>
+
+<p>Minska antalet öppna buggar och förbättra de allmänna kvalitet måtten som rapporteras av kvalitets
+    övervakningssystem.</p>
+
+<h3>Nya värden efter förbättringar jag inplementerat:</h3>
+<p>Här är den nya statistiken från phpmetrics.</p>
+<ul>
+    <li>Violations: 2</li>
+    <li>Lines of code: 884</li>
+    <li>Classes: 16</li>
+    <li>Average cyclomatic complexity by class: 3.69</li>
+    <li>Assertions in tests: 140</li>
+    <li>Average bugs by class: 0.14</li>
+</ul>
+
+<p>Scrutinizer coverage = 89%</p>
+
 <h2>Diskussion</h2>
 
+<p>Jag tror att man aktivt kan arbeta med kodkvalitet och clean code på sättet vi gjort i detta kursmoment. Med verktyg
+    som Phpmetrics och Scrutnizer får jag konkret feedback på min kod som till exempel komplexitet och kod täckning.
+    Verktygen hjälper mig att lätt se vilka delar av koden som är mer problematiska och visar flaskhalsar som kan göra
+    koden långsammare. När man kontinuerligt analyserar sin kod med verktyg som dessa så får koden bättre struktur,
+    läsbarhet och blir lättare att underhålla.
+</p>
 
+<p>Det finns för och nackdelar med denna typ av utveckling.</p>
 
+<h3>Fördelar:</h3>
+<p>Snabb feedback för att se om den skrivna koden är eller kan vara problematisk. Eftersom verktyget visar snabbt och
+    ibland
+    ger förslag på förbättringar.</p>
 
+<p>Det visas tydliga mätvärden som till exempel cyklomatisk komplexitet så att man får feedback om en ändring var
+    positiv eller negativ.</p>
+
+<p>Automatisering av tester hjälper att göra det enklare att hålla koll på kod kvaliteten under utvecklings processen.
+</p>
+
+<h3>Nackdelar:</h3>
+
+<p>Tester tar tid att utveckla och utföra. Jag kan tänk mig att projekt som är större så kan tiden öka exponentiellt.
+</p>
+
+<p>Verktygen kan ha fel/vilseleda. Ibland kan verktyget identifiera felaktigt eller säga att ett problem är större än
+    vad det
+    egentligen är. Det kan leda till att man prioriterar fel och slösar tid.</p>
+
+<p>För mycket fokus på statistik från verktygen kan också göra att man fokuserar på att optimera koden istället för att
+    skapa ny funktionalitet som kanske är viktigare.</p>
+
+<h3>Andra sätt att jobba med clean code</h3>
+
+<p>Jag tror det finns fler sätt att jobba med clean code utöver att använda sig av verktyg som Phpmetrics och
+    Scrutnizer.</p>
+
+<p>Det kan till exempel vara parprogrammering. När man parprogrammerar så sitter man med åtminstone en annan person och
+    skriver kod. Man kan med medarbetarna diskutera och förbättra koden man skriver i realtid.
+</p>
+
+<p>Att granska koden i efterhand (Code Reviews) är också ett sätt att skriva Clean Code. Om man gör detta regelbundet
+    med medlemmarna i ett team så kan man identifiera problem tillsammans.</p>
+
+<p>Refaktorisering av kod är också ett sätt att jobba med Clean Code. När man refaktorisera sin kod så är målet att
+    förbättra strukturen och läsbarheten samt simplifiera komplexa funktioner.
+</p>
+
+<p>Med metoderna ovan så kan man enklare arbeta för att få en högre kvalitet på sin kod.</p>
 
 
 {% endblock %}
