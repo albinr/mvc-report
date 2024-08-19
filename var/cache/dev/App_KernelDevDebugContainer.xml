@@ -355,6 +355,9 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Card\BlackJack" class="App\Card\BlackJack" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Card\BlackJack&quot;: argument &quot;$playerList&quot; of method &quot;__construct()&quot; is type-hinted &quot;array&quot;, you should configure its value explicitly."/>
+    </service>
     <service id="App\Card\Card" class="App\Card\Card" autowire="true" autoconfigure="true">
       <tag name="container.error" message="Cannot autowire service &quot;App\Card\Card&quot;: argument &quot;$value&quot; of method &quot;__construct()&quot; is type-hinted &quot;string&quot;, you should configure its value explicitly."/>
     </service>
@@ -364,6 +367,9 @@
     <service id="App\Card\CardHand" class="App\Card\CardHand" autowire="true" autoconfigure="true"/>
     <service id="App\Card\DeckOfCards" class="App\Card\DeckOfCards" autowire="true" autoconfigure="true"/>
     <service id="App\Card\DeckWithJokers" class="App\Card\DeckWithJokers" autowire="true" autoconfigure="true"/>
+    <service id="App\Card\Player" class="App\Card\Player" autowire="true" autoconfigure="true">
+      <tag name="container.error" message="Cannot autowire service &quot;App\Card\Player&quot;: argument &quot;$dbId&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
+    </service>
     <service id="App\Card\TwentyOne" class="App\Card\TwentyOne" autowire="true" autoconfigure="true"/>
     <service id="App\Controller\ApiCardController" class="App\Controller\ApiCardController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
@@ -386,6 +392,13 @@
         <argument type="service" id=".service_locator.jUv.zyj.App\Controller\ApiLibraryController"/>
       </call>
     </service>
+    <service id="App\Controller\BlackJackController" class="App\Controller\BlackJackController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.jUv.zyj.App\Controller\BlackJackController"/>
+      </call>
+    </service>
     <service id="App\Controller\CardController" class="App\Controller\CardController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -398,6 +411,13 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.jUv.zyj.App\Controller\LibraryController"/>
+      </call>
+    </service>
+    <service id="App\Controller\ProjController" class="App\Controller\ProjController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.jUv.zyj.App\Controller\ProjController"/>
       </call>
     </service>
     <service id="App\Controller\ReportController" class="App\Controller\ReportController" public="true" autowire="true" autoconfigure="true">
@@ -414,7 +434,15 @@
         <argument type="service" id=".service_locator.jUv.zyj.App\Controller\TwentyOneController"/>
       </call>
     </service>
+    <service id="App\Repository\BlackJackRepository" class="App\Repository\BlackJackRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\BookRepository" class="App\Repository\BookRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\PlayerRepository" class="App\Repository\PlayerRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -445,7 +473,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.ErvjVkr"/>
+      <argument type="service" id=".service_locator._Cal2d_"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3342,7 +3370,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.ErvjVkr"/>
+      <argument type="service" id=".service_locator._Cal2d_"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -5075,7 +5103,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.kjkXYMe"/>
+      <argument type="service" id=".service_locator.tVVZ7aA"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -7097,20 +7125,30 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ApiLibraryController" class="App\Controller\ApiLibraryController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ApiLibraryController" class="App\Controller\ApiLibraryController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ApiLibraryController" class="App\Controller\ApiLibraryController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\BlackJackController" class="App\Controller\BlackJackController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\BlackJackController" class="App\Controller\BlackJackController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\BlackJackController" class="App\Controller\BlackJackController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CardController" class="App\Controller\CardController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CardController" class="App\Controller\CardController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CardController" class="App\Controller\CardController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\LibraryController" class="App\Controller\LibraryController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\LibraryController" class="App\Controller\LibraryController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\LibraryController" class="App\Controller\LibraryController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ProjController" class="App\Controller\ProjController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ProjController" class="App\Controller\ProjController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ProjController" class="App\Controller\ProjController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ReportController" class="App\Controller\ReportController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ReportController" class="App\Controller\ReportController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ReportController" class="App\Controller\ReportController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TwentyOneController" class="App\Controller\TwentyOneController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TwentyOneController" class="App\Controller\TwentyOneController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\TwentyOneController" class="App\Controller\TwentyOneController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BlackJackRepository" class="App\Repository\BlackJackRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\BlackJackRepository" class="App\Repository\BlackJackRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BookRepository" class="App\Repository\BookRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\BookRepository" class="App\Repository\BookRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PlayerRepository" class="App\Repository\PlayerRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\PlayerRepository" class="App\Repository\PlayerRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.bJ.4HC5" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7540,11 +7578,17 @@
         <argument key="doctrine" type="service_closure" id="doctrine"/>
       </argument>
     </service>
-    <service id=".service_locator.ErvjVkr" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator._Cal2d_" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ApiLibraryController::apiBookIsbn" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ApiLibraryController::apiLibrary" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController::apiGameSetup" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController::createPlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController::deletePlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController::home" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController::stand" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController::start" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController::createBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController::deleteBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController::index" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -7558,6 +7602,12 @@
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Controller\ApiLibraryController:apiBookIsbn" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ApiLibraryController:apiLibrary" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController:apiGameSetup" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController:createPlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController:deletePlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController:home" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController:stand" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\BlackJackController:start" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController:createBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController:deleteBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController:index" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -7854,10 +7904,12 @@
         <argument key="turbo.doctrine.event_listener" type="service_closure" id="turbo.doctrine.event_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.kjkXYMe" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.tVVZ7aA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\BlackJackRepository" type="service_closure" id="App\Repository\BlackJackRepository"/>
         <argument key="App\Repository\BookRepository" type="service_closure" id="App\Repository\BookRepository"/>
+        <argument key="App\Repository\PlayerRepository" type="service_closure" id="App\Repository\PlayerRepository"/>
       </argument>
     </service>
     <service id=".service_locator.KLVvNIq" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8187,6 +8239,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jUv.zyj" method="withContext"/>
     </service>
+    <service id=".service_locator.jUv.zyj.App\Controller\BlackJackController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\BlackJackController"/>
+      <argument>App\Controller\BlackJackController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.jUv.zyj" method="withContext"/>
+    </service>
     <service id=".service_locator.jUv.zyj.App\Controller\CardController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\CardController"/>
       <argument>App\Controller\CardController</argument>
@@ -8196,6 +8254,12 @@
     <service id=".service_locator.jUv.zyj.App\Controller\LibraryController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\LibraryController"/>
       <argument>App\Controller\LibraryController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.jUv.zyj" method="withContext"/>
+    </service>
+    <service id=".service_locator.jUv.zyj.App\Controller\ProjController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ProjController"/>
+      <argument>App\Controller\ProjController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.jUv.zyj" method="withContext"/>
     </service>
@@ -8387,8 +8451,10 @@
           <argument>App\Controller\ApiCardController</argument>
           <argument>App\Controller\ApiController</argument>
           <argument>App\Controller\ApiLibraryController</argument>
+          <argument>App\Controller\BlackJackController</argument>
           <argument>App\Controller\CardController</argument>
           <argument>App\Controller\LibraryController</argument>
+          <argument>App\Controller\ProjController</argument>
           <argument>App\Controller\ReportController</argument>
           <argument>App\Controller\TwentyOneController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
@@ -9743,7 +9809,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.bJ.4HC5" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ErvjVkr"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator._Cal2d_"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>

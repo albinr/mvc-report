@@ -57,7 +57,7 @@ class CardController extends AbstractController
     public function deck(SessionInterface $session): Response
     {
         $cardArray = $session->get('deck');
-        $deck = new DeckOfCards($cardArray ? $cardArray : null);
+        $deck = new DeckOfCards(1, $cardArray ? $cardArray : null);
 
         $deck->sortDeck();
         $session->set('deck', $deck->toArray());
@@ -93,7 +93,7 @@ class CardController extends AbstractController
     #[Route("/card/deck/draw", name: "draw")]
     public function draw(SessionInterface $session): Response
     {
-        $deck = new DeckOfCards($session->get('deck') ?? []);
+        $deck = new DeckOfCards(1, $session->get('deck') ?? []);
         $card = $deck->dealCard();
         $session->set('deck', $deck->toArray());
 
@@ -114,7 +114,7 @@ class CardController extends AbstractController
     public function multiDraw(int $num, SessionInterface $session): Response
     {
         $cardArray = $session->get('deck');
-        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
+        $deck = $cardArray ? new DeckOfCards(1, $cardArray) : new DeckOfCards();
 
         if ($num > count($deck->getCards())) {
             throw new Exception("Cannot draw more cards!");

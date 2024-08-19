@@ -453,7 +453,7 @@ class __TwigTemplate_9b279c9685cf641a0be43c9ea9f17753 extends Template
     <p>Det uppkom dock ganska jobbiga och tidskrävande problem jag stötte på med scrutinizer. Problemet började när jag
         skulle skriva tester för mina controllers. Alla tester passerade phpunit lokalt men i Scrutinizer så
         misslyckades dem. Jag gick igenom en hel runda med problemlösningar och lyckades tillslut hitta lösningen som
-        var att kommentera ut en rad ur gitignore. Problemen uppstod eftersom scrutinizer inte fick tillgång till delar
+        var att kommentera ut en rad ur \".gitignore\". Problemen uppstod eftersom scrutinizer inte fick tillgång till delar
         av koden som testerna behövde.
     </p>
 
@@ -888,7 +888,7 @@ class __TwigTemplate_9b279c9685cf641a0be43c9ea9f17753 extends Template
     <p>Det uppkom dock ganska jobbiga och tidskrävande problem jag stötte på med scrutinizer. Problemet började när jag
         skulle skriva tester för mina controllers. Alla tester passerade phpunit lokalt men i Scrutinizer så
         misslyckades dem. Jag gick igenom en hel runda med problemlösningar och lyckades tillslut hitta lösningen som
-        var att kommentera ut en rad ur gitignore. Problemen uppstod eftersom scrutinizer inte fick tillgång till delar
+        var att kommentera ut en rad ur \".gitignore\". Problemen uppstod eftersom scrutinizer inte fick tillgång till delar
         av koden som testerna behövde.
     </p>
 

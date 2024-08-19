@@ -1,0 +1,14 @@
+{% extends 'proj/base.html.twig' %}
+
+{% block title %}Add book{% endblock %}
+
+{% block body %}
+<h1>Create a player</h1>
+
+<form action="{{ path('black_jack_create_player') }}" method="POST" class="form">
+    <label for="name" class="input-label">Name</label>
+    <input type="text" class="input" name="name" id="name" placeholder="Enter name" required>
+    <input type="submit" class="button green-button" value="Create Player">
+
+</form>
+{% endblock %}

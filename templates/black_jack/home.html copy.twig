@@ -1,0 +1,35 @@
+{# templates/black_jack/home.html.twig #}
+
+{% extends 'proj/base.html.twig' %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block body %}
+<h1>Black Jack</h1>
+<form action="{{ path('blackjack_start') }}" method="post" class="form">
+    <div class="saved-players">
+        {% for player in players %}
+        <div>
+            <p>{{ player.name }}</p>
+            <p>ID: {{ player.playerId }}</p>
+            <p>Wins: {{ player.wins }}</p>
+            <p>Losses: {{ player.losses }}</p>
+            {# checkbox here #}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <label for="numPlayers">Number of Players (1-7):</label>
+        <input type="number" id="numPlayers" name="numPlayers" min="1" max="7" value="3" required class="input">
+    </div>
+    <div>
+        <label for="numDecks">Number of Decks (1-8):</label>
+        <input type="number" id="numDecks" name="numDecks" min="1" max="8" value="1" required class="input">
+    </div>
+    <button type="submit" class="button">Start Game</button>
+</form>
+
+<a href="{{ path('black_jack_create_player_form') }}" class="button">Create player</a>
+
+{% endblock %}

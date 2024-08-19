@@ -27,7 +27,7 @@ class DeckOfCardsTest extends TestCase
             ['value' => 'Q', 'suit' => 'Spades', 'id' => 3],
             ['value' => 'J', 'suit' => 'Spades', 'id' => 4],
         ];
-        $deck = new DeckOfCards($cards);
+        $deck = new DeckOfCards(1, $cards);
         $this->assertCount(4, $deck->getCards());
         $extractedCards = $deck->toArray();
         foreach ($cards as $index => $cardData) {

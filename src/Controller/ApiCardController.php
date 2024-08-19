@@ -37,7 +37,7 @@ class ApiCardController extends AbstractController
     public function apiDeckShuffle(SessionInterface $session): JsonResponse
     {
         $cardArray = $session->get('deck');
-        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
+        $deck = $cardArray ? new DeckOfCards(1, $cardArray) : new DeckOfCards();
 
         $deck->shuffleDeck();
         $session->set('deck', $deck->toArray());
@@ -61,7 +61,7 @@ class ApiCardController extends AbstractController
     {
 
         $cardArray = $session->get('deck');
-        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
+        $deck = $cardArray ? new DeckOfCards(1, $cardArray) : new DeckOfCards();
 
         $card = $deck->dealCard();
         $session->set('deck', $deck->toArray());
@@ -84,7 +84,7 @@ class ApiCardController extends AbstractController
     public function apiMultiDraw(int $num, SessionInterface $session): Response
     {
         $cardArray = $session->get('deck');
-        $deck = $cardArray ? new DeckOfCards($cardArray) : new DeckOfCards();
+        $deck = $cardArray ? new DeckOfCards(1, $cardArray) : new DeckOfCards();
 
         if ($num > count($deck->getCards())) {
             throw new Exception("Can not draw more cards!");

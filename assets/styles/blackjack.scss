@@ -1,0 +1,155 @@
+.black-jack-body {
+    background-color: rgb(21, 21, 21);
+    color: rgb(211, 211, 211);
+}
+
+.black-jack-header {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    width: 100%;
+    background-color: $almost-black;
+    margin-bottom: 20px;
+}
+
+.black-jack-footer{
+        background-color: $almost-black;
+}
+
+.black-jack-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.black-jack-nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.black-jack-nav ul li {
+    padding: 10px;
+}
+
+.black-jack-nav ul a {
+    text-decoration: none;
+    color: $light-grey;
+}
+
+.me-icon {
+    // border-radius: 8px;
+    // width: 50px;
+    // height: 50px;
+    // margin: 10px;
+    // overflow: hidden;
+    filter: drop-shadow(0 0 0.75rem $blue);
+}
+
+.me-icon img {
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+}
+
+.black-jack-nav ul span{
+    color: $light-grey;
+}
+
+.black-jack{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hand {
+    display: flex;
+    flex-flow: row wrap;
+    min-width: 300px;
+}
+
+.black-jack-main {
+    padding: 0.7rem;
+    margin: 0 auto;
+    max-width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.all-players {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    max-width: 90vw;
+}
+
+.black-jack-player {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 5px;
+    background-color: darken($blue, 40%);
+    border-radius: 8px;
+    padding: 5px;
+    border: 1px solid darken($blue, 10%);
+}
+
+.current-player {
+    background-color: darken($green, 40%);
+    border: 1px solid darken($green, 10%);
+}
+
+.black-jack-player h2 {
+    margin-bottom: 8px;
+}
+
+.black-jack-bank-cards {
+    margin: 5px;
+    background-color: darken($red, 30%);
+    border: 1px solid darken($red, 10%);
+    border-radius: 8px;
+    padding: 5px;
+    min-width: 502px;
+    min-height: 304px;
+}
+
+.black-jack-bank-cards .hand {
+}
+
+.black-jack-bank-cards h2 {
+    margin-bottom: 8px;
+}
+
+.black-jack-player-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.saved-players {
+    display: flex;
+    flex-direction: row;
+}
+
+.saved-players div {
+    background-color: $almost-black;
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 4px;
+}

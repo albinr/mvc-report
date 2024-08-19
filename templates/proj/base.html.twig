@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/glider.svg') }}">
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+
+<body class="black-jack-body">
+    <header class="black-jack-header">
+        <nav class="black-jack-nav">
+            <ul>
+                <li>
+                    <a href="{{ path('home') }}" class="me-icon"><img src="{{asset('img/small-me-img.jpg') }}"
+                            alt="img of Albin Ryberg"></a>
+                </li>
+                <li>
+                    <span>alry23/mvc/report/proj/<strong>BlackJack</strong></span>
+                </li>
+            </ul>
+            <ul>
+                <li><a href="{{ path('proj_home') }}">HEM</a></li>
+                <li><a href="{{ path('proj_about') }}">OM</a></li>
+                <li><a href="{{ path('blackjack_home') }}">SPELA</a></li>
+                <li><a href="{{ path('proj_api') }}">API</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="black-jack-main">
+        {% block body %}{% endblock %}
+    </div>
+    <footer class="black-jack-footer">
+        <p>Webbplats av Albin Ryberg (alry23)</p>
+        <a href="{{ path('session') }}" class="button">Session</a>
+    </footer>
+</body>
+
+</html>

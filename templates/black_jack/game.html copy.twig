@@ -1,0 +1,38 @@
+{% extends 'proj/base.html.twig' %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block body %}
+    <div class="black-jack">
+        <div class="black-jack-bank-cards">
+            <h2>Dealer</h2>
+            <div class="game-points">Card score: {{ game.getBankScore() }}</div>
+            <div class="hand">
+                {% for card in game.getBankHand().getRenderedHand() %}
+                    {{ card|raw }}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="game-status">{{ game.getStatus() }}</div>
+
+        <div class="all-players">
+            {% for playerIndex in 0..game.getNumPlayers() - 1 %}
+                <div class="black-jack-player {% if game.getCurrentPlayer() == playerIndex %}current-player{% endif %}">
+                    <h2>Player {{ playerIndex + 1 }}</h2>
+                    <div class="game-points">Card score: {{ game.getPlayerScore(playerIndex) }}</div>
+                    <div class="hand">
+                        {% for card in game.getPlayerHand(playerIndex).getRenderedHand() %}
+                            {{ card|raw }}
+                        {% endfor %}
+                    </div>
+                    {% if game.getCurrentPlayer() == playerIndex %}
+                        <div class="black-jack-player-actions">
+                            <a href="{{ path('blackjack_hit') }}" class="button blue-button">Hit</a>
+                            <a href="{{ path('blackjack_stand') }}" class="button">Stand</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -5,9 +5,18 @@ namespace App\Card;
 class DeckOfCards
 {
     protected array $cards = [];
+    protected int $numDecks;
 
-    public function __construct(array $cards = null)
+
+    /**
+     * Constructor initializes the deck with the specified number of decks.
+     *
+     * @param int $numDecks The number of decks to include (default is 1).
+     * @param array|null $cards An optional array of cards to initialize the deck with.
+     */
+    public function __construct(int $numDecks = 1, array $cards = null)
     {
+        $this->numDecks = $numDecks;
         if (is_array($cards)) {
             $this->cards = array_map(function ($cardData) {
                 return new Card($cardData['value'], $cardData['suit'], $cardData['id']);
@@ -19,15 +28,21 @@ class DeckOfCards
     }
 
 
+    /**
+     * Initializes the deck with the specified number of decks.
+     */
     protected function initialize(): void
     {
         $suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
         $values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         $count = 1;
-        foreach ($suits as $suit) {
-            foreach ($values as $value) {
-                $this->cards[] = new Card($value, $suit, $count);
-                $count++;
+
+        for ($deck = 0; $deck < $this->numDecks; $deck++) {
+            foreach ($suits as $suit) {
+                foreach ($values as $value) {
+                    $this->cards[] = new Card($value, $suit, $count);
+                    $count++;
+                }
             }
         }
     }

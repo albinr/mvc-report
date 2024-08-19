@@ -1,0 +1,32 @@
+{% extends 'proj/base.html.twig' %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block body %}
+<h1>Black Jack</h1>
+<form action="{{ path('blackjack_start') }}" method="post" class="form">
+    <div class="saved-players">
+        {% for player in players %}
+        <div>
+            <p>{{ player.name }}</p>
+            <p>ID: {{ player.playerId }}</p>
+            <p>Wins: {{ player.wins }}</p>
+            <p>Losses: {{ player.losses }}</p>
+            <label>
+                <input type="checkbox" name="selectedPlayers[]" value="{{ player.playerId }}">
+                Select {{ player.name }}
+            </label>
+            <form action="{{ path('black_jack_delete_player', {'playerid': player.playerId}) }}" method="post"
+                    style="display: inline;">
+                    <button type="submit">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="button">Start Game</button>
+</form>
+
+<a href="{{ path('black_jack_create_player_form') }}" class="button">Create player</a>
+
+{% endblock %}
