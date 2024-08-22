@@ -123,7 +123,10 @@ class __TwigTemplate_1b7a5cd586aaf130eed2c262ead6d826 extends Template
         // line 39
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("metrics");
         echo "\">METRICS</a></li>
-
+                <li><a href=\"";
+        // line 40
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("proj_home");
+        echo "\">PROJ</a></li>
             </ul>
         </nav>
     </header>
@@ -278,7 +281,7 @@ class __TwigTemplate_1b7a5cd586aaf130eed2c262ead6d826 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  243 => 45,  224 => 14,  214 => 15,  212 => 14,  207 => 13,  197 => 12,  184 => 9,  174 => 8,  155 => 6,  140 => 49,  135 => 46,  133 => 45,  124 => 39,  120 => 38,  116 => 37,  112 => 36,  108 => 35,  104 => 34,  100 => 33,  96 => 32,  92 => 31,  79 => 23,  70 => 16,  68 => 12,  65 => 11,  63 => 8,  59 => 7,  55 => 6,  48 => 1,);
+        return array (  246 => 45,  227 => 14,  217 => 15,  215 => 14,  210 => 13,  200 => 12,  187 => 9,  177 => 8,  158 => 6,  143 => 49,  138 => 46,  136 => 45,  128 => 40,  124 => 39,  120 => 38,  116 => 37,  112 => 36,  108 => 35,  104 => 34,  100 => 33,  96 => 32,  92 => 31,  79 => 23,  70 => 16,  68 => 12,  65 => 11,  63 => 8,  59 => 7,  55 => 6,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -322,7 +325,7 @@ class __TwigTemplate_1b7a5cd586aaf130eed2c262ead6d826 extends Template
                 <li><a href=\"{{ path('game') }}\">GAME</a></li>
                 <li><a href=\"{{ path('library') }}\">LIBRARY</a></li>
                 <li><a href=\"{{ path('metrics') }}\">METRICS</a></li>
-
+                <li><a href=\"{{ path('proj_home') }}\">PROJ</a></li>
             </ul>
         </nav>
     </header>

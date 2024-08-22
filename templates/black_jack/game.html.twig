@@ -3,38 +3,42 @@
 {% block title %}Black Jack{% endblock %}
 
 {% block body %}
-    <div class="black-jack">
-        <div class="black-jack-bank-cards">
-            <h2>Dealer</h2>
-            <div class="game-points">Card score: {{ game.getBankScore() }}</div>
-            <div class="hand">
-                {% for card in game.getBankHand().getRenderedHand() %}
-                    {{ card|raw }}
-                {% endfor %}
-            </div>
-        </div>
-        <div class="game-status">{{ game.getStatus() }}</div>
-
-        <div class="all-players">
-            {% for player in game.getPlayers() %}
-                <div class="black-jack-player {% if game.getCurrentPlayer() == loop.index0 %}current-player{% endif %}">
-                    <h2>Player {{ player.getName() }}</h2>
-                    <h2>Result {{ player.getResult() }}</h2>
-                    <div class="game-points">Card score: {{ game.getPlayerScore(loop.index0) }}</div>
-                    <div class="hand">
-                        {% for card in game.getPlayerHand(loop.index0).getRenderedHand() %}
-                            {{ card|raw }}
-                        {% endfor %}
-                    </div>
-                    {% if game.getCurrentPlayer() == loop.index0 %}
-                        <div class="black-jack-player-actions">
-                            <a href="{{ path('blackjack_hit') }}" class="button blue-button">Hit</a>
-                            <a href="{{ path('blackjack_stand') }}" class="button">Stand</a>
-                        </div>
-                    {% endif %}
-
-                </div>
+<div class="black-jack">
+    <div class="black-jack-bank-cards">
+        <h2>Dealer</h2>
+        <div class="game-points">Card score: {{ game.getBankScore() }}</div>
+        <div class="hand">
+            {% for card in game.getBankHand().getRenderedHand() %}
+            {{ card|raw }}
             {% endfor %}
         </div>
     </div>
+    <div class="game-status">{{ game.getStatus() }}</div>
+    {% if game.getStatus() == 'complete' %}
+    <div class="game-controls">
+        <a href="{{ path('blackjack_home') }}" class="button green-button">Start New Game</a>
+    </div>
+    {% endif %}
+    <div class="all-players">
+        {% for player in game.getPlayers() %}
+        <div
+            class="black-jack-player {% if game.getCurrentPlayer() == loop.index0 %}current-player{% endif %} {{ player.getResult() }}">
+            <h2>Player {{ player.getName() }} {{ player.getResult() }}</h2>
+            <div class="game-points">Card score: {{ game.getPlayerScore(loop.index0) }}</div>
+            <div class="hand">
+                {% for card in game.getPlayerHand(loop.index0).getRenderedHand() %}
+                {{ card|raw }}
+                {% endfor %}
+            </div>
+            {% if game.getCurrentPlayer() == loop.index0 %}
+            <div class="black-jack-player-actions">
+                <a href="{{ path('blackjack_hit') }}" class="button blue-button">Hit</a>
+                <a href="{{ path('blackjack_stand') }}" class="button">Stand</a>
+            </div>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

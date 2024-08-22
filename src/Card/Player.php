@@ -2,9 +2,6 @@
 
 namespace App\Card;
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Player as PlayerDb;
-
 /**
  * Class Player
  */
@@ -15,14 +12,13 @@ class Player
     private string $result;
     private CardHand $hand;
 
-    private EntityManagerInterface $entityManager;
 
     public function __construct(int $dbId, string $name)
     {
         $this->dbId = $dbId;
         $this->name = $name;
         $this->hand = new CardHand();
-        $this->result = "playing";
+        $this->result = "";
     }
 
     public function getName(): string
@@ -40,6 +36,11 @@ class Player
         return $this->hand;
     }
 
+    public function setHand(CardHand $hand): void
+    {
+        $this->hand = $hand;
+    }
+
     public function setWin()
     {
         $this->result = "win";
@@ -48,6 +49,11 @@ class Player
     public function setLoss()
     {
         $this->result = "loss";
+    }
+
+    public function setDraw()
+    {
+        $this->result = "draw";
     }
 
     public function getResult()

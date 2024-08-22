@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Player as PlayerDb;
+use App\Entity\GameHistory;
 use App\Card\BlackJack;
 use App\Card\Player as ActivePlayer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,9 +23,11 @@ class BlackJackController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $players = $entityManager->getRepository(PlayerDb::class)->findAll();
+        $gameHistory = $entityManager->getRepository(GameHistory::class)->findAll();
 
         return $this->render('black_jack/home.html.twig', [
             'players' => $players,
+            'gameHistory' => $gameHistory,
         ]);
     }
 
@@ -42,8 +45,7 @@ class BlackJackController extends AbstractController
             }
         }
         $game = new BlackJack($foundPlayers);
-
-        $session->set('black_jack_game', serialize($game));
+        $session->set('black_jack_game', $game->toSession());
 
         return $this->render('black_jack/game.html.twig', [
             'game' => $game,
@@ -53,9 +55,11 @@ class BlackJackController extends AbstractController
     #[Route("/proj/blackjack/hit", name: "blackjack_hit")]
     public function hit(SessionInterface $session): Response
     {
-        $game = unserialize($session->get('black_jack_game'));
+        $gameData = $session->get('black_jack_game');
+        $game = BlackJack::fromSession($gameData);
+
         $game->hit();
-        $session->set('black_jack_game', serialize($game));
+        $session->set('black_jack_game', $game->toSession());
 
         return $this->render('black_jack/game.html.twig', [
             'game' => $game,
@@ -65,14 +69,18 @@ class BlackJackController extends AbstractController
     #[Route("/proj/blackjack/stand", name: "blackjack_stand")]
     public function stand(SessionInterface $session, ManagerRegistry $doctrine): Response
     {
-        $game = unserialize($session->get('black_jack_game'));
+        $gameData = $session->get('black_jack_game');
+        $game = BlackJack::fromSession($gameData);
+
         $game->stand();
-        $session->set('black_jack_game', serialize($game));
+        $session->set('black_jack_game', $game->toSession());
 
         if ($game->getStatus() === 'complete') {
             $entityManager = $doctrine->getManager();
 
             $results = $game->getGameResults();
+
+            $playerData = [];
 
             foreach ($results as $result) {
                 $playerDb = $entityManager->getRepository(PlayerDb::class)->find($result['id']);
@@ -85,8 +93,21 @@ class BlackJackController extends AbstractController
                     }
 
                     $entityManager->persist($playerDb);
+
+                    $playerData[] = [
+                        'id' => $playerDb->getPlayerId(),
+                        'name' => $playerDb->getName(),
+                        'score' => $result['score'],
+                        'result' => $result['status']
+                    ];
                 }
             }
+
+            $gameHistory = new GameHistory();
+            $gameHistory->setGameDate(new \DateTime());
+            $gameHistory->setPlayerDataJson($playerData);
+            $gameHistory->setBankScore($game->getBankScore());
+            $entityManager->persist($gameHistory);
             $entityManager->flush();
         }
 
@@ -204,13 +225,34 @@ class BlackJackController extends AbstractController
     }
 
     #[Route("/proj/api/blackjack/stand", name: "api_blackjack_stand")]
-    public function apiGameStand(SessionInterface $session): Response
+    public function apiGameStand(SessionInterface $session, ManagerRegistry $doctrine): Response
     {
         $data = ['game-status' => 'No game in progress.'];
         if ($session->has('black_jack_game')) {
             $game = unserialize($session->get('black_jack_game'));
             $game->stand();
             $session->set('black_jack_game', serialize($game));
+
+            if ($game->getStatus() === 'complete') {
+                $entityManager = $doctrine->getManager();
+
+                $results = $game->getGameResults();
+
+                foreach ($results as $result) {
+                    $playerDb = $entityManager->getRepository(PlayerDb::class)->find($result['id']);
+
+                    if ($playerDb) {
+                        if ($result['status'] === 'win') {
+                            $playerDb->setWins($playerDb->getWins() + 1);
+                        } elseif ($result['status'] === 'lose') {
+                            $playerDb->setLosses($playerDb->getLosses() + 1);
+                        }
+
+                        $entityManager->persist($playerDb);
+                    }
+                }
+                $entityManager->flush();
+            }
 
             $data = [
                 'current-player' => $game->getCurrentPlayer(),

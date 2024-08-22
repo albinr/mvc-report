@@ -59,10 +59,19 @@ class Card
     /**
      * Returns a string representation of the card, combining its value and suit.
      *
-     * @return string A string representing the card for example: "A of Spades".
+     * @return string A string representing the card ("A of Spades").
      */
     public function getAsString(): string
     {
         return "{$this->value} of {$this->suit}";
+    }
+
+    public static function fromString(string $cardString, ?int $cardId = null): Card
+    {
+        $value = substr($cardString, 0, -1);
+        $suit = substr($cardString, -1);
+        $id = $cardId;
+
+        return new Card($value, $suit, $id);
     }
 }

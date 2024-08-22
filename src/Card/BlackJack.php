@@ -18,7 +18,7 @@ class BlackJack
      *
      * @param int[] $numPlayers The number of players (2-7).
      */
-    public function __construct(array $playerList)
+    public function __construct(array $playerList, bool $isNewGame = true)
     {
         $this->players = $playerList;
         $numDecks = 1;
@@ -29,16 +29,18 @@ class BlackJack
         $this->deck = new DeckOfCards($numDecks);
         $this->deck->shuffleDeck();
 
-        foreach ($this->players as $player) {
-            $this->addCardToHand($player->getHand());
-            $this->addCardToHand($player->getHand());
+        if ($isNewGame) {
+            foreach ($this->players as $player) {
+                $this->addCardToHand($player->getHand());
+                $this->addCardToHand($player->getHand());
+            }
+
+            $this->bankHand = new CardHand();
+            $this->addCardToHand($this->bankHand);
+            $this->status = 'playing';
         }
-
-        $this->bankHand = new CardHand();
-        $this->addCardToHand($this->bankHand);
-
-        $this->status = 'playing';
     }
+
 
     /**
      * Adds a card to the specified hand from the deck.
@@ -90,7 +92,6 @@ class BlackJack
         }
 
         $this->status = 'complete';
-        $this->getGameResults();
     }
 
     /**
@@ -125,23 +126,27 @@ class BlackJack
     /**
      * Determines the outcome of the game after the bank finishes its turn.
      */
-    private function determinePlayerStatus($player): string
+    private function playerResult($player): string
     {
         $playerScore = $this->calcScore($player->getHand()->getCards());
         $bankScore = $this->calcScore($this->bankHand->getCards());
 
         if ($playerScore > 21) {
+            $player->setLoss();
             return 'lose';
         }
 
         if ($bankScore > 21 || $playerScore > $bankScore) {
+            $player->setWin();
             return 'win';
         }
 
         if ($playerScore < $bankScore) {
+            $player->setLoss();
             return 'lose';
         }
 
+        $player->setDraw();
         return 'draw';
     }
 
@@ -154,7 +159,7 @@ class BlackJack
                 'id' => $player->getId(),
                 'name' => $player->getName(),
                 'score' => $this->calcScore($player->getHand()->getCards()),
-                'status' => $this->determinePlayerStatus($player),
+                'status' => $this->playerResult($player),
             ];
 
             $results[] = $playerResult;
@@ -248,5 +253,85 @@ class BlackJack
     public function getDeck(): DeckOfCards
     {
         return $this->deck;
+    }
+
+    public function setBankHand(CardHand $hand): void
+    {
+        $this->bankHand = $hand;
+    }
+
+    public function setCurrentPlayer(int $currentPlayer): void
+    {
+        $this->currentPlayer = $currentPlayer;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+
+    public function toSession(): array
+    {
+        $players = [];
+        foreach ($this->players as $player) {
+            $players[] = [
+                'id' => $player->getId(),
+                'name' => $player->getName(),
+                'cards' => array_map(function ($card) {
+                    return [
+                        'id' => $card->getId(),
+                        'value' => $card->getValue(),
+                        'suit' => $card->getSuit(),
+                    ];
+                }, $player->getHand()->getCards()),
+            ];
+        }
+
+        $gameState = [
+            'players' => $players,
+            'bank' => [
+                'cards' => array_map(function ($card) {
+                    return [
+                        'id' => $card->getId(),
+                        'value' => $card->getValue(),
+                        'suit' => $card->getSuit(),
+                    ];
+                }, $this->bankHand->getCards()),
+            ],
+            'current_player' => $this->currentPlayer,
+            'status' => $this->status,
+        ];
+
+        return $gameState;
+    }
+
+    public static function fromSession(array $gameData): BlackJack
+    {
+        $players = [];
+        foreach ($gameData['players'] as $playerData) {
+            $activePlayer = new Player($playerData['id'], $playerData['name']);
+
+            $hand = new CardHand();
+            foreach ($playerData['cards'] as $cardData) {
+                $hand->addCard(new Card($cardData['value'], $cardData['suit'], $cardData['id']));
+            }
+
+            $activePlayer->setHand($hand);
+            $players[] = $activePlayer;
+        }
+
+        $game = new BlackJack($players, false);
+
+        $bankHand = new CardHand();
+        foreach ($gameData['bank']['cards'] as $cardData) {
+            $bankHand->addCard(new Card($cardData['value'], $cardData['suit'], $cardData['id']));
+        }
+        $game->setBankHand($bankHand);
+
+        $game->setCurrentPlayer($gameData['current_player']);
+        $game->setStatus($gameData['status']);
+
+        return $game;
     }
 }

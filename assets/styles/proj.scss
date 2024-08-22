@@ -1,0 +1,23 @@
+.proj-table{
+    border-collapse: collapse;
+    margin: 1em 0;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    overflow: hidden;
+}
+
+.proj-table th {
+    background-color: $dark-grey;
+}
+
+.proj-table td, th{
+    padding: 0.5em;
+}
+
+.proj-table tr{
+    border-bottom: 1px solid $dark-grey;
+}
+
+.table-wrapper{
+    overflow-x: auto;
+}
