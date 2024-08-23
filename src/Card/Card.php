@@ -66,12 +66,4 @@ class Card
         return "{$this->value} of {$this->suit}";
     }
 
-    public static function fromString(string $cardString, ?int $cardId = null): Card
-    {
-        $value = substr($cardString, 0, -1);
-        $suit = substr($cardString, -1);
-        $id = $cardId;
-
-        return new Card($value, $suit, $id);
-    }
 }

@@ -56,4 +56,5 @@ class CardTest extends TestCase
         $card = new Card('3', 'Clubs', 13);
         $this->assertEquals(13, $card->getId());
     }
+
 }

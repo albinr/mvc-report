@@ -109,4 +109,43 @@ class BlackJackTest extends TestCase
         $this->assertGreaterThanOrEqual(17, $bankScore);
         $this->assertEquals('complete', $game->getStatus());
     }
+
+    public function testToSessionAndFromSession()
+    {
+        $players = [
+            new Player(1, 'Alice'),
+            new Player(2, 'Bob')
+        ];
+
+        $game = new BlackJack($players);
+        $gameState = $game->toSession();
+
+        $restoredGame = BlackJack::fromSession($gameState);
+
+        $this->assertEquals($game->getCurrentPlayer(), $restoredGame->getCurrentPlayer());
+        $this->assertEquals($game->getStatus(), $restoredGame->getStatus());
+
+        $this->assertCount(2, $restoredGame->getPlayers());
+        $this->assertInstanceOf(CardHand::class, $restoredGame->getBankHand());
+    }
+
+    public function testMultipleDecks()
+    {
+        $players = [
+            new Player(1, 'Alice'),
+            new Player(2, 'Bob'),
+            new Player(3, 'Charlie'),
+            new Player(4, 'David')
+        ];
+
+        $game = new BlackJack($players);
+
+        $this->assertGreaterThanOrEqual(54, count($game->getDeck()->getCards()));
+    }
+
+    public function testNoPlayers()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $game = new BlackJack([]);
+    }
 }
