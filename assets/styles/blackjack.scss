@@ -145,11 +145,13 @@
 .saved-players {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 450px;
 }
 
 .saved-players div {
     background-color: $almost-black;
-    margin: 0 5px;
+    margin: 5px;
     padding: 5px;
     border-radius: 4px;
 }

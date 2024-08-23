@@ -17,45 +17,10 @@
                 <input type="checkbox" name="selectedPlayers[]" value="{{ player.playerId }}">
                 Select {{ player.name }}
             </label>
-            {# <form action="{{ path('black_jack_delete_player', {'playerid': player.playerId}) }}" method="post"
-                style="display: inline;">
-                <button type="submit">Delete</button>
-            </form> #}
         </div>
         {% endfor %}
     </div>
-
-    <button type="submit" class="button">Start Game</button>
+    <button type="submit" class="button full-width-button green-button">Start Game</button>
 </form>
-
-<a href="{{ path('black_jack_create_player_form') }}" class="button">Create player</a>
-
-{% if gameHistory is not empty %}
-<h2>Game History</h2>
-<table class="proj-table">
-    <thead>
-        <tr>
-            <th>Game Date</th>
-            <th>Bank Score</th>
-            <th>Players</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for game in gameHistory %}
-        <tr>
-            <td>{{ game.getGameDate|date('Y-m-d H:i:s') }}</td>
-            <td>{{ game.getBankScore }}</td>
-            <td>
-                <ul>
-                    {% for player in game.getPlayerDataJson %}
-                    <li>{{ player.name }} - Score: {{ player.score }} - Result: {{ player.result }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endif %}
 
 {% endblock %}

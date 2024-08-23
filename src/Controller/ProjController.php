@@ -2,18 +2,29 @@
 
 namespace App\Controller;
 
+use App\Entity\Player as PlayerDb;
+use App\Entity\GameHistory;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ProjController extends AbstractController
 {
     #[Route("/proj", name: "proj_home")]
-    public function home(SessionInterface $session): Response
+    public function home(ManagerRegistry $doctrine): Response
     {
-        return $this->render('proj/index.html.twig');
+        $entityManager = $doctrine->getManager();
+        $players = $entityManager->getRepository(PlayerDb::class)->findAll();
+        $gameHistory = $entityManager->getRepository(GameHistory::class)->findAll();
+
+        return $this->render('proj/index.html.twig',[
+            'players' => $players,
+            'gameHistory' => $gameHistory,
+        ]);
     }
 
     #[Route("/proj/about", name: "proj_about")]

@@ -434,10 +434,6 @@
         <argument type="service" id=".service_locator.jUv.zyj.App\Controller\TwentyOneController"/>
       </call>
     </service>
-    <service id="App\Repository\BlackJackRepository" class="App\Repository\BlackJackRepository" autowire="true" autoconfigure="true">
-      <tag name="doctrine.repository_service"/>
-      <argument type="service" id="doctrine"/>
-    </service>
     <service id="App\Repository\BookRepository" class="App\Repository\BookRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -477,7 +473,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.ZzU1Q0j"/>
+      <argument type="service" id=".service_locator.zeMPMnj"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3374,7 +3370,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.ZzU1Q0j"/>
+      <argument type="service" id=".service_locator.zeMPMnj"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -5107,7 +5103,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.6r2y5t8"/>
+      <argument type="service" id=".service_locator.soQMk4f"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -7147,8 +7143,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TwentyOneController" class="App\Controller\TwentyOneController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TwentyOneController" class="App\Controller\TwentyOneController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\TwentyOneController" class="App\Controller\TwentyOneController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BlackJackRepository" class="App\Repository\BlackJackRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\BlackJackRepository" class="App\Repository\BlackJackRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BookRepository" class="App\Repository\BookRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\BookRepository" class="App\Repository\BookRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\GameHistoryRepository" class="App\Repository\GameHistoryRepository" autowire="true" abstract="true"/>
@@ -7584,7 +7578,7 @@
         <argument key="doctrine" type="service_closure" id="doctrine"/>
       </argument>
     </service>
-    <service id=".service_locator.ZzU1Q0j" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.zeMPMnj" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ApiLibraryController::apiBookIsbn" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -7603,6 +7597,7 @@
         <argument key="App\Controller\LibraryController::readOne" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController::updateBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController::updateFormBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\ProjController::home" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -7623,6 +7618,7 @@
         <argument key="App\Controller\LibraryController:readOne" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController:updateBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\LibraryController:updateFormBook" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\ProjController:home" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
       </argument>
@@ -7912,10 +7908,9 @@
         <argument key="turbo.doctrine.event_listener" type="service_closure" id="turbo.doctrine.event_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.6r2y5t8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.soQMk4f" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Repository\BlackJackRepository" type="service_closure" id="App\Repository\BlackJackRepository"/>
         <argument key="App\Repository\BookRepository" type="service_closure" id="App\Repository\BookRepository"/>
         <argument key="App\Repository\GameHistoryRepository" type="service_closure" id="App\Repository\GameHistoryRepository"/>
         <argument key="App\Repository\PlayerRepository" type="service_closure" id="App\Repository\PlayerRepository"/>
@@ -9818,7 +9813,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.bJ.4HC5" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ZzU1Q0j"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.zeMPMnj"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
