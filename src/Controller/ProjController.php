@@ -28,13 +28,13 @@ class ProjController extends AbstractController
     }
 
     #[Route("/proj/about", name: "proj_about")]
-    public function about(SessionInterface $session): Response
+    public function about(): Response
     {
         return $this->render('proj/about.html.twig');
     }
 
     #[Route("/proj/api", name: "proj_api")]
-    public function apiLibrary(SessionInterface $session): Response
+    public function apiBlackJack(): Response
     {
         $apiRoutes = [
             [

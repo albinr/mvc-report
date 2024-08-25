@@ -40,11 +40,4 @@ class CardControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    // public function testMultiDraw()
-    // {
-    //     $client = static::createClient();
-    //     $client->request('GET', '/card/deck/5');
-
-    //     $this->assertResponseIsSuccessful();
-    // }
 }

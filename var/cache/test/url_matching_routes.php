@@ -8,6 +8,11 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
+        '/api/blackjack/setup' => [[['_route' => 'api_blackjack_setup', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameSetup'], null, ['POST' => 0], null, false, false, null]],
+        '/proj/api/blackjack' => [[['_route' => 'api_blackjack_status', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameStatus'], null, ['GET' => 0], null, false, false, null]],
+        '/proj/api/blackjack/hit' => [[['_route' => 'api_blackjack_hit', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameHit'], null, null, null, false, false, null]],
+        '/proj/api/blackjack/stand' => [[['_route' => 'api_blackjack_stand', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameStand'], null, null, null, false, false, null]],
+        '/proj/api/blackjack/deck' => [[['_route' => 'api_blackjack_deck', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameDeck'], null, null, null, false, false, null]],
         '/api/deck' => [[['_route' => 'api_deck', '_controller' => 'App\\Controller\\ApiCardController::apiDeck'], null, ['GET' => 0], null, false, false, null]],
         '/api/deck/shuffle' => [[['_route' => 'api_deck_shuffle', '_controller' => 'App\\Controller\\ApiCardController::apiDeckShuffle'], null, ['POST' => 0], null, false, false, null]],
         '/api/deck/draw' => [[['_route' => 'api_deck_draw', '_controller' => 'App\\Controller\\ApiCardController::apiDraw'], null, ['POST' => 0], null, false, false, null]],
@@ -18,12 +23,6 @@ return [
         '/proj/blackjack/start' => [[['_route' => 'blackjack_start', '_controller' => 'App\\Controller\\BlackJackController::start'], null, ['POST' => 0], null, false, false, null]],
         '/proj/blackjack/hit' => [[['_route' => 'blackjack_hit', '_controller' => 'App\\Controller\\BlackJackController::hit'], null, null, null, false, false, null]],
         '/proj/blackjack/stand' => [[['_route' => 'blackjack_stand', '_controller' => 'App\\Controller\\BlackJackController::stand'], null, null, null, false, false, null]],
-        '/proj/blackjack/doc' => [[['_route' => 'blackjack_doc', '_controller' => 'App\\Controller\\BlackJackController::doc'], null, null, null, false, false, null]],
-        '/api/blackjack/setup' => [[['_route' => 'api_blackjack_setup', '_controller' => 'App\\Controller\\BlackJackController::apiGameSetup'], null, ['POST' => 0], null, false, false, null]],
-        '/proj/api/blackjack' => [[['_route' => 'api_blackjack_status', '_controller' => 'App\\Controller\\BlackJackController::apiGameStatus'], null, ['GET' => 0], null, false, false, null]],
-        '/proj/api/blackjack/hit' => [[['_route' => 'api_blackjack_hit', '_controller' => 'App\\Controller\\BlackJackController::apiGameHit'], null, null, null, false, false, null]],
-        '/proj/api/blackjack/stand' => [[['_route' => 'api_blackjack_stand', '_controller' => 'App\\Controller\\BlackJackController::apiGameStand'], null, null, null, false, false, null]],
-        '/proj/api/blackjack/deck' => [[['_route' => 'api_blackjack_deck', '_controller' => 'App\\Controller\\BlackJackController::apiGameDeck'], null, null, null, false, false, null]],
         '/proj/blackjack/create_player_form' => [[['_route' => 'black_jack_create_player_form', '_controller' => 'App\\Controller\\BlackJackController::createPlayerForm'], null, null, null, false, false, null]],
         '/blackjack/player/create' => [[['_route' => 'black_jack_create_player', '_controller' => 'App\\Controller\\BlackJackController::createPlayer'], null, ['POST' => 0], null, false, false, null]],
         '/card' => [[['_route' => 'card', '_controller' => 'App\\Controller\\CardController::card'], null, null, null, false, false, null]],
@@ -36,7 +35,7 @@ return [
         '/library/books' => [[['_route' => 'read_many', '_controller' => 'App\\Controller\\LibraryController::readMany'], null, null, null, false, false, null]],
         '/proj' => [[['_route' => 'proj_home', '_controller' => 'App\\Controller\\ProjController::home'], null, null, null, false, false, null]],
         '/proj/about' => [[['_route' => 'proj_about', '_controller' => 'App\\Controller\\ProjController::about'], null, null, null, false, false, null]],
-        '/proj/api' => [[['_route' => 'proj_api', '_controller' => 'App\\Controller\\ProjController::apiLibrary'], null, null, null, false, false, null]],
+        '/proj/api' => [[['_route' => 'proj_api', '_controller' => 'App\\Controller\\ProjController::apiBlackJack'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\ReportController::home'], null, null, null, false, false, null]],
         '/about' => [[['_route' => 'about', '_controller' => 'App\\Controller\\ReportController::about'], null, null, null, false, false, null]],
         '/report' => [[['_route' => 'report', '_controller' => 'App\\Controller\\ReportController::report'], null, null, null, false, false, null]],

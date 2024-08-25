@@ -371,6 +371,13 @@
       <tag name="container.error" message="Cannot autowire service &quot;App\Card\Player&quot;: argument &quot;$dbId&quot; of method &quot;__construct()&quot; is type-hinted &quot;int&quot;, you should configure its value explicitly."/>
     </service>
     <service id="App\Card\TwentyOne" class="App\Card\TwentyOne" autowire="true" autoconfigure="true"/>
+    <service id="App\Controller\ApiBlackJackController" class="App\Controller\ApiBlackJackController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.jUv.zyj.App\Controller\ApiBlackJackController"/>
+      </call>
+    </service>
     <service id="App\Controller\ApiCardController" class="App\Controller\ApiCardController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -473,7 +480,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.zeMPMnj"/>
+      <argument type="service" id=".service_locator.tqHyPji"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3370,7 +3377,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.zeMPMnj"/>
+      <argument type="service" id=".service_locator.tqHyPji"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -7116,6 +7123,9 @@
         <argument key="_default" type="service_closure" id="webpack_encore.entrypoint_lookup[_default]"/>
       </argument>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ApiBlackJackController" class="App\Controller\ApiBlackJackController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ApiBlackJackController" class="App\Controller\ApiBlackJackController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ApiBlackJackController" class="App\Controller\ApiBlackJackController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ApiCardController" class="App\Controller\ApiCardController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ApiCardController" class="App\Controller\ApiCardController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ApiCardController" class="App\Controller\ApiCardController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7578,13 +7588,13 @@
         <argument key="doctrine" type="service_closure" id="doctrine"/>
       </argument>
     </service>
-    <service id=".service_locator.zeMPMnj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.tqHyPji" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\ApiBlackJackController::apiGameSetup" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\ApiBlackJackController::apiGameStand" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ApiLibraryController::apiBookIsbn" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ApiLibraryController::apiLibrary" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\BlackJackController::apiGameSetup" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\BlackJackController::apiGameStand" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\BlackJackController::createPlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\BlackJackController::deletePlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\BlackJackController::home" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -7602,10 +7612,10 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
+        <argument key="App\Controller\ApiBlackJackController:apiGameSetup" type="service_closure" id=".service_locator.o6sN0hZ"/>
+        <argument key="App\Controller\ApiBlackJackController:apiGameStand" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ApiLibraryController:apiBookIsbn" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\ApiLibraryController:apiLibrary" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\BlackJackController:apiGameSetup" type="service_closure" id=".service_locator.o6sN0hZ"/>
-        <argument key="App\Controller\BlackJackController:apiGameStand" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\BlackJackController:createPlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\BlackJackController:deletePlayer" type="service_closure" id=".service_locator.o6sN0hZ"/>
         <argument key="App\Controller\BlackJackController:home" type="service_closure" id=".service_locator.o6sN0hZ"/>
@@ -8225,6 +8235,12 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.jUv.zyj.App\Controller\ApiBlackJackController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ApiBlackJackController"/>
+      <argument>App\Controller\ApiBlackJackController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.jUv.zyj" method="withContext"/>
+    </service>
     <service id=".service_locator.jUv.zyj.App\Controller\ApiCardController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ApiCardController"/>
       <argument>App\Controller\ApiCardController</argument>
@@ -8452,6 +8468,7 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\ApiBlackJackController</argument>
           <argument>App\Controller\ApiCardController</argument>
           <argument>App\Controller\ApiController</argument>
           <argument>App\Controller\ApiLibraryController</argument>
@@ -9813,7 +9830,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.bJ.4HC5" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.zeMPMnj"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.tqHyPji"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>

@@ -68,3 +68,15 @@ ca7b54,127.0.0.1,GET,http://localhost:8888/proj/blackjack/hit,1724447042,,200,re
 e6007e,127.0.0.1,GET,http://localhost:8888/proj/blackjack/stand,1724447056,,200,request
 7ce71b,127.0.0.1,GET,http://localhost:8888/proj/blackjack,1724447060,,200,request
 0fb30f,127.0.0.1,GET,http://localhost:8888/proj,1724447082,,200,request
+77692b,127.0.0.1,GET,http://localhost:8888/proj,1724514605,,200,request
+a2c52e,127.0.0.1,GET,http://localhost:8888/proj/api,1724514613,,200,request
+f96a73,127.0.0.1,POST,http://localhost:8888/api/blackjack/setup,1724514615,,200,request
+4797ae,127.0.0.1,GET,http://localhost:8888/proj/api/blackjack,1724514626,,200,request
+8eb55d,127.0.0.1,GET,http://localhost:8888/proj/api/blackjack/hit,1724514634,,200,request
+03ff4c,127.0.0.1,GET,http://localhost:8888/proj/api/blackjack/stand,1724514643,,200,request
+70b430,127.0.0.1,GET,http://localhost:8888/proj/api/blackjack/deck,1724514646,,200,request
+6db773,127.0.0.1,GET,http://localhost:8888/proj,1724581670,,200,request
+a03d33,127.0.0.1,GET,http://localhost:8888/proj/about,1724581676,,200,request
+acc6dc,127.0.0.1,GET,http://localhost:8888/proj,1724581681,,200,request
+b316c9,127.0.0.1,GET,http://localhost:8888/proj/blackjack,1724581683,,200,request
+0eb873,127.0.0.1,GET,http://localhost:8888/proj/api,1724581690,,200,request

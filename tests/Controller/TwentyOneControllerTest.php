@@ -51,14 +51,6 @@ class TwentyOneControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    // public function testApiGameStatus()
-    // {
-    //     $client = static::createClient();
-    //     $client->request('GET', '/api/game');
-
-    //     $this->assertResponseIsSuccessful();
-    // }
-
     public function testApiGameStatus()
     {
         $client = static::createClient();
@@ -72,8 +64,5 @@ class TwentyOneControllerTest extends WebTestCase
         $this->assertArrayHasKey('bank-score', $data);
         $this->assertArrayHasKey('player-cards', $data);
         $this->assertArrayHasKey('bank-cards', $data);
-
     }
-
-
 }
