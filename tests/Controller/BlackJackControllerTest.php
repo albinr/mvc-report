@@ -33,7 +33,6 @@ class BlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // Simulate starting the game first
         $client->request('POST', '/proj/blackjack/start', [
             'selectedPlayers' => [1, 2]
         ]);
