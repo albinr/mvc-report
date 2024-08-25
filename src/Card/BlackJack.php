@@ -238,7 +238,7 @@ class BlackJack
     /**
      * Gets the number of players in the game.
      *
-     * @return int The number of players.
+     * @return array The number of players.
      */
     public function getPlayers(): array
     {

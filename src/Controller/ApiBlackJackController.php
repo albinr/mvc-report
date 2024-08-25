@@ -17,6 +17,7 @@ class ApiBlackJackController extends AbstractController
     #[Route("/api/blackjack/setup", name: "api_blackjack_setup", methods: ["POST"])]
     public function apiGameSetup(SessionInterface $session, ManagerRegistry $doctrine): JsonResponse
     {
+        $session->remove('black_jack_game');
         $entityManager = $doctrine->getManager();
         $playerRepo = $entityManager->getRepository(PlayerDb::class);
 
@@ -32,7 +33,7 @@ class ApiBlackJackController extends AbstractController
         }
 
         $game = new BlackJack($foundPlayers);
-        $session->set('black_jack_game', serialize($game));
+        $session->set('black_jack_game', $game->toSession());
 
         $players = [];
         foreach ($foundPlayers as $index => $player) {
@@ -67,7 +68,8 @@ class ApiBlackJackController extends AbstractController
         $data = ['game-status' => 'No game in session.'];
 
         if ($session->has('black_jack_game')) {
-            $game = unserialize($session->get('black_jack_game'));
+            $gameData = $session->get('black_jack_game');
+            $game = BlackJack::fromSession($gameData);
 
             $players = [];
 
@@ -97,15 +99,15 @@ class ApiBlackJackController extends AbstractController
         return new JsonResponse($data);
     }
 
-
     #[Route("/proj/api/blackjack/hit", name: "api_blackjack_hit")]
     public function apiGameHit(SessionInterface $session): Response
     {
         $data = ['game-status' => 'No game in progress.'];
         if ($session->has('black_jack_game')) {
-            $game = unserialize($session->get('black_jack_game'));
+            $gameData = $session->get('black_jack_game');
+            $game = BlackJack::fromSession($gameData);
             $drawnCard = $game->hit();
-            $session->set('black_jack_game', serialize($game));
+            $session->set('black_jack_game', $game->toSession());
 
             $data = [
                 'current-player' => $game->getCurrentPlayer(),
@@ -121,9 +123,11 @@ class ApiBlackJackController extends AbstractController
     {
         $data = ['game-status' => 'No game in progress.'];
         if ($session->has('black_jack_game')) {
-            $game = unserialize($session->get('black_jack_game'));
+            $gameData = $session->get('black_jack_game');
+            $game = BlackJack::fromSession($gameData);
+
             $game->stand();
-            $session->set('black_jack_game', serialize($game));
+            $session->set('black_jack_game', $game->toSession());
 
             if ($game->getStatus() === 'complete') {
                 $entityManager = $doctrine->getManager();
@@ -159,7 +163,8 @@ class ApiBlackJackController extends AbstractController
     {
         $data = ['game-status' => 'No game in progress.'];
         if ($session->has('black_jack_game')) {
-            $game = unserialize($session->get('black_jack_game'));
+            $gameData = $session->get('black_jack_game');
+            $game = BlackJack::fromSession($gameData);
 
             $data = [
                 'number-of-cards' => count($game->getDeck()->getCards()),

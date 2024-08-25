@@ -3,73 +3,155 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApiBlackJackControllerTest extends WebTestCase
 {
-    public function testApiGameSetup()
+    public function testApiBlackJackSetup()
     {
         $client = static::createClient();
-
-        $client->request("POST", "/api/blackjack/setup");
+        
+        $client->request('POST', '/api/blackjack/setup');
 
         $this->assertResponseIsSuccessful();
 
+        $this->assertJson($client->getResponse()->getContent());
+
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals("Game started", $response["status"]);
-        $this->assertArrayHasKey("players", $response);
-        $this->assertNotEmpty($response["players"]);
+        $this->assertEquals('Game started', $response['status']);
+        $this->assertIsArray($response['players']);
+        $this->assertIsArray($response['bank']['bank-cards']);
     }
 
-    public function testApiGameStatusNoGameInSession()
+    public function testApiBlackJackStatusNoGame()
     {
         $client = static::createClient();
-
-        $client->request("GET", "/proj/api/blackjack");
+        
+        $client->request('GET', '/proj/api/blackjack');
 
         $this->assertResponseIsSuccessful();
 
+        $this->assertJson($client->getResponse()->getContent());
+
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals("No game in session.", $response["game-status"]);
+        $this->assertEquals('No game in session.', $response['game-status']);
     }
 
-    public function testApiGameHitNoGameInSession()
+    public function testApiBlackJackStatusWithGame()
     {
         $client = static::createClient();
+        
+        $client->request('POST', '/api/blackjack/setup');
 
-        $client->request("GET", "/proj/api/blackjack/hit");
+        $client->request('GET', '/proj/api/blackjack');
 
         $this->assertResponseIsSuccessful();
 
+        $this->assertJson($client->getResponse()->getContent());
+
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals("No game in progress.", $response["game-status"]);
+        $this->assertEquals('playing', $response['game-status']);
+        $this->assertIsArray($response['players']);
+        $this->assertIsArray($response['bank']['bank-cards']);
     }
 
-    public function testApiGameStandNoGameInSession()
+    public function testApiBlackJackHitWithoutGame()
     {
         $client = static::createClient();
-
-        $client->request("GET", "/proj/api/blackjack/stand");
+        
+        $client->request('GET', '/proj/api/blackjack/hit');
 
         $this->assertResponseIsSuccessful();
 
+        $this->assertJson($client->getResponse()->getContent());
+
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals("No game in progress.", $response["game-status"]);
+        $this->assertEquals('No game in progress.', $response['game-status']);
     }
 
-    public function testApiGameDeckNoGameInSession()
+    public function testApiBlackJackHitWithGame()
     {
         $client = static::createClient();
+        
+        $client->request('POST', '/api/blackjack/setup');
 
-        $client->request("GET", "/proj/api/blackjack/deck");
+        $client->request('GET', '/proj/api/blackjack/hit');
 
         $this->assertResponseIsSuccessful();
 
+        $this->assertJson($client->getResponse()->getContent());
+
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals("No game in progress.", $response["game-status"]);
+        $this->assertArrayHasKey('drawn-card', $response);
+    }
+
+    public function testApiBlackJackStandWithoutGame()
+    {
+        $client = static::createClient();
+        
+        $client->request('GET', '/proj/api/blackjack/stand');
+
+        $this->assertResponseIsSuccessful();
+
+        $this->assertJson($client->getResponse()->getContent());
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals('No game in progress.', $response['game-status']);
+    }
+
+    public function testApiBlackJackStandWithGame()
+    {
+        $client = static::createClient();
+        
+        $client->request('POST', '/api/blackjack/setup');
+
+        $client->request('GET', '/proj/api/blackjack/stand');
+
+        $this->assertResponseIsSuccessful();
+
+        $this->assertJson($client->getResponse()->getContent());
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('current-player', $response);
+    }
+
+    public function testApiBlackJackDeckWithoutGame()
+    {
+        $client = static::createClient();
+        
+        $client->request('GET', '/proj/api/blackjack/deck');
+
+        $this->assertResponseIsSuccessful();
+
+        $this->assertJson($client->getResponse()->getContent());
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertEquals('No game in progress.', $response['game-status']);
+    }
+
+    public function testApiBlackJackDeckWithGame()
+    {
+        $client = static::createClient();
+        
+        $client->request('POST', '/api/blackjack/setup');
+
+        $client->request('GET', '/proj/api/blackjack/deck');
+
+        $this->assertResponseIsSuccessful();
+
+        $this->assertJson($client->getResponse()->getContent());
+
+        $response = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('number-of-cards', $response);
+        $this->assertIsArray($response['deck']);
     }
 }
