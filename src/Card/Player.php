@@ -9,16 +9,14 @@ class Player
 {
     private string $name;
     private int $dbId;
-    private string $result;
-    private CardHand $hand;
+    private array $results = [];
+    private array $hands = [];
 
 
     public function __construct(int $dbId, string $name)
     {
         $this->dbId = $dbId;
         $this->name = $name;
-        $this->hand = new CardHand();
-        $this->result = "";
     }
 
     public function getName(): string
@@ -31,33 +29,38 @@ class Player
         return $this->dbId;
     }
 
-    public function getHand(): CardHand
+    public function getHands(): array
     {
-        return $this->hand;
+        return $this->hands;
     }
 
-    public function setHand(CardHand $hand): void
+    public function setHand(int $handIndex, CardHand $hand): void
     {
-        $this->hand = $hand;
+        $this->hands[$handIndex] = $hand;
     }
 
-    public function setWin()
+    public function addHand(CardHand $hand): void
     {
-        $this->result = "win";
+        $this->hands[] = $hand;
     }
 
-    public function setLoss()
+    public function getHand(int $handIndex): CardHand
     {
-        $this->result = "loss";
+        return $this->hands[$handIndex];
     }
 
-    public function setDraw()
+    public function setResult(int $handIndex, string $result): void
     {
-        $this->result = "draw";
+        $this->results[$handIndex] = $result;
     }
 
-    public function getResult()
+    public function getResult(int $handIndex): ?string
     {
-        return $this->result;
+        return $this->results[$handIndex] ?? null;
+    }
+
+    public function getResults(): array
+    {
+        return $this->results;
     }
 }

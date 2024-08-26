@@ -43,11 +43,6 @@
 }
 
 .me-icon {
-    // border-radius: 8px;
-    // width: 50px;
-    // height: 50px;
-    // margin: 10px;
-    // overflow: hidden;
     filter: drop-shadow(0 0 0.75rem $blue);
 }
 
@@ -107,14 +102,21 @@
     border: 1px solid darken($blue, 10%);
 }
 
+.current-hand {
+    background-color: darken($green, 30%);
+    border: 1px solid darken($green, 10%);
+    border-radius: 8px;
+    padding: 10px;
+}
+
 .black-jack-player h2 {
     margin-bottom: 8px;
 }
 
 .black-jack-bank-cards {
     margin: 5px;
-    background-color: darken($red, 30%);
-    border: 1px solid darken($red, 10%);
+    background-color: darken($red, 50%);
+    border: 1px solid darken($red, 20%);
     border-radius: 8px;
     padding: 5px;
     min-width: 502px;

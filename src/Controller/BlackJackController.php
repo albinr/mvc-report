@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Player as PlayerDb;
 use App\Entity\GameHistory;
 use App\Card\BlackJack;
+use App\Card\CardHand;
 use App\Card\Player as ActivePlayer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;
@@ -34,17 +35,37 @@ class BlackJackController extends AbstractController
     public function start(Request $request, SessionInterface $session, ManagerRegistry $doctrine): Response
     {
         $playerIds = $request->request->all('selectedPlayers', []);
-        $entityManager = $doctrine->getManager();
+        $handsData = $request->request->all('hands', []);
 
+        $entityManager = $doctrine->getManager();
         $foundPlayers = [];
+
         foreach ($playerIds as $playerId) {
             $playerInfo = $entityManager->getRepository(PlayerDb::class)->find($playerId);
             if ($playerInfo) {
-                $foundPlayers[] = new ActivePlayer($playerInfo->getPlayerId(), $playerInfo->getName());
+                $player = new ActivePlayer($playerInfo->getPlayerId(), $playerInfo->getName());
+
+                $numHands = $handsData[$playerId];
+
+                for ($i = 0; $i < $numHands; $i++) {
+                    $player->addHand(new CardHand());
+                }
+
+                $foundPlayers[] = $player;
             }
         }
+
         $game = new BlackJack($foundPlayers);
         $session->set('black_jack_game', $game->toSession());
+
+        return $this->redirectToRoute('blackjack_game');
+    }
+
+    #[Route("/proj/blackjack/game", name: "blackjack_game")]
+    public function game(SessionInterface $session): Response
+    {   
+        $gameData = $session->get('black_jack_game');
+        $game = BlackJack::fromSession($gameData);
 
         return $this->render('black_jack/game.html.twig', [
             'game' => $game,
@@ -60,9 +81,7 @@ class BlackJackController extends AbstractController
         $game->hit();
         $session->set('black_jack_game', $game->toSession());
 
-        return $this->render('black_jack/game.html.twig', [
-            'game' => $game,
-        ]);
+        return $this->redirectToRoute('blackjack_game');
     }
 
     #[Route("/proj/blackjack/stand", name: "blackjack_stand")]
@@ -76,18 +95,17 @@ class BlackJackController extends AbstractController
 
         if ($game->getStatus() === 'complete') {
             $entityManager = $doctrine->getManager();
-
             $results = $game->getGameResults();
 
             $playerData = [];
 
             foreach ($results as $result) {
-                $playerDb = $entityManager->getRepository(PlayerDb::class)->find($result['id']);
+                $playerDb = $entityManager->getRepository(PlayerDb::class)->find($result['player_id']);
 
                 if ($playerDb) {
-                    if ($result['status'] === 'win') {
+                    if ($result['result'] === 'win') {
                         $playerDb->setWins($playerDb->getWins() + 1);
-                    } elseif ($result['status'] === 'lose') {
+                    } elseif ($result['result'] === 'lose') {
                         $playerDb->setLosses($playerDb->getLosses() + 1);
                     }
 
@@ -97,7 +115,7 @@ class BlackJackController extends AbstractController
                         'id' => $playerDb->getPlayerId(),
                         'name' => $playerDb->getName(),
                         'score' => $result['score'],
-                        'result' => $result['status']
+                        'result' => $result['result']
                     ];
                 }
             }
@@ -110,10 +128,9 @@ class BlackJackController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->render('black_jack/game.html.twig', [
-            'game' => $game,
-        ]);
+        return $this->redirectToRoute('blackjack_game');
     }
+
 
     #[Route('/proj/blackjack/create_player_form', name: 'black_jack_create_player_form')]
     public function createPlayerForm(): Response

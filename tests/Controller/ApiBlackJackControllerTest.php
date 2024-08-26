@@ -3,7 +3,6 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 class ApiBlackJackControllerTest extends WebTestCase
 {
@@ -11,7 +10,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
         
-        $client->request('POST', '/api/blackjack/setup');
+        $client->request("POST", "/api/blackjack/setup");
 
         $this->assertResponseIsSuccessful();
 
@@ -19,16 +18,16 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals('Game started', $response['status']);
-        $this->assertIsArray($response['players']);
-        $this->assertIsArray($response['bank']['bank-cards']);
+        $this->assertEquals("Game started", $response["status"]);
+        $this->assertIsArray($response["players"]);
+        $this->assertIsArray($response["bank"]["bank-cards"]);
     }
 
     public function testApiBlackJackStatusNoGame()
     {
         $client = static::createClient();
         
-        $client->request('GET', '/proj/api/blackjack');
+        $client->request("GET", "/proj/api/blackjack");
 
         $this->assertResponseIsSuccessful();
 
@@ -36,16 +35,16 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals('No game in session.', $response['game-status']);
+        $this->assertEquals("No game in session.", $response["game-status"]);
     }
 
     public function testApiBlackJackStatusWithGame()
     {
         $client = static::createClient();
         
-        $client->request('POST', '/api/blackjack/setup');
+        $client->request("POST", "/api/blackjack/setup");
 
-        $client->request('GET', '/proj/api/blackjack');
+        $client->request("GET", "/proj/api/blackjack");
 
         $this->assertResponseIsSuccessful();
 
@@ -53,16 +52,16 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals('playing', $response['game-status']);
-        $this->assertIsArray($response['players']);
-        $this->assertIsArray($response['bank']['bank-cards']);
+        $this->assertEquals("playing", $response["game-status"]);
+        $this->assertIsArray($response["players"]);
+        $this->assertIsArray($response["bank"]["bank-cards"]);
     }
 
     public function testApiBlackJackHitWithoutGame()
     {
         $client = static::createClient();
         
-        $client->request('GET', '/proj/api/blackjack/hit');
+        $client->request("GET", "/proj/api/blackjack/hit");
 
         $this->assertResponseIsSuccessful();
 
@@ -70,16 +69,16 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals('No game in progress.', $response['game-status']);
+        $this->assertEquals("No game in progress.", $response["game-status"]);
     }
 
     public function testApiBlackJackHitWithGame()
     {
         $client = static::createClient();
         
-        $client->request('POST', '/api/blackjack/setup');
+        $client->request("POST", "/api/blackjack/setup");
 
-        $client->request('GET', '/proj/api/blackjack/hit');
+        $client->request("GET", "/proj/api/blackjack/hit");
 
         $this->assertResponseIsSuccessful();
 
@@ -87,14 +86,14 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertArrayHasKey('drawn-card', $response);
+        $this->assertArrayHasKey("drawn-card", $response);
     }
 
     public function testApiBlackJackStandWithoutGame()
     {
         $client = static::createClient();
         
-        $client->request('GET', '/proj/api/blackjack/stand');
+        $client->request("GET", "/proj/api/blackjack/stand");
 
         $this->assertResponseIsSuccessful();
 
@@ -102,16 +101,16 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals('No game in progress.', $response['game-status']);
+        $this->assertEquals("No game in progress.", $response["game-status"]);
     }
 
     public function testApiBlackJackStandWithGame()
     {
         $client = static::createClient();
         
-        $client->request('POST', '/api/blackjack/setup');
+        $client->request("POST", "/api/blackjack/setup");
 
-        $client->request('GET', '/proj/api/blackjack/stand');
+        $client->request("GET", "/proj/api/blackjack/stand");
 
         $this->assertResponseIsSuccessful();
 
@@ -119,14 +118,14 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertArrayHasKey('current-player', $response);
+        $this->assertArrayHasKey("current-player", $response);
     }
 
     public function testApiBlackJackDeckWithoutGame()
     {
         $client = static::createClient();
         
-        $client->request('GET', '/proj/api/blackjack/deck');
+        $client->request("GET", "/proj/api/blackjack/deck");
 
         $this->assertResponseIsSuccessful();
 
@@ -134,16 +133,16 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals('No game in progress.', $response['game-status']);
+        $this->assertEquals("No game in progress.", $response["game-status"]);
     }
 
     public function testApiBlackJackDeckWithGame()
     {
         $client = static::createClient();
         
-        $client->request('POST', '/api/blackjack/setup');
+        $client->request("POST", "/api/blackjack/setup");
 
-        $client->request('GET', '/proj/api/blackjack/deck');
+        $client->request("GET", "/proj/api/blackjack/deck");
 
         $this->assertResponseIsSuccessful();
 
@@ -151,7 +150,7 @@ class ApiBlackJackControllerTest extends WebTestCase
 
         $response = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertArrayHasKey('number-of-cards', $response);
-        $this->assertIsArray($response['deck']);
+        $this->assertArrayHasKey("number-of-cards", $response);
+        $this->assertIsArray($response["deck"]);
     }
 }
