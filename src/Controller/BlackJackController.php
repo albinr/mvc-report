@@ -55,7 +55,14 @@ class BlackJackController extends AbstractController
             }
         }
 
+        if (empty($foundPlayers)) {
+            $this->addFlash('warning', 'No players were selected. Select at least one player to start the game.');
+            
+            return $this->redirectToRoute('blackjack_home');
+        }
+
         $game = new BlackJack($foundPlayers);
+
         $session->set('black_jack_game', $game->toSession());
 
         return $this->redirectToRoute('blackjack_game');

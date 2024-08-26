@@ -162,11 +162,26 @@
     border-radius: 4px;
 }
 
+.game-player-select{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 800px;
+}
+
 .player-select {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: $almost-black;
     border: 1px solid $almost-black;
 }
 
 .player-select:hover {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 4px;
     background-color: $dark-grey;
     border: 1px solid darken($green, 10%);
 }

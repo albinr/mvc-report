@@ -21,6 +21,8 @@ class ProjController extends AbstractController
         $players = $entityManager->getRepository(PlayerDb::class)->findAll();
         $gameHistory = $entityManager->getRepository(GameHistory::class)->findAll();
 
+        $gameHistory = array_reverse($gameHistory);
+
         return $this->render('proj/index.html.twig',[
             'players' => $players,
             'gameHistory' => $gameHistory,

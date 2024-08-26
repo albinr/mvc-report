@@ -5,14 +5,14 @@
 {% block body %}
 <h1>Black Jack</h1>
 <h2>Select players for the game below:</h2>
+{{ include('flash.html.twig') }}
 <form action="{{ path('blackjack_start') }}" method="post" class="form">
-    <div class="saved-players">
+    <div class="game-player-select">
         {% for player in players %}
         <label for="player-{{ player.playerId }}">
             <div class="player-select">
                 <p> <input type="checkbox" id="player-{{ player.playerId }}" name="selectedPlayers[]"
-                    value="{{ player.playerId }}">{{ player.name }}</p>
-
+                        value="{{ player.playerId }}">{{ player.name }}</p>
                 <div>
                     <label for="hands-{{ player.playerId }}">Number of hands (5 max):</label>
                     <input type="number" name="hands[{{ player.playerId }}]" id="hands-{{ player.playerId }}" min="1"
