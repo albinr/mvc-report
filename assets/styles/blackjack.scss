@@ -10,8 +10,8 @@
     margin-bottom: 20px;
 }
 
-.black-jack-footer{
-        background-color: $almost-black;
+.black-jack-footer {
+    background-color: $almost-black;
 }
 
 .black-jack-nav {
@@ -52,11 +52,11 @@
     height: 50px;
 }
 
-.black-jack-nav ul span{
+.black-jack-nav ul span {
     color: $light-grey;
 }
 
-.black-jack{
+.black-jack {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,6 +97,12 @@
     border: 1px solid darken($dark-grey, 10%);
 }
 
+.black-jack-player-hand {
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
 .current-player {
     background-color: darken($blue, 30%);
     border: 1px solid darken($blue, 10%);
@@ -105,7 +111,6 @@
 .current-hand {
     background-color: darken($green, 30%);
     border: 1px solid darken($green, 10%);
-    border-radius: 8px;
     padding: 10px;
 }
 
@@ -123,8 +128,7 @@
     min-height: 260px;
 }
 
-.black-jack-bank-cards .hand {
-}
+.black-jack-bank-cards .hand {}
 
 .black-jack-bank-cards h2 {
     margin-bottom: 8px;
@@ -148,7 +152,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 450px;
+    max-width: 400px;
 }
 
 .saved-players div {
@@ -156,6 +160,15 @@
     margin: 5px;
     padding: 5px;
     border-radius: 4px;
+}
+
+.player-select {
+    border: 1px solid $almost-black;
+}
+
+.player-select:hover {
+    background-color: $dark-grey;
+    border: 1px solid darken($green, 10%);
 }
 
 .win {
@@ -166,4 +179,9 @@
 .loss {
     background-color: darken($red, 30%);
     border: 1px solid darken($red, 10%);
+}
+
+.draw {
+    background-color: darken($yellow, 30%);
+    border: 1px solid darken($yellow, 10%);
 }

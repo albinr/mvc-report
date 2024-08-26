@@ -19,15 +19,18 @@
         <a href="{{ path('blackjack_home') }}" class="button green-button">Start New Game</a>
     </div>
     {% endif %}
-    
+
     <div class="all-players">
         {% for playerIndex, player in game.getPlayers() %}
         <div class="black-jack-player {% if game.getCurrentPlayer() == loop.index0 %}current-player{% endif %}">
             <h2>Player {{ player.getName() }}</h2>
-            
+
             {% for handIndex, hand in player.getHands() %}
-            <div class="black-jack-player-hand {% if game.getCurrentPlayer() == loop.parent.loop.index0 and game.getCurrentHand() == handIndex %}current-hand{% endif %}">
+            <div class="black-jack-player-hand 
+                {% if game.getCurrentPlayer() == loop.parent.loop.index0 and game.getCurrentHand() == handIndex %}current-hand{% endif %}
+                {{ player.getResult(handIndex) }}">
                 <h3>Hand {{ handIndex + 1 }} {{ player.getResult(handIndex) }}</h3>
+
                 <div class="game-points">Card score: {{ game.getPlayerHandScore(playerIndex, handIndex) }}</div>
                 <div class="hand">
                     {% for card in hand.getRenderedHand() %}

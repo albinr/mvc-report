@@ -17,6 +17,8 @@ class Player
     {
         $this->dbId = $dbId;
         $this->name = $name;
+        $this->results = [];
+        $this->hands = [];
     }
 
     public function getName(): string

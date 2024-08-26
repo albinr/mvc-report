@@ -149,8 +149,8 @@ class BlackJack
         $bankScore = $this->calcScore($this->bankHand->getCards());
 
         if ($playerScore > 21) {
-            $player->setResult($handIndex, "lose");
-            return "lose";
+            $player->setResult($handIndex, "loss");
+            return "loss";
         }
 
         if ($bankScore > 21 || $playerScore > $bankScore) {
@@ -159,8 +159,8 @@ class BlackJack
         }
 
         if ($playerScore < $bankScore) {
-            $player->setResult($handIndex, "lose");
-            return "lose";
+            $player->setResult($handIndex, "loss");
+            return "loss";
         }
 
         $player->setResult($handIndex, "draw");
@@ -299,7 +299,6 @@ class BlackJack
         $this->status = $status;
     }
 
-
     public function toSession(): array
     {
         $players = [];
@@ -317,10 +316,13 @@ class BlackJack
                 ];
             }
 
+            $playerResults = $player->getResults();
+
             $players[] = [
                 "id" => $player->getId(),
                 "name" => $player->getName(),
                 "hands" => $playerHands,
+                "results" => $playerResults,
             ];
         }
 
@@ -344,18 +346,65 @@ class BlackJack
     }
 
 
+    // public function toSession(): array
+    // {
+    //     $players = [];
+    //     foreach ($this->players as $player) {
+    //         $playerHands = [];
+    //         foreach ($player->getHands() as $hand) {
+    //             $playerHands[] = [
+    //                 "cards" => array_map(function ($card) {
+    //                     return [
+    //                         "id" => $card->getId(),
+    //                         "value" => $card->getValue(),
+    //                         "suit" => $card->getSuit(),
+    //                     ];
+    //                 }, $hand->getCards()),
+    //             ];
+    //         }
+
+    //         $players[] = [
+    //             "id" => $player->getId(),
+    //             "name" => $player->getName(),
+    //             "hands" => $playerHands,
+    //         ];
+    //     }
+
+    //     $gameState = [
+    //         "players" => $players,
+    //         "bank" => [
+    //             "cards" => array_map(function ($card) {
+    //                 return [
+    //                     "id" => $card->getId(),
+    //                     "value" => $card->getValue(),
+    //                     "suit" => $card->getSuit(),
+    //                 ];
+    //             }, $this->bankHand->getCards()),
+    //         ],
+    //         "current_player" => $this->currentPlayer,
+    //         "current_hand" => $this->currentHand,
+    //         "status" => $this->status,
+    //     ];
+
+    //     return $gameState;
+    // }
+
     public static function fromSession(array $gameData): BlackJack
     {
         $players = [];
         foreach ($gameData["players"] as $playerData) {
             $activePlayer = new Player($playerData["id"], $playerData["name"]);
 
-            foreach ($playerData["hands"] as $handData) {
+            foreach ($playerData["hands"] as $handIndex => $handData) {
                 $hand = new CardHand();
                 foreach ($handData["cards"] as $cardData) {
                     $hand->addCard(new Card($cardData["value"], $cardData["suit"], $cardData["id"]));
                 }
                 $activePlayer->addHand($hand);
+
+                if (isset($playerData['results'][$handIndex])) {
+                    $activePlayer->setResult($handIndex, $playerData['results'][$handIndex]);
+                }
             }
 
             $players[] = $activePlayer;
@@ -375,4 +424,36 @@ class BlackJack
 
         return $game;
     }
+
+    // public static function fromSession(array $gameData): BlackJack
+    // {
+    //     $players = [];
+    //     foreach ($gameData["players"] as $playerData) {
+    //         $activePlayer = new Player($playerData["id"], $playerData["name"]);
+
+    //         foreach ($playerData["hands"] as $handData) {
+    //             $hand = new CardHand();
+    //             foreach ($handData["cards"] as $cardData) {
+    //                 $hand->addCard(new Card($cardData["value"], $cardData["suit"], $cardData["id"]));
+    //             }
+    //             $activePlayer->addHand($hand);
+    //         }
+
+    //         $players[] = $activePlayer;
+    //     }
+
+    //     $game = new BlackJack($players, false);
+
+    //     $bankHand = new CardHand();
+    //     foreach ($gameData["bank"]["cards"] as $cardData) {
+    //         $bankHand->addCard(new Card($cardData["value"], $cardData["suit"], $cardData["id"]));
+    //     }
+    //     $game->setBankHand($bankHand);
+
+    //     $game->setCurrentPlayer($gameData["current_player"]);
+    //     $game->currentHand = $gameData["current_hand"];
+    //     $game->setStatus($gameData["status"]);
+
+    //     return $game;
+    // }
 }

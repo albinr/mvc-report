@@ -8,21 +8,18 @@
 <form action="{{ path('blackjack_start') }}" method="post" class="form">
     <div class="saved-players">
         {% for player in players %}
-        <div>
-            <p>{{ player.name }}</p>
-            <p>ID: {{ player.playerId }}</p>
-            <p>Wins: {{ player.wins }}</p>
-            <p>Losses: {{ player.losses }}</p>
-            <label>
-                <input type="checkbox" name="selectedPlayers[]" value="{{ player.playerId }}">
-                Select {{ player.name }}
-            </label>
-            
-            <div>
-                <label for="hands-{{ player.playerId }}">Number of hands (1-3):</label>
-                <input type="number" name="hands[{{ player.playerId }}]" id="hands-{{ player.playerId }}" min="1" max="3" value="1" required>
+        <label for="player-{{ player.playerId }}">
+            <div class="player-select">
+                <p> <input type="checkbox" id="player-{{ player.playerId }}" name="selectedPlayers[]"
+                    value="{{ player.playerId }}">{{ player.name }}</p>
+
+                <div>
+                    <label for="hands-{{ player.playerId }}">Number of hands (5 max):</label>
+                    <input type="number" name="hands[{{ player.playerId }}]" id="hands-{{ player.playerId }}" min="1"
+                        max="5" value="1" required>
+                </div>
             </div>
-        </div>
+        </label>
         {% endfor %}
     </div>
     <button type="submit" class="button full-width-button green-button">Start Game</button>

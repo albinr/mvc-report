@@ -63,7 +63,7 @@ class BlackJackController extends AbstractController
 
     #[Route("/proj/blackjack/game", name: "blackjack_game")]
     public function game(SessionInterface $session): Response
-    {   
+    {
         $gameData = $session->get('black_jack_game');
         $game = BlackJack::fromSession($gameData);
 
@@ -91,7 +91,6 @@ class BlackJackController extends AbstractController
         $game = BlackJack::fromSession($gameData);
 
         $game->stand();
-        $session->set('black_jack_game', $game->toSession());
 
         if ($game->getStatus() === 'complete') {
             $entityManager = $doctrine->getManager();
@@ -105,7 +104,7 @@ class BlackJackController extends AbstractController
                 if ($playerDb) {
                     if ($result['result'] === 'win') {
                         $playerDb->setWins($playerDb->getWins() + 1);
-                    } elseif ($result['result'] === 'lose') {
+                    } elseif ($result['result'] === 'loss') {
                         $playerDb->setLosses($playerDb->getLosses() + 1);
                     }
 
@@ -127,6 +126,9 @@ class BlackJackController extends AbstractController
             $entityManager->persist($gameHistory);
             $entityManager->flush();
         }
+
+        $session->set('black_jack_game', $game->toSession());
+
 
         return $this->redirectToRoute('blackjack_game');
     }
