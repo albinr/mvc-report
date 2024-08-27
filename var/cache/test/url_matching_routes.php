@@ -21,6 +21,7 @@ return [
         '/api/library/books' => [[['_route' => 'api_library', '_controller' => 'App\\Controller\\ApiLibraryController::apiLibrary'], null, null, null, false, false, null]],
         '/proj/blackjack' => [[['_route' => 'blackjack_home', '_controller' => 'App\\Controller\\BlackJackController::home'], null, null, null, false, false, null]],
         '/proj/blackjack/start' => [[['_route' => 'blackjack_start', '_controller' => 'App\\Controller\\BlackJackController::start'], null, ['POST' => 0], null, false, false, null]],
+        '/proj/blackjack/game' => [[['_route' => 'blackjack_game', '_controller' => 'App\\Controller\\BlackJackController::game'], null, null, null, false, false, null]],
         '/proj/blackjack/hit' => [[['_route' => 'blackjack_hit', '_controller' => 'App\\Controller\\BlackJackController::hit'], null, null, null, false, false, null]],
         '/proj/blackjack/stand' => [[['_route' => 'blackjack_stand', '_controller' => 'App\\Controller\\BlackJackController::stand'], null, null, null, false, false, null]],
         '/proj/blackjack/create_player_form' => [[['_route' => 'black_jack_create_player_form', '_controller' => 'App\\Controller\\BlackJackController::createPlayerForm'], null, null, null, false, false, null]],

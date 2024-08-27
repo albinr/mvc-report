@@ -3,7 +3,6 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 class BlackJackControllerTest extends WebTestCase
 {
@@ -13,6 +12,9 @@ class BlackJackControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/proj/blackjack');
 
         $this->assertResponseIsSuccessful();
+
+        $this->assertSelectorTextContains('h1', 'Black Jack');
+        $this->assertSelectorExists('.saved-players');
     }
 
     public function testStartGame()
@@ -20,13 +22,14 @@ class BlackJackControllerTest extends WebTestCase
         $client = static::createClient();
 
         $client->request('POST', '/proj/blackjack/start', [
-            'selectedPlayers' => [1, 3] #spelare med id 2 existerar inte nu (08-25)
+            'selectedPlayers' => [1, 3]  // Currently valid ids (2 was deleted)
         ]);
 
-        $this->assertSelectorTextContains('.game-status', 'playing');
+        $client->followRedirect();
 
         $this->assertResponseIsSuccessful();
 
+        $this->assertSelectorTextContains('.game-status', 'playing');
     }
 
     public function testHitRoute()
@@ -37,11 +40,13 @@ class BlackJackControllerTest extends WebTestCase
             'selectedPlayers' => [1, 2]
         ]);
 
-        $client->request('GET', '/proj/blackjack/hit');
+        $client->followRedirect();
 
+        $client->request('GET', '/proj/blackjack/hit');
         $this->assertResponseIsSuccessful();
 
         $this->assertSelectorExists('.black-jack');
+        $this->assertSelectorExists('.hand');
     }
 
     public function testStand()
@@ -52,7 +57,11 @@ class BlackJackControllerTest extends WebTestCase
             'selectedPlayers' => [1, 2]
         ]);
 
+        $client->followRedirect();
+
         $client->request('GET', '/proj/blackjack/stand');
+
+        $client->followRedirect();
 
         $this->assertResponseIsSuccessful();
 
@@ -63,10 +72,24 @@ class BlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/proj/blackjack/create_player_form');
-
+        $crawler = $client->request('GET', '/proj/blackjack/create_player_form');
         $this->assertResponseIsSuccessful();
 
+        $this->assertSelectorExists('form input[name="name"]');
+        $this->assertSelectorTextContains('button', 'Submit');
     }
 
+    public function testPlayerNotSelected()
+    {
+        $client = static::createClient();
+
+        $client->request('POST', '/proj/blackjack/start', [
+            'selectedPlayers' => []
+        ]);
+
+        $client->followRedirect();
+
+        $this->assertSelectorExists('.flash-notice');
+        $this->assertSelectorTextContains('.flash-notice', 'No players were selected');
+    }
 }

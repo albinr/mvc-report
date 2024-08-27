@@ -5,11 +5,11 @@ namespace App\Card;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test cases for class CardGraphic.
+ * Test cases for class BlackJack.
  */
 class BlackJackTest extends TestCase
 {
-    public function testInitializationWithPlayers()
+    public function testInitWithPlayers()
     {
         $players = [
             new Player(1, "Albin"),
@@ -36,7 +36,7 @@ class BlackJackTest extends TestCase
         $playerHand = $game->getPlayerHand(0)->getCards();
         $this->assertCount(3, $playerHand);
 
-        $score = $game->getPlayerScore(0);
+        $score = $game->getPlayerHandScore(0, 0);
         if ($score > 21) {
             $this->assertEquals("Player Albin bust", $game->getStatus());
         } else {
@@ -75,7 +75,7 @@ class BlackJackTest extends TestCase
     {
         $players = [
             new Player(1, "Albin"),
-            new Player(2, "VIggo")
+            new Player(2, "Viggo")
         ];
 
         $game = new BlackJack($players);
@@ -85,12 +85,12 @@ class BlackJackTest extends TestCase
         $results = $game->getGameResults();
 
         foreach ($results as $result) {
-            $this->assertArrayHasKey('id', $result);
-            $this->assertArrayHasKey('name', $result);
+            $this->assertArrayHasKey('player_id', $result);
+            $this->assertArrayHasKey('player_name', $result);
             $this->assertArrayHasKey('score', $result);
-            $this->assertArrayHasKey('status', $result);
+            $this->assertArrayHasKey('result', $result);
 
-            $this->assertContains($result['status'], ['win', 'lose', 'draw']);
+            $this->assertContains($result['result'], ['win', 'loss', 'draw']);
         }
     }
 
