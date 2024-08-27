@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Player as PlayerDb;
 use App\Entity\GameHistory;
 use App\Card\BlackJack;
-use App\Card\CardHand;
 use App\Card\Player as ActivePlayer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;

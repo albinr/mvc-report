@@ -528,3 +528,4 @@ cda02a,127.0.0.1,POST,http://localhost:8888/proj/blackjack/start,1724760047,,302
 405548,127.0.0.1,GET,http://localhost:8888/proj/blackjack/game,1724760047,,200,request
 dae6dc,127.0.0.1,GET,http://localhost:8888/proj,1724763110,,200,request
 bb9a9e,127.0.0.1,GET,http://localhost:8888/proj/blackjack/create_player_form,1724763113,,200,request
+083078,127.0.0.1,GET,http://localhost:8888/proj/blackjack,1724764314,,200,request

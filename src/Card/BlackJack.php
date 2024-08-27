@@ -17,9 +17,12 @@ class BlackJack
     private string $status;
 
     /**
-     * Constructor initializes the game with a shuffled deck, game status and empty hands for players and bank.
+     * Constructor initializes the game with a shuffled deck, game status, and empty hands for players and bank.
      *
-     * @param int[] $numPlayers The number of players (2-7).
+     * @param array $playerList Array of players in the game.
+     * @param bool $isNewGame If true, starts a new game with initial card distribution.
+     * 
+     * @throws InvalidArgumentException If there are fewer than one player in the game.
      */
     public function __construct(array $playerList, bool $isNewGame = true)
     {
@@ -54,7 +57,8 @@ class BlackJack
     /**
      * Adds a card to the specified hand from the deck.
      *
-     * @param CardHand $hand The hand to add cards to.
+     * @param CardHand $hand The hand to add a card to.
+     * @return Card|null The card added to the hand or null if the deck is empty.
      */
     private function addCardToHand(CardHand $hand): ?Card
     {
@@ -66,10 +70,9 @@ class BlackJack
     }
 
     /**
-     * Allows the specified player to take a hit (draw a card) during their turn.
-     * Updates the game status if the player's score exceeds 21.
+     * Allows the current player to take a hit (draw a card).
      *
-     * @param int $playerIndex The index of the player (0 to numPlayers-1).
+     * @return Card|null The card drawn by the player or null if the deck is empty.
      */
     public function hit(): ?Card
     {
@@ -82,7 +85,9 @@ class BlackJack
         return $drawnCard;
     }
 
-
+    /**
+     * The current player decides to stand, ending their turn. The next player or bank will play.
+     */
     public function stand(): void
     {
         $player = $this->players[$this->currentPlayer];
@@ -100,7 +105,7 @@ class BlackJack
     }
 
     /**
-     * Manages the bank's turn, where the bank continues to draw cards until its score is 17 or more.
+     * Banks turn to play; the bank draws cards until the score is 17 or higher.
      */
     private function bankPlay(): void
     {
@@ -114,7 +119,7 @@ class BlackJack
     /**
      * Calculates the score of a hand.
      *
-     * @param array $hand An array of Card objects representing a hand.
+     * @param array $hand Array of Card objects representing a hand.
      * @return int The total score of the hand.
      */
     private function calcScore(array $hand): int
@@ -141,7 +146,11 @@ class BlackJack
     }
 
     /**
-     * Determines the outcome of the game after the bank finishes its turn.
+     * Determines the result of a players hand compared to the banks hand.
+     *
+     * @param Player $player The player whose hand is being evaluated.
+     * @param int $handIndex The index of the hand to evaluate.
+     * @return string The result of the hand ("win", "loss", or "draw").
      */
     private function handResult($player, int $handIndex): string
     {
@@ -167,7 +176,11 @@ class BlackJack
         return "draw";
     }
 
-
+    /**
+     * Retrieves the results for all players' hands.
+     *
+     * @return array An array containing the results of the game for each players hand.
+     */
     public function getGameResults(): array
     {
         $results = [];
@@ -190,7 +203,7 @@ class BlackJack
     /**
      * Gets the current status of the game.
      *
-     * @return string The current game status.
+     * @return string The current game status
      */
     public function getStatus(): string
     {
@@ -198,10 +211,11 @@ class BlackJack
     }
 
     /**
-     * Gets the specified player's hand.
+     * Gets the specified players hand.
      *
-     * @param int $playerIndex The index of the player (0 to numPlayers-1).
-     * @return CardHand The player's hand.
+     * @param int $playerIndex The index of the player
+     * @param int $handIndex The index of the players hand
+     * @return CardHand The hand of the player
      */
     public function getPlayerHand(int $playerIndex, int $handIndex): CardHand
     {
@@ -209,9 +223,9 @@ class BlackJack
     }
 
     /**
-     * Gets the bank's hand.
+     * Gets the banks hand.
      *
-     * @return CardHand The bank's hand.
+     * @return CardHand The hand of the bank.
      */
     public function getBankHand(): CardHand
     {
@@ -219,10 +233,11 @@ class BlackJack
     }
 
     /**
-     * Calculates and returns the specified player's score.
+     * Gets the score of the specified players hand.
      *
-     * @param int $playerIndex The index of the player (0 to numPlayers-1).
-     * @return int The score of the player's hand.
+     * @param int $playerIndex The index of the player.
+     * @param int $handIndex The index of the hand.
+     * @return int The score of the players hand.
      */
     public function getPlayerHandScore(int $playerIndex, int $handIndex): int
     {
@@ -230,9 +245,9 @@ class BlackJack
     }
 
     /**
-     * Calculates and returns the bank's score.
+     * Gets the score of the banks hand.
      *
-     * @return int The score of the bank's hand.
+     * @return int The score of the banks hand.
      */
     public function getBankScore(): int
     {
@@ -250,9 +265,9 @@ class BlackJack
     }
 
     /**
-     * Gets the number of players in the game.
+     * Gets all players in the game.
      *
-     * @return array The number of players.
+     * @return array An array of Player objects.
      */
     public function getPlayers(): array
     {
@@ -260,9 +275,9 @@ class BlackJack
     }
 
     /**
-     * Gets the current player.
+     * Gets the index of the current player.
      *
-     * @return int The current player.
+     * @return int The index of the current player.
      */
     public function getCurrentPlayer(): int
     {
@@ -270,41 +285,70 @@ class BlackJack
     }
 
     /**
-     * Gets the current player current hand.
+     * Gets the index of the current hand being played.
      *
-     * @return int The current hand.
+     * @return int The index of the current hand.
      */
     public function getCurrentHand(): int
     {
         return $this->currentHand;
     }
 
+    /**
+     * Gets the deck of cards.
+     *
+     * @return DeckOfCards The deck being used in the game
+     */
     public function getDeck(): DeckOfCards
     {
         return $this->deck;
     }
 
+    /**
+     * Sets the banks hand.
+     *
+     * @param CardHand $hand The banks hand.
+     */
     public function setBankHand(CardHand $hand): void
     {
         $this->bankHand = $hand;
     }
 
+    /**
+     * Sets the current player by index.
+     *
+     * @param int $currentPlayer The index of the current player.
+     */
     public function setCurrentPlayer(int $currentPlayer): void
     {
         $this->currentPlayer = $currentPlayer;
     }
 
+    /**
+     * Sets the status of the game.
+     *
+     * @param string $status The game status ("playing" / "complete").
+     */
     public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
+    /**
+     * Sets the deck of cards.
+     *
+     * @param array $deck The array of cards in the deck.
+     */
     public function setDeck(array $deck): void
     {
         $this->deck = new DeckOfCards(1, $deck);
     }
 
-
+    /**
+     * Saves the current state of the game to an array that can be stored in a session.
+     *
+     * @return array The current state of the game.
+     */
     public function toSession(): array
     {
         $players = [];
@@ -354,6 +398,12 @@ class BlackJack
         return $gameState;
     }
 
+    /**
+     * Restores the game state from a session array.
+     *
+     * @param array $gameData The session data to restore the game from.
+     * @return BlackJack The restored BlackJack game instance.
+     */
     public static function fromSession(array $gameData): BlackJack
     {
         $players = [];

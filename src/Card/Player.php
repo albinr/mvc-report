@@ -29,16 +29,31 @@ class Player
         }
     }
 
+    /**
+     * Gets the name of the player.
+     *
+     * @return string The name of the player.
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Gets the database ID of the player.
+     *
+     * @return int The database ID of the player.
+     */
     public function getId(): int
     {
         return $this->dbId;
     }
 
+    /**
+     * Gets all hands held by the player.
+     *
+     * @return array An array of CardHand objects representing the player's hands.
+     */
     public function getHands(): array
     {
         return $this->hands;
