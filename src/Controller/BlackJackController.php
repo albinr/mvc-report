@@ -43,20 +43,14 @@ class BlackJackController extends AbstractController
         foreach ($playerIds as $playerId) {
             $playerInfo = $entityManager->getRepository(PlayerDb::class)->find($playerId);
             if ($playerInfo) {
-                $player = new ActivePlayer($playerInfo->getPlayerId(), $playerInfo->getName());
-
-                $numHands = $handsData[$playerId];
-
-                for ($i = 0; $i < $numHands; $i++) {
-                    $player->addHand(new CardHand());
-                }
+                $player = new ActivePlayer($playerInfo->getPlayerId(), $playerInfo->getName(), $handsData[$playerId]);
 
                 $foundPlayers[] = $player;
             }
         }
 
         if (empty($foundPlayers)) {
-            $this->addFlash('warning', 'No players were selected. Select at least one player to start the game.');
+            $this->addFlash('warning', 'No players were selected.');
             
             return $this->redirectToRoute('blackjack_home');
         }

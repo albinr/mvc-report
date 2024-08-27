@@ -30,8 +30,8 @@ class ApiBlackJackController extends AbstractController
 
         $foundPlayers = [];
         foreach ($dbPlayers as $dbPlayer) {
-            $newPlayer = new ActivePlayer($dbPlayer->getPlayerId(), $dbPlayer->getName());
-            $newPlayer->addHand(new CardHand()); #One hand per player (mabey add arg through url?)
+            #One hand per player (mabey add arg through url?)
+            $newPlayer = new ActivePlayer($dbPlayer->getPlayerId(), $dbPlayer->getName(), 1);
             $foundPlayers[] = $newPlayer;
         }
 
@@ -130,7 +130,7 @@ class ApiBlackJackController extends AbstractController
             $gameData = $session->get('black_jack_game');
             $game = BlackJack::fromSession($gameData);
 
-            $drawnCard = $game->hit(); // Hit for the current player's current hand
+            $drawnCard = $game->hit();
             $session->set('black_jack_game', $game->toSession());
 
             $data = [
@@ -153,7 +153,7 @@ class ApiBlackJackController extends AbstractController
             $gameData = $session->get('black_jack_game');
             $game = BlackJack::fromSession($gameData);
 
-            $game->stand(); // Stand for the current player's current hand
+            $game->stand();
             $session->set('black_jack_game', $game->toSession());
 
             if ($game->getStatus() === 'complete') {

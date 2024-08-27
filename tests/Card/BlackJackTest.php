@@ -26,14 +26,14 @@ class BlackJackTest extends TestCase
     public function testPlayerHit()
     {
         $players = [
-            new Player(1, "Albin"),
-            new Player(2, "Viggo")
+            new Player(1, "Albin", 1),
+            new Player(2, "Viggo", 1)
         ];
 
         $game = new BlackJack($players);
         $game->hit();
 
-        $playerHand = $game->getPlayerHand(0)->getCards();
+        $playerHand = $game->getPlayerHand(0, 0)->getCards();
         $this->assertCount(3, $playerHand);
 
         $score = $game->getPlayerHandScore(0, 0);

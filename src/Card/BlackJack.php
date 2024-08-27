@@ -203,9 +203,9 @@ class BlackJack
      * @param int $playerIndex The index of the player (0 to numPlayers-1).
      * @return CardHand The player's hand.
      */
-    public function getPlayerHand(int $playerIndex): CardHand
+    public function getPlayerHand(int $playerIndex, int $handIndex): CardHand
     {
-        return $this->players[$playerIndex]->getHand();
+        return $this->players[$playerIndex]->getHand($handIndex);
     }
 
     /**
@@ -358,14 +358,14 @@ class BlackJack
     {
         $players = [];
         foreach ($gameData["players"] as $playerData) {
-            $activePlayer = new Player($playerData["id"], $playerData["name"]);
+            $activePlayer = new Player($playerData["id"], $playerData["name"], count($playerData["hands"]));
 
             foreach ($playerData["hands"] as $handIndex => $handData) {
-                $hand = new CardHand();
+                $hand = $activePlayer->getHand($handIndex);
                 foreach ($handData["cards"] as $cardData) {
                     $hand->addCard(new Card($cardData["value"], $cardData["suit"], $cardData["id"]));
                 }
-                $activePlayer->addHand($hand);
+                // $activePlayer->addHand($hand);
 
                 if (isset($playerData['results'][$handIndex])) {
                     $activePlayer->setResult($handIndex, $playerData['results'][$handIndex]);
@@ -391,5 +391,4 @@ class BlackJack
 
         return $game;
     }
-
 }
