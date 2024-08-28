@@ -1,0 +1,67 @@
+{% extends 'proj/base.html.twig' %}
+
+{% block title %}Om databasen{% endblock %}
+
+{% block body %}
+<h1>Om databasen</h1>
+<div class="black_jack_about">
+    <h2>ER diagram</h2>
+    <h3>Tabellbeskrivningar</h3>
+    <p>Mitt spel använder sig av två tabeller i en SQLite databas. </p>
+    <p>
+    <h4>Player:</h4> Innehåller spelarinformation som namn, vinster och förluster.</p>
+    <div class="white-background">
+        <p>
+            <img src="{{ asset('img/player.png') }}" alt="ER diagram av player tabellen">
+        </p>
+    </div>
+    <p>
+    <h4>GameHistory:</h4> Sparar data för tidigare spel, inklusive datum, bankens poäng och vilka spelare som deltog.
+    </p>
+    <div class="white-background">
+        <p>
+            <img src="{{ asset('img/gamehistory.png') }}" alt="ER diagram av gamehistory tabellen">
+        </p>
+    </div>
+
+    <h3>Relationer mellan tabellerna</h3>
+    <p>Det finns en svag relation mellan tabellerna genom att spelares data och id sparas som JSON i
+        GameHistory-tabellen.</p>
+
+    <h3>Databastyp</h3>
+    <p>SQLite används för detta projekt på grund av dess enkelhet och lättviktiga setup.</p>
+
+    <h3>Enhetstester</h3>
+    <p>Enhetstester har skapats för att verifiera att databas funktioner som att skapa spelare och spara
+        spelhistorik fungerar korrekt.</p>
+
+    <h3>ORM och SQL (MariaDB): För och nackdelar</h3>
+    <p>Att använda ett ORM (Object Relational Mapping) har flera fördelar. Det förenklar interaktionen med databasen
+        genom att byta ut SQL och låta utvecklaren arbeta direkt med objekt i koden. Detta kan öka
+        produktiviteten, genom att minska mängden standard/vanlig kod som behövs för att utföra
+        vanliga operationer som till exempel att skapa, läsa, uppdatera och ta bort rader i databasen. Jag kommer ihåg
+        från databas kursen att jag skrev extremt många sql förfrågningar så filen blev nästan 1000 rader lång. Därför
+        känns orm väldigt smidigt att jobba med.</p>
+
+    <p>Det finns dock nackdelar med att använda ORM. En av de största är att det kan leda till
+        sämre prestanda i applikationen. Särskilt när det gäller mer komplexa förfrågningar eller stora mängder data.
+        ORM verktyg genererar ofta SQL kod automatiskt, det kan leda till mindre effektiva förfrågningar som är
+        svårare att optimera än SQL som skrivits manuellt. Detta kan vara en stor nackdel i system där prestanda är
+        extra viktig.</p>
+
+    <p>Att använda traditionell SQL som vi använde i databas kursen erbjuder full kontroll över hur förfrågningar
+        skrivs. Det kan resultera i bättre prestanda och mer flexibla lösningar för avancerade problem. Med SQL
+        kan utvecklaren utnyttja alla kraftfulla funktioner som en databas som MariaDB erbjuder, såsom användning av
+        index, joins, och
+        transaktioner på ett mer optimerat sätt. Dock kräver det också att utvecklaren har djupare kunskap om databasen
+        och att mer tid läggs på att skriva och underhålla SQL koden.</p>
+
+    <p>Sammanfattningsvis är ORM ett bra verktyg för att snabbare kunna utveckla applikationer och hantera
+        standardiserade
+        databas förfrågningar, men det kommer med en kostnad på mindre prestanda och flexibilitet. Traditionell SQL
+        erbjuder
+        mer kontroll och optimering men med ökad komplexitet och utvecklingstid. Valet mellan ORM och SQL
+        bör baseras på projektets specifika behov och krav.</p>
+</div>
+<a href="{{ path('proj_about') }}" class="button">Tillbaka till Om projektet</a>
+{% endblock %}

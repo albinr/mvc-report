@@ -200,3 +200,13 @@
     background-color: darken($yellow, 30%);
     border: 1px solid darken($yellow, 10%);
 }
+
+.black_jack_about {
+    max-width: 800px;
+}
+
+.white-background {
+    background-color: $white;
+    width: fit-content;
+    height: fit-content;
+}

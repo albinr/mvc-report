@@ -3,20 +3,28 @@
 {% block title %}About Black Jack Game{% endblock %}
 
 {% block body %}
-    <h1>About the Black Jack Game Project</h1>
-    <p>This project is a web-based implementation of the classic card game Black Jack. The goal of the project is to create an interactive and fun gaming experience using modern web technologies.</p>
-    <h2>Project Features</h2>
-    <ul>
-        <li>Interactive Black Jack gameplay</li>
-        <li>Stylish and user-friendly interface</li>
-        <li>JSON API for game interactions</li>
-        <li>ORM-based database integration</li>
-    </ul>
-    <h2>Technologies Used</h2>
-    <ul>
-        <li>Symfony Framework</li>
-        <li>PHP and Twig</li>
-        <li>JavaScript and AJAX</li>
-        <li>Doctrine ORM</li>
-    </ul>
+<h1>Om projektet</h1>
+<div class="black_jack_about">
+    <p>I detta projekt har jag skapat ett Blackjack spel för flera spelare där varje spelare kan spela med flera händer
+        samtidigt. Spelet följer de klassiska reglerna för blackjack där varje spelare tävlar mot banken/dealern, och
+        målet är
+        att komma så nära 21 poäng som möjligt utan att överstiga den gränsen.</p>
+    <p>Jag har lagt till databas funktionalitet där spelare kan skapas och raderas. Alla spelare som skapas och varje
+        spelomgång som spelas, sparas i två separata tabeller i en
+        SQLite-databas. Detta låter användaren att se statistik över spel och spelare, till exempel antal vinster och
+        förluster.</p>
+    <p>Jag har skapat api funkitonalitet för spelet och man kan spela ett spel genom apiet.</p>
+    <p>Spelet är skapat så att flera spelare kan delta samtidigt och varje spelare kan välja att spela med en eller
+        flera
+        händer. Detta ökar komplexiteten för spelet. Varje spelare måste fatta beslut om att dra ett kort (hit) eller
+        stanna (stand) för varje hand
+        de spelar, beroende på hur nära de är att nå 21 poäng.</p>
+    <p>Projektet är byggt med Symfony-ramverket och använder Twig för att bygga spelets gränssnitt. Logiken för spelet
+        hanteras av PHP-klasser som hanterar spelets flöde, såsom kortutdelning, poängberäkning och resultatbedömning.
+        Spelets status sparas i session. Sass används för att styla projektet.</p>
+    <p>Sammanfattningsvis har detta projekt gett mig möjligheten att kombinera databasinteraktion, serverlogik och
+        webbutveckling för att skapa ett blackjack spel som kan hantera flera spelare och
+        deras händer samtidigt.</p>
+</div>
+<a href="{{ path('proj_about_database') }}" class="button">Om databasen</a>
 {% endblock %}

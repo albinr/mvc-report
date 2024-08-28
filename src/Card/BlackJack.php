@@ -36,6 +36,10 @@ class BlackJack
             $numDecks = 2;
         }
 
+        if (count($this->players) > 4) {
+            $numDecks = 3;
+        }
+
         $this->deck = new DeckOfCards($numDecks);
         $this->deck->shuffleDeck();
 
