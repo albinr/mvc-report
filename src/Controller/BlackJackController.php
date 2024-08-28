@@ -50,7 +50,7 @@ class BlackJackController extends AbstractController
 
         if (empty($foundPlayers)) {
             $this->addFlash('warning', 'No players were selected.');
-            
+
             return $this->redirectToRoute('blackjack_home');
         }
 
@@ -146,16 +146,24 @@ class BlackJackController extends AbstractController
         ManagerRegistry $doctrine
     ): Response {
         $entityManager = $doctrine->getManager();
+        $playerName = $request->request->get('name');
+
+        $existingPlayer = $entityManager->getRepository(PlayerDb::class)->findOneBy(['name' => $playerName]);
+
+        if ($existingPlayer) {
+            $this->addFlash('warning', 'Name is already in use. Choose a different name.');
+            return $this->redirectToRoute('black_jack_create_player_form');
+        }
 
         $player = new PlayerDb();
-        $player->setName($request->request->get('name'));
+        $player->setName($playerName);
 
         $entityManager->persist($player);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Created new player with id ' . $player->getPlayerId());
+        $this->addFlash('notice', 'Created new player '. $playerName .' with id ' . $player->getPlayerId());
 
-        return $this->redirectToRoute('blackjack_home');
+        return $this->redirectToRoute('proj_home');
     }
 
     #[Route('/proj/blackjack/player/delete/{playerid}', name: 'black_jack_delete_player', methods: ['POST'])]
@@ -173,8 +181,8 @@ class BlackJackController extends AbstractController
         $entityManager->remove($player);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Player deleted successfully');
+        $this->addFlash('notice', 'Player deleted successfully');
 
-        return $this->redirectToRoute('blackjack_home');
+        return $this->redirectToRoute('proj_home');
     }
 }
