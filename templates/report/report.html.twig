@@ -371,7 +371,8 @@
     <p>Det uppkom dock ganska jobbiga och tidskrävande problem jag stötte på med scrutinizer. Problemet började när jag
         skulle skriva tester för mina controllers. Alla tester passerade phpunit lokalt men i Scrutinizer så
         misslyckades dem. Jag gick igenom en hel runda med problemlösningar och lyckades tillslut hitta lösningen som
-        var att kommentera ut en rad ur ".gitignore". Problemen uppstod eftersom scrutinizer inte fick tillgång till delar
+        var att kommentera ut en rad ur ".gitignore". Problemen uppstod eftersom scrutinizer inte fick tillgång till
+        delar
         av koden som testerna behövde.
     </p>
 
@@ -397,5 +398,181 @@
     <p>Min til för detta kursmoment är hur jag kan lägga till och använda verktyg och automatiserade tester för att
         förbättra min kod. Jag har fått lära mig hur jag kan identifiera problem i min kod med verktygen. Jag kommer
         definitivt använda mig mer av verktyg som dessa i framtida projekt jag gör.</p>
+</section>
+<section>
+    <h2 id="kmom010">Kmom10</h2>
+    <h3>Krav 1, 2, 3 Webbplats</h3>
+    <p>För att uppfylla krav 1, 2 och 3 så har jag byggt en landningssida under /proj. Jag har valt kortspelet Blackjack
+        som projekt. Webbplatsen har ett mörkt tema som skiljer sig från min rapport sida. Jag har en about sida som ger
+        en introduction till projektet och ligger under /proj/about.</p>
+    <h4>BlackJack Spelet</h4>
+    <p>Spelet är byggt med och använder många klasser. Här är klasserna:</p>
+    <p>Card: En klass som representerar ett kort.</p>
+    <p>DeckOfCards: En klass som representerar en kortlek med kort.</p>
+    <p>CardHand: Representerar en hand med kort</p>
+
+    <h5>Player klassen</h5>
+    <p>För att kunna starta mitt blackjack-spel så behöver man först skapa en lista med spelare(Player). För att skapa
+        en spelare behövs ett databas id, namn och antalet händer spelaren ska hålla. Standard alternativet är att
+        spelaren har en hand. För varje Korthand(CardHand) som läggs till så läggs också ett nullvärde till i en
+        resultatlista. Resultatlistan håller koll på om en hand är win,loss eller draw. Sedan finns det olika getters
+        och setters för att lägga till och hämta värden från spelaren.</p>
+
+    <h5>Blackjack klassen</h5>
+    <p>Blackjack klassen tar hand om all logik för spelet.</p>
+
+    <p>Konstruktorn för klassen tar emot en lista med spelare och en boolean för att kolla om denna konstruktion av
+        klassen är ett pågående spel eller inte. Standardvärdet är att det är ett nytt spel. Jag sparar spelarna i klass
+        variabeln “players” och sedan kollar jag hur många kortlekar jag skall använda för spelet beroende på hur många
+        spelare det är. Min DeckOfCards klass kan lägga till fler kortlekar om det behövs. Sedan sparar jag kortleken i
+        klassen. Om det är ett helt nytt spel så lägger jag till två kort i alla spelares händer. Jag skapar också en
+        korthand åt banken, lägger ett kort i bankens hand och sedan sätter jag status på spelet till “playing”.</p>
+
+    <p>Nu är spelet igång och det finns två funktioner som användaren använder för att spela, det är hit() och stand().
+        Hit() funktionen kollar vilken spelare och hand som ska dra ett kort. Sedan gör jag en uträkning på om spelaren
+        har överskridit 21 och visar en status om spelaren har överskridit.</p>
+
+    <p>När spelaren är nöjd med sin hands kort så anropar dem stand. När stand anropas kollar jag vilken hand som spelas
+        om det nuvarande indexet för handen är mindre än antalet händer spelaren har så ökar jag indexet. Om indexet är
+        över spelaren händer så nollställer jag indexet och ökar det nuvarande spelarens indexet. På så vis blir det
+        nästa spelares tur. När jag gått igenom alla spelare och deras händer så blir det bankens tur genom att bank
+        Play funktionen kallas. I min twig template interface har jag många olika loopar och checkar för att visa
+        korthänder och knappar för rätt hand.</p>
+
+    <p>Banken drar kort i en while loop tills kortens värde är högre än 17. När banken är klar så sätts status på spelet
+        till “complete”.</p>
+
+    <p>Ett if statement i min stand router kollar om status på spelet är “complete”. När spelet är “complete” så sätts
+        alla resultat på spelarnas händer och data som vinster och förluster sparas i databasen för spelare. Information
+        om spelet sparas också i gameHistory tabellen med en del json data.</p>
+
+    <h3>Krav 4: JSON API</h3>
+    <p>För att göra krav 4 så har jag skapat en controller som hanterar mina api endpoints(apiBlackJackController). Jag
+        har skapat följande routes:
+    </p>
+
+    <h5>/proj/api/blackjack/setup</h5>
+    <p> Denna rutt startar ett blackjack spel och returnerar json data med all information om
+        spelet. Spelet startar med fyra spelare som letas upp från databasen. De fyra spelarna får en hand kort var och
+        sedan börjar spelet. I och med att jag behöver returnera något så lägger jag information om det pågånede spelet
+        i api responsen. Spelet kan spelas genom rutterna nedan.</p>
+
+    <h5>/proj/api/blackjack/status</h5>
+    <p>Denna rutt returnerar en översikt på det nuvarande spelet. Den visar alla spelares händer, deras poäng osv.
+        Rutten påverkar inte spelet på något sätt.
+    </p>
+
+    <h5>/proj/api/blackjack/hit</h5>
+    <p>Denna rutt kallar en “hit” på den nuvarande spelarens hand och returnerar vilken spelare, den hand som drog
+        kortet och kortets värde.</p>
+
+    <h5>/proj/api/blackjack/stand</h5>
+    <p>Denna rutt kallar en “stand” för den nuvarande spelaren och deras hand. Det som returneras är spel status,
+        nuvarande spelarens index och den nuvarande handens index.
+    </p>
+
+    <h5>/proj/api/blackjack/deck</h5>
+    <p>Denna rutt visar hela kortleken och hur många kort som är kvar i den.</p>
+
+    <h3>Krav 5: ORM</h3>
+    <p>För att uppfylla krav 5 så har jag skapat två tabeller i en SQLite databas. Tabellerna heter Player och
+        “gameHistory”.</p>
+
+    <h5>Player</h5>
+    <p>Player tabellen är skapad för att kunna spara spelare och statistik om dem. I tabellen kan man spara namn, antal
+        vinster och förluster. Tabellen kommer till användning vid två olika tillfällen, när “stand” rutten ser att
+        spelets status är “complete” och när man vill skapa en ny spelare eller ta bort en sparad spelare.</p>
+
+    <p>Rutten stand väntar på att statusen på spelet skall bli “complete”. När statusen blir “complete” så startar jag
+        processen för att räkna vinsterna de individuella spelarna fått i spelet. Om spelarens id hittas i databasen så
+        kollar jag om resultatet har strängen win eller loss i sig. Beroende på vinst eller förlust så ökar databasens
+        vinst eller förlust rad med 1.
+    </p>
+
+    <p>Rutten för att skapa en spelare väntar på att ett post formulär skickar ett namn från formuläret och en ny rad i
+        spelar tabellen skapas med ett id, namn, 0 vinster och 0 förluster.
+    </p>
+
+    <p>Rutten för att ta bort en spelare har spelarens id i urlen. Sedan letar jag upp idt i databasen och sedan raderar
+        den raden med spelarens information.</p>
+
+    <p>En tanke jag hade med denna tabell var att lägga till pengar så att spelarna kan betta på sina händer. Med mer
+        tid så vill jag lägga till det.
+    </p>
+
+    <h5>GameHistory</h5>
+
+    <p>GameHitory tabellen är skapad för att spara historik från tidigare Blackjack spel. Tabellen sparar Datumet,
+        Bankens poäng och data från spelarna i jsonformat. I samma veva som när player-tabellen uppdaterar en spelares
+        vinster och förluster efter att spelets status är “complete” så samlas data för att spara spelhistoriken.
+        Spelarens id, namn, poäng och resultat sparas i json format under kolumnen “playerDataJson”.</p>
+
+    <p>Något jag inte är så säker på är att jag sparar all spelardata i json format istället för att skapa en separat
+        länk tabell som sparar resultaten mer separerat istället för en enda lång sträng i playerDataJson kolumnen.
+    </p>
+
+    <h3>Krav 6: Avancerade features</h3>
+    <p>Jag tycker att detta projekt varit otroligt klurigt och jag har spenderat mycket tid på att tänka på logiken för
+        spelet. När jag valde BlackJack som projekt så missförstod jag också kravet med att man ska minst kunna spela 3
+        händer. Jag trodde det betydde att minst 3 spelare skulle kunna spela. Så det har varit lite klurigt att lista
+        ut hur jag skulle lägga till funktionalitet så att en spelare kan hålla flera händer kort. De följande är
+        features som jag tycker är avancerade:</p>
+
+    <h5>Spelare med många händer</h5>
+    <p>För att lösa detta problem så har jag skapat en spelar klass som håller en array med instanser av klassen
+        CardHand. I sin tur så har CardHand klassen en array med klassen card. Just nu så har jag satt en spärr i html
+        för att användarna inte ska kunna spela med mer än 5 händer. Utan spärren så kan man lägga till oändligt många
+        händer kort. Efter som jag väldigt sent märkte att en spelare ska kunna använda många händer så var det väldigt
+        klurigt att lägga till funktionaliteten utan att behöva skriva om massa kod i Blackjack klassen. Men lösningen
+        blev en klassvariabel som håller den nuvarande handens index.
+    </p>
+
+    <h5>toSession, fromSession och utbyte av Serialize()</h5>
+    <p>För att kunna hålla igång ett spel efter sid-omladdningar är viktigt. I början så använde jag ofta funktionen
+        serialize på mitt Blackjack objekt för att sedan spara det i session. Serialize funktionen gör att ett objekt
+        blir omvandlat till en sträng. Detta var väldigt smidigt när jag jobbade med ett tidigare kursmoment där klassen
+        jag sparade var mycket mindre och gjorde koden i Rutterna väldigt minimal. Det var två problem jag stötte på
+        under utvecklingen av klassen. Det första var att när 2 eller tre kortlekar användes i spelet så sparades inte
+        hela kortleken i session av någon anledning. Det andra problemet var att jag inte kunde göra
+        databasförfrågningar när jag hämtade tillbaka objektet från session. Det kan bli väldigt mycket information som
+        ska sparas när till exempel 7 spelare spelar och alla har 3 händer var. Så jag har suttit länge för att matcha
+        så att den ena funktionen (toSession) lägger upp rätt information för den andra funktionen (fromSession) att
+        hämta.</p>
+
+    <h5>Twig spel template</h5>
+    <p>Twig templates som ska visa all information och vara någorlunda intressant att kolla på tycker jag blivit ganska
+        avancerad. Det är loopar i loopar för att visa händerna och checkar så att rätt hand får knapparna att visas.
+    </p>
+
+    <h5>Många klasser som används i en klass</h5>
+    <p>När jag tänker på alla klasser som används tillsammans för att få spelet att fungera så tycker jag det är ganska
+        avancerat. Klasserna som används är Card, CardGraphic, DeckOfCards ,CardHand, Player, och allt används i
+        BlackJack klassen. Det har ofta jag behöver använda en metod som ligger i en klass som ligger i en klass.</p>
+
+    <h3>Genomförande av projektet</h3>
+    <p>Projektet har varit väldigt tidskrävande och klurigt. Det har varit det mest “fria” projektet vi haft hittills
+        och det har varit lite stressande att skapa något mer självständigt. Jag har ofta blivit lite stressad över att
+        jag kanske skulle behöva skriva om mycket av Blackjack klassen för att lösa ett visst krav. Till exempel
+        missförståndet att alla spelare ska kunna spela många händer. Det har också varit svårt att komma tillbaka till
+        kod jag skrev för länge sedan och behöva lista ut hur jag tänkte när jag först började. Anteckningar av något
+        slag skulle ha hjälpt mycket tror jag.
+    </p>
+
+    <p>Dokumentation och tester har varit jobbigt att komma ihåg. Ibland glömde jag att uppdatera funktioners
+        documentation när jag ändrade på saker. Ändringarna i koden ledde till att jag också behövde uppdatera mina
+        tester vilket var jobbigt.
+        Jag är inte helt nöjd med min phpmetrics och scrutinizer poäng. Det finns en del förbättringar jag kan göra på
+        min blackjack klass. Många av mina metoder är väldigt långa och skulle behöva delas upp. Jag skulle också kunna
+        skapa fler klasser som tar hand om olika delar av spelet, till exempel skulle jag kunna skapa en klass som tar
+        hand om spelarna och deras ordning. Kanske en klass för att hålla koll på kortleken och hur de delas ut.
+    </p>
+
+    <h3>Tankar om kursen</h3>
+    <p>Kursen har varit lärorik och rolig. Att få jobba mer med git och introduktionen av mvc har gett mig kunskap jag
+        kommer använda i framtiden tror jag. Jag tycker att mvc har varit ett bekvämt sätt att jobba med
+        användargränssnitt och uppdateringen av dem. Det har varit roligt att jobba med templates och det känns lätt att
+        få det att se ut som jag vill. Jag ger kursen en 7/10 i betyg.
+    </p>
+
 </section>
 {% endblock %}

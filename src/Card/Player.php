@@ -52,7 +52,7 @@ class Player
     /**
      * Gets all hands held by the player.
      *
-     * @return array An array of CardHand objects representing the player's hands.
+     * @return array An array of CardHand objects representing the players hands.
      */
     public function getHands(): array
     {

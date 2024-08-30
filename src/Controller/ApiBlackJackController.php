@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Player as PlayerDb;
 use App\Card\BlackJack;
-use App\Card\CardHand;
 use App\Card\Player as ActivePlayer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiBlackJackController extends AbstractController
 {
-    #[Route("/api/blackjack/setup", name: "api_blackjack_setup", methods: ["POST"])]
+    #[Route("/proj/api/blackjack/setup", name: "api_blackjack_setup", methods: ["POST"])]
     public function apiGameSetup(SessionInterface $session, ManagerRegistry $doctrine): JsonResponse
     {
         $session->remove('black_jack_game');
@@ -75,7 +74,7 @@ class ApiBlackJackController extends AbstractController
     }
 
 
-    #[Route("/proj/api/blackjack", name: "api_blackjack_status", methods: ["GET"])]
+    #[Route("/proj/api/blackjack/status", name: "api_blackjack_status", methods: ["GET"])]
     public function apiGameStatus(SessionInterface $session): JsonResponse
     {
         $data = ['game-status' => 'No game in session.'];
