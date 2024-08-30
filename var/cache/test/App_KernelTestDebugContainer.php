@@ -16,7 +16,7 @@ if (!\class_exists(App_KernelTestDebugContainer::class, false)) {
 
 return new \ContainerGJDEIbr\App_KernelTestDebugContainer([
     'container.build_hash' => 'GJDEIbr',
-    'container.build_id' => 'f39d96a0',
-    'container.build_time' => 1724763511,
+    'container.build_id' => '2760fc42',
+    'container.build_time' => 1725026924,
     'container.runtime_mode' => \in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) ? 'web=0' : 'web=1',
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerGJDEIbr');

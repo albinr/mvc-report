@@ -8,8 +8,8 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
-        '/api/blackjack/setup' => [[['_route' => 'api_blackjack_setup', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameSetup'], null, ['POST' => 0], null, false, false, null]],
-        '/proj/api/blackjack' => [[['_route' => 'api_blackjack_status', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameStatus'], null, ['GET' => 0], null, false, false, null]],
+        '/proj/api/blackjack/setup' => [[['_route' => 'api_blackjack_setup', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameSetup'], null, ['POST' => 0], null, false, false, null]],
+        '/proj/api/blackjack/status' => [[['_route' => 'api_blackjack_status', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameStatus'], null, ['GET' => 0], null, false, false, null]],
         '/proj/api/blackjack/hit' => [[['_route' => 'api_blackjack_hit', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameHit'], null, null, null, false, false, null]],
         '/proj/api/blackjack/stand' => [[['_route' => 'api_blackjack_stand', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameStand'], null, null, null, false, false, null]],
         '/proj/api/blackjack/deck' => [[['_route' => 'api_blackjack_deck', '_controller' => 'App\\Controller\\ApiBlackJackController::apiGameDeck'], null, null, null, false, false, null]],
@@ -36,6 +36,7 @@ return [
         '/library/books' => [[['_route' => 'read_many', '_controller' => 'App\\Controller\\LibraryController::readMany'], null, null, null, false, false, null]],
         '/proj' => [[['_route' => 'proj_home', '_controller' => 'App\\Controller\\ProjController::home'], null, null, null, false, false, null]],
         '/proj/about' => [[['_route' => 'proj_about', '_controller' => 'App\\Controller\\ProjController::about'], null, null, null, false, false, null]],
+        '/proj/about/database' => [[['_route' => 'proj_about_database', '_controller' => 'App\\Controller\\ProjController::aboutDatabase'], null, null, null, false, false, null]],
         '/proj/api' => [[['_route' => 'proj_api', '_controller' => 'App\\Controller\\ProjController::apiBlackJack'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\ReportController::home'], null, null, null, false, false, null]],
         '/about' => [[['_route' => 'about', '_controller' => 'App\\Controller\\ReportController::about'], null, null, null, false, false, null]],

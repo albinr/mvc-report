@@ -10,7 +10,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
         
-        $client->request("POST", "/api/blackjack/setup");
+        $client->request("POST", "/proj/api/blackjack/setup");
 
         $this->assertResponseIsSuccessful();
 
@@ -27,7 +27,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
         
-        $client->request("GET", "/proj/api/blackjack");
+        $client->request("GET", "/proj/api/blackjack/status");
 
         $this->assertResponseIsSuccessful();
 
@@ -42,9 +42,9 @@ class ApiBlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
         
-        $client->request("POST", "/api/blackjack/setup");
+        $client->request("POST", "/proj/api/blackjack/setup");
 
-        $client->request("GET", "/proj/api/blackjack");
+        $client->request("GET", "/proj/api/blackjack/status");
 
         $this->assertResponseIsSuccessful();
 
@@ -76,7 +76,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
         
-        $client->request("POST", "/api/blackjack/setup");
+        $client->request("POST", "/proj/api/blackjack/setup");
 
         $client->request("GET", "/proj/api/blackjack/hit");
 
@@ -108,7 +108,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
         
-        $client->request("POST", "/api/blackjack/setup");
+        $client->request("POST", "/proj/api/blackjack/setup");
 
         $client->request("GET", "/proj/api/blackjack/stand");
 
@@ -140,7 +140,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     {
         $client = static::createClient();
         
-        $client->request("POST", "/api/blackjack/setup");
+        $client->request("POST", "/proj/api/blackjack/setup");
 
         $client->request("GET", "/proj/api/blackjack/deck");
 
