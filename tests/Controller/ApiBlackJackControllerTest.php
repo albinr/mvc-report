@@ -9,7 +9,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackSetup()
     {
         $client = static::createClient();
-        
+
         $client->request("POST", "/proj/api/blackjack/setup");
 
         $this->assertResponseIsSuccessful();
@@ -26,7 +26,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackStatusNoGame()
     {
         $client = static::createClient();
-        
+
         $client->request("GET", "/proj/api/blackjack/status");
 
         $this->assertResponseIsSuccessful();
@@ -41,7 +41,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackStatusWithGame()
     {
         $client = static::createClient();
-        
+
         $client->request("POST", "/proj/api/blackjack/setup");
 
         $client->request("GET", "/proj/api/blackjack/status");
@@ -60,7 +60,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackHitWithoutGame()
     {
         $client = static::createClient();
-        
+
         $client->request("GET", "/proj/api/blackjack/hit");
 
         $this->assertResponseIsSuccessful();
@@ -75,7 +75,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackHitWithGame()
     {
         $client = static::createClient();
-        
+
         $client->request("POST", "/proj/api/blackjack/setup");
 
         $client->request("GET", "/proj/api/blackjack/hit");
@@ -92,7 +92,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackStandWithoutGame()
     {
         $client = static::createClient();
-        
+
         $client->request("GET", "/proj/api/blackjack/stand");
 
         $this->assertResponseIsSuccessful();
@@ -107,7 +107,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackStandWithGame()
     {
         $client = static::createClient();
-        
+
         $client->request("POST", "/proj/api/blackjack/setup");
 
         $client->request("GET", "/proj/api/blackjack/stand");
@@ -124,7 +124,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackDeckWithoutGame()
     {
         $client = static::createClient();
-        
+
         $client->request("GET", "/proj/api/blackjack/deck");
 
         $this->assertResponseIsSuccessful();
@@ -139,7 +139,7 @@ class ApiBlackJackControllerTest extends WebTestCase
     public function testApiBlackJackDeckWithGame()
     {
         $client = static::createClient();
-        
+
         $client->request("POST", "/proj/api/blackjack/setup");
 
         $client->request("GET", "/proj/api/blackjack/deck");

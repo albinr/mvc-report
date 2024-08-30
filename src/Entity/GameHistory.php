@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class GameHistory
- * 
+ *
  * This class represents the history of a game, storing information
  * about the game such as date, player data, and bank score.
  */

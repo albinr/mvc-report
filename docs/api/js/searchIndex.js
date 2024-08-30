@@ -28,7 +28,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AbankPlay\u0028\u0029",
             "name": "bankPlay",
-            "summary": "Bank\u0027s\u0020turn\u0020to\u0020play\u003B\u0020the\u0020bank\u0020draws\u0020cards\u0020until\u0020the\u0020score\u0020is\u002017\u0020or\u0020higher.",
+            "summary": "Banks\u0020turn\u0020to\u0020play\u003B\u0020the\u0020bank\u0020draws\u0020cards\u0020until\u0020the\u0020score\u0020is\u002017\u0020or\u0020higher.",
             "url": "classes/App-Card-BlackJack.html#method_bankPlay"
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AcalcScore\u0028\u0029",
@@ -38,7 +38,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AhandResult\u0028\u0029",
             "name": "handResult",
-            "summary": "Determines\u0020the\u0020result\u0020of\u0020a\u0020player\u0027s\u0020hand\u0020compared\u0020to\u0020the\u0020bank\u0027s\u0020hand.",
+            "summary": "Determines\u0020the\u0020result\u0020of\u0020a\u0020players\u0020hand\u0020compared\u0020to\u0020the\u0020banks\u0020hand.",
             "url": "classes/App-Card-BlackJack.html#method_handResult"
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AgetGameResults\u0028\u0029",
@@ -53,22 +53,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AgetPlayerHand\u0028\u0029",
             "name": "getPlayerHand",
-            "summary": "Gets\u0020the\u0020specified\u0020player\u0027s\u0020hand.",
+            "summary": "Gets\u0020the\u0020specified\u0020players\u0020hand.",
             "url": "classes/App-Card-BlackJack.html#method_getPlayerHand"
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AgetBankHand\u0028\u0029",
             "name": "getBankHand",
-            "summary": "Gets\u0020the\u0020bank\u0027s\u0020hand.",
+            "summary": "Gets\u0020the\u0020banks\u0020hand.",
             "url": "classes/App-Card-BlackJack.html#method_getBankHand"
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AgetPlayerHandScore\u0028\u0029",
             "name": "getPlayerHandScore",
-            "summary": "Gets\u0020the\u0020score\u0020of\u0020the\u0020specified\u0020player\u0027s\u0020hand.",
+            "summary": "Gets\u0020the\u0020score\u0020of\u0020the\u0020specified\u0020players\u0020hand.",
             "url": "classes/App-Card-BlackJack.html#method_getPlayerHandScore"
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AgetBankScore\u0028\u0029",
             "name": "getBankScore",
-            "summary": "Gets\u0020the\u0020score\u0020of\u0020the\u0020bank\u0027s\u0020hand.",
+            "summary": "Gets\u0020the\u0020score\u0020of\u0020the\u0020banks\u0020hand.",
             "url": "classes/App-Card-BlackJack.html#method_getBankScore"
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AgetNumPlayers\u0028\u0029",
@@ -98,7 +98,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AsetBankHand\u0028\u0029",
             "name": "setBankHand",
-            "summary": "Sets\u0020the\u0020bank\u0027s\u0020hand.",
+            "summary": "Sets\u0020the\u0020banks\u0020hand.",
             "url": "classes/App-Card-BlackJack.html#method_setBankHand"
         },                {
             "fqsen": "\\App\\Card\\BlackJack\u003A\u003AsetCurrentPlayer\u0028\u0029",
@@ -725,6 +725,11 @@ Search.appendIndex(
             "name": "about",
             "summary": "",
             "url": "classes/App-Controller-ProjController.html#method_about"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjController\u003A\u003AaboutDatabase\u0028\u0029",
+            "name": "aboutDatabase",
+            "summary": "",
+            "url": "classes/App-Controller-ProjController.html#method_aboutDatabase"
         },                {
             "fqsen": "\\App\\Controller\\ProjController\u003A\u003AapiBlackJack\u0028\u0029",
             "name": "apiBlackJack",

@@ -21,7 +21,7 @@ class BlackJack
      *
      * @param array $playerList Array of players in the game.
      * @param bool $isNewGame If true, starts a new game with initial card distribution.
-     * 
+     *
      * @throws InvalidArgumentException If there are fewer than one player in the game.
      */
     public function __construct(array $playerList, bool $isNewGame = true)

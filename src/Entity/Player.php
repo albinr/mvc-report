@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Player
- * 
+ *
  * This class represents a player in the game. It stores the players ID,
  * name, number of wins, and losses.
  */
